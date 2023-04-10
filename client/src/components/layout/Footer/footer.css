@@ -1,0 +1,88 @@
+.footer {
+    position: absolute;
+    width: 100%;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    /* top: 990px; */
+
+    background: #5669FF;
+}
+
+.footer-container>.row {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* SOCIAL LIST */
+.footer__social-list {
+    padding: 40px;
+    display: flex;
+}
+
+.footer__social-list>li {
+    list-style-type: none;
+}
+
+.footer__social-list>li>a {
+    color: white;
+    font-size: 30px;
+    margin: 30px;
+    text-decoration: none;
+}
+
+/* LIST LINK */
+.footer__list-link {
+    margin: 50px 0;
+    display: flex;
+    flex-flow: nowrap;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.footer__list-link>div {
+    /* padding-top: 40px; */
+    margin-left: 50px;
+    margin-right: 35px;
+    display: flex;
+    flex-direction: column;
+}
+
+.footer__list-link>div>a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Mobile: width < 740px */
+@media screen and (max-width: 46.1875em) {
+    .footer-container>.row {
+        display: block;
+    }
+
+    .footer__social-list {
+        display: flex;
+        margin: 0;
+        justify-content: center;
+    }
+
+    .footer__list-link {
+        margin: 0;
+        flex-direction: column;
+        /* align-items: center; */
+        justify-content: center;
+    }
+
+    .footer__list-link>div>a {
+        text-align: center;
+    }
+}
+
+/* Tablet: width >= 740px and width < 1024px */
+@media screen and (min-width: 46.25em) and (max-width: 63.9375em) {
+    .footer__social-list {
+        justify-content: center;
+    }
+}
+
+/* Mobile & table: width >= 1024px */
+@media screen and (max-width: 64em) {}
