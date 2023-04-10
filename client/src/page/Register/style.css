@@ -1,0 +1,30 @@
+.appBg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+.registerForm {
+  background-color: rgba(255, 255, 255, 0.33);
+  box-shadow: 0px 8px 32px 0 rgba(0, 0, 255, 0.33);
+  backdrop-filter: blur(3px);
+  padding: 0px 86px;
+  border-radius: 10px;
+  width: 500px;
+}
+.form-item-register{
+  text-align: center;
+}
+.btn-register{
+  width: 200px;
+  height: 40px;
+  margin-bottom: 20px;
+}
+.ArrowRightOutlined{
+    float: right;
+    border-radius: 50%;
+    background: #2000ff;
+    font-size: 18px;
+    margin-top: 3px;
+}
