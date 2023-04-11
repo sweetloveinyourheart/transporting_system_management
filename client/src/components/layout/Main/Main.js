@@ -1,6 +1,7 @@
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
 import './main.css'
+import Mybooking from '../../Mybooking/Mybooking'
 // import { Layout, theme } from 'antd';
 // import { Content } from 'antd/es/layout/layout';
 
@@ -20,7 +21,7 @@ export default function Main() {
                 <Header></Header>
                 <div className='content-wrap'>
                     <div>
-
+                        <Mybooking />
                     </div>
                 </div>
                 <Footer></Footer>
