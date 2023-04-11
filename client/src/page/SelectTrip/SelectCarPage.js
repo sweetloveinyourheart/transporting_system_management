@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import SelectSeatPage from './SelectSeatPage';
+import SelectSeat from './SelectSeat';
 import './css/SelectCarPage.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 export default function SelectCarPage() {
@@ -26,12 +26,11 @@ export default function SelectCarPage() {
                         {arr.map((item, index) => (
                             <div key={item} className="car">
                                 <div className="car__type-price">
-                                    <p style={{ fontWeight: 500, fontSize: "20px" }}>A/C Sleeper</p>
-                                    <p style={{ fontWeight: 500, fontSize: "15px" }}>RS. 150.000</p>
+                                    <p style={{ fontWeight: 500, fontSize: "20px" }}>17:00 to 7:00</p>
+                                    <p style={{ fontWeight: 500, fontSize: "15px" }}>Price: 150.000</p>
                                 </div>
                                 <div className="car__time-and-button">
                                     <div className="car__time">
-
                                         <div className='car__time-icon'>
                                             <i>
                                                 <FontAwesomeIcon icon={['far', 'clock']} />
@@ -41,8 +40,8 @@ export default function SelectCarPage() {
                                             </i>
                                         </div>
                                         <div>
-                                            <p>Departure Time</p>
-                                            <p>Journey Time</p>
+                                            <p>Departure Place</p>
+                                            <p>Journey Place</p>
                                         </div>
                                         <div>
                                             <p style={{
@@ -56,8 +55,8 @@ export default function SelectCarPage() {
                                             </p>
                                         </div>
                                         <div>
-                                            <p>08:30 PM</p>
-                                            <p>07:45 Hrs</p>
+                                            <p>Quy Nhon</p>
+                                            <p>Ha Noi</p>
                                         </div>
                                     </div>
                                     <div>
@@ -89,9 +88,18 @@ export default function SelectCarPage() {
                                         </i>
                                         <p>Charging Plug</p>
                                     </div>
+                                    <div>
+                                        <p>|</p>
+                                    </div>
+                                    <div>
+                                        <i>
+                                            <FontAwesomeIcon icon={['fas', 'chair']} />
+                                        </i>
+                                        <p>25 Empty Seat</p>
+                                    </div>
                                 </div>
                                 <div style={{ display: index === position ? 'block' : 'none' }} className='seat-map'>
-                                    <SelectSeatPage></SelectSeatPage>
+                                    <SelectSeat></SelectSeat>
                                 </div>
                             </div>
                         ))}

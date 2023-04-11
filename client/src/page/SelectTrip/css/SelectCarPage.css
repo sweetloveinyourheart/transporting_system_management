@@ -37,6 +37,12 @@
     justify-content: space-between;
 }
 
+.car__time>div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
 .car__time-icon {
     display: flex;
     flex-direction: column;

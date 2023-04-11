@@ -12,10 +12,12 @@ import {
     faBars,
     faSnowflake,
     faWifi,
-    faChargingStation
+    faChargingStation,
+    faChair
 } from '@fortawesome/free-solid-svg-icons'
 
 import { faClock } from '@fortawesome/free-regular-svg-icons'
+
 
 
 //Add icon to library
@@ -27,4 +29,5 @@ library.add(
     faSnowflake,
     faWifi,
     faChargingStation,
-    faClock)
+    faClock,
+    faChair)

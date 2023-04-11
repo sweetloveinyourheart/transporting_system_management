@@ -7,6 +7,7 @@ import Login from './page/Login';
 import Register from './page/Register';
 import ProvideContactDetails from './page/ProvideContactDetails';
 import ProvidePassengerDetails from './page/ProvidePassengerDetails';
+import SelectCarPage from './page/SelectTrip/SelectCarPage';
 
 function App() {
   return (

@@ -7,7 +7,7 @@ import greenchair from '../../assets/images/chair/greenchair.png'
 import pinkchair from '../../assets/images/chair/pinkchair.png'
 
 
-export default function SelectSeatPage() {
+export default function SelectSeat() {
     const arr = [1, 2, 3, 4, 5];
     return (
         <div class="select-seat-page">
@@ -75,8 +75,13 @@ export default function SelectSeatPage() {
                     ))}
                 </div>
             </div>
-            <div>
-                <p >Số ghế: 5, 13</p>
+            <div style={{ display: 'flex' }}>
+                <div>
+                    <p >Số ghế: 5, 13</p>
+                </div>
+                <div>
+                    <button className="btn-choose">Continue</button>
+                </div>
             </div>
         </div>
     )
