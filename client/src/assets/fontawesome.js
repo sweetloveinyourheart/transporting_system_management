@@ -8,11 +8,23 @@ import {
     faTwitter,
 } from '@fortawesome/free-brands-svg-icons';
 
-import { faBars } from '@fortawesome/free-solid-svg-icons'
+import {
+    faBars,
+    faSnowflake,
+    faWifi,
+    faChargingStation
+} from '@fortawesome/free-solid-svg-icons'
+
+import { faClock } from '@fortawesome/free-regular-svg-icons'
+
 
 //Add icon to library
 library.add(
     faFacebookF,
     faInstagram,
     faTwitter,
-    faBars)
+    faBars,
+    faSnowflake,
+    faWifi,
+    faChargingStation,
+    faClock)
