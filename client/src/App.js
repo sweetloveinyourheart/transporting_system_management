@@ -3,11 +3,12 @@ import './assets/styles/fonts.css'
 import "./assets/fontawesome"
 import './App.css';
 import Main from './components/layout/Main/Main';
+import Home from './page/Home';
 
 function App() {
   return (
     <div className="App">
-      <Main></Main>
+      <Home />
     </div>
   );
 }
