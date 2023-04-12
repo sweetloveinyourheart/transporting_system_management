@@ -1,6 +1,8 @@
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
-import './main.css'
+import './main.css';
+import BookingDetails from '../../../BookingDetails';
+import VerifyAllDetails from '../../../VerifyAllDetails';
 // import { Layout, theme } from 'antd';
 // import { Content } from 'antd/es/layout/layout';
 
@@ -20,7 +22,8 @@ export default function Main() {
                 <Header></Header>
                 <div className='content-wrap'>
                     <div>
-
+                     {/* <BookingDetails />    */}
+                    <VerifyAllDetails/>  
                     </div>
                 </div>
                 <Footer></Footer>
