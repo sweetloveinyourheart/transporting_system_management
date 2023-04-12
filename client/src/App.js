@@ -7,7 +7,11 @@ import Login from './page/Login';
 import Register from './page/Register';
 import ProvideContactDetails from './page/ProvideContactDetails';
 import ProvidePassengerDetails from './page/ProvidePassengerDetails';
+<<<<<<< HEAD
 import PayTickets from './page/Payment';
+=======
+import SelectCarPage from './page/SelectTrip/SelectCarPage';
+>>>>>>> dev
 
 function App() {
 	return (

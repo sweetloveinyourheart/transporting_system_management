@@ -18,51 +18,51 @@ function Home() {
             <div className=''>
                 {/* panel */}
                 <div className=''>
-                    <img className='' src={panelImage} alt='error'/>
+                    <img className='' src={panelImage} alt='error' />
                 </div>
                 {/* middle */}
                 <ul className='flex flex-col items-center py-5'>
                     <li className='flex border rounded px-2 py-2 my-2'>
-                        <img alt='error' src={homeIcon} className=''/>
+                        <img alt='error' src={homeIcon} className='' />
                         <input className='outline-none placeholder:text-base placeholder:font-medium
                             text-center w-72'
-                            placeholder='Source City'/>
+                            placeholder='Source City' />
                     </li>
                     <li className='my-2'>
                         <img alt='error' src={arrowIcon}
-                            className='w-12'/>
+                            className='w-12' />
                     </li>
                     <li className='flex border rounded px-2 py-2 my-2'>
-                        <img alt='error' src={homeIcon} className=''/>
+                        <img alt='error' src={homeIcon} className='' />
                         <input className='outline-none placeholder:text-base placeholder:font-medium
                             text-center w-72'
-                            placeholder='Destination City'/>
+                            placeholder='Destination City' />
                     </li>
                     {/* calendar */}
                     <li className='flex flex-col mt-5'>
                         <div className='flex border rounded px-3 py-2 items-center
                             select-none cursor-pointer hover:opacity-75'
                             onClick={() => {
-                                if(dateInputRef.current){
+                                if (dateInputRef.current) {
                                     dateInputRef.current.showPicker();
                                 }
                             }}>
                             <img alt='error' src={calendarIcon}
-                                className='w-5'/>
+                                className='w-5' />
                             <span className='text-gray-400 mx-5'>
                                 {
                                     searchDate ?
-                                    searchDate.toLocaleString()
-                                    :
-                                    "Choose from calender"
+                                        searchDate.toLocaleString()
+                                        :
+                                        "Choose from calender"
                                 }
                             </span>
                             <img alt='error' src={arr1}
-                                className='w-fit h-fit'/>
+                                className='w-fit h-fit' />
                             {/* real date picker */}
                             <input ref={dateInputRef} type='datetime-local'
                                 onChange={(e) => { setSearchDate(new Date(e.target.value)) }}
-                                className='w-0 h-0'/>
+                                className='w-0 h-0' />
                         </div>
                         <div className='flex justify-center mt-3'>
                             <button className='px-3 py-2 font-medium
@@ -85,7 +85,7 @@ function Home() {
                             <span className='text-white w-56'>SEARCH NOW</span>
                             <div className='bg-dark-blue w-7 h-7 rounded-full
                                 flex justify-center items-center'>
-                                <img alt='error' src={arrowWhite}/>
+                                <img alt='error' src={arrowWhite} />
                             </div>
                         </button>
                     </li>

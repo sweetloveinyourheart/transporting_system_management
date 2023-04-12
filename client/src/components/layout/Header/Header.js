@@ -1,6 +1,6 @@
 import './header.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import logo from './images/logo.png'
+import logo from '../../../assets/images/header/logo.png'
 
 export default function Header() {
     return (
