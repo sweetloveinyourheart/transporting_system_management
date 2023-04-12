@@ -7,11 +7,10 @@ import Login from './page/Login';
 import Register from './page/Register';
 import ProvideContactDetails from './page/ProvideContactDetails';
 import ProvidePassengerDetails from './page/ProvidePassengerDetails';
-<<<<<<< HEAD
-import PayTickets from './page/Payment';
-=======
 import SelectCarPage from './page/SelectTrip/SelectCarPage';
->>>>>>> dev
+import SelectSeatPage from './page/SelectTrip/SelectSeat';
+import MyBookingPage from './page/Mybooking/Mybooking';
+import PayTickets from './page/Payment'
 
 function App() {
 	return (
@@ -22,6 +21,9 @@ function App() {
 				<Route path='/register' element={<Register />} />
 				<Route path='/contact-detail' element={<ProvideContactDetails />} />
 				<Route path='/passenger-detail' element={<ProvidePassengerDetails />} />
+				<Route path='/trip/select-car' element={<SelectCarPage />} />
+				<Route path='/trip/select-seat' element={<SelectSeatPage />} />
+				<Route path='/my-booking' element={<MyBookingPage />} />z
 				<Route path='/payment' element={<PayTickets />} />
 			</Routes>
 		</div>
