@@ -8,6 +8,8 @@ import Register from './page/Register';
 import ProvideContactDetails from './page/ProvideContactDetails';
 import ProvidePassengerDetails from './page/ProvidePassengerDetails';
 import SelectCarPage from './page/SelectTrip/SelectCarPage';
+import SelectSeatPage from './page/SelectTrip/SelectSeatPage';
+import MyBookingPage from './page/Mybooking/Mybooking';
 
 function App() {
   return (
@@ -18,6 +20,9 @@ function App() {
         <Route path='/register' element={<Register />} />
         <Route path='/contact-detail' element={<ProvideContactDetails />} />
         <Route path='/passenger-detail' element={<ProvidePassengerDetails />} />
+        <Route path='/trip/select-car' element={<SelectCarPage />} />
+        <Route path='/trip/select-seat' element={<SelectSeatPage />} />
+        <Route path='/my-booking' element={<MyBookingPage />} />
       </Routes>
     </div>
   );
