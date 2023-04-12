@@ -1,0 +1,18 @@
+.container-info{
+    min-height: 100vh;
+}
+.content-info{
+    padding: 24px;
+}
+.avatar-info{
+    background: #fff;
+    padding: 24px;
+    margin-top: 16px;
+}
+.text-info{
+    
+    background: #fff;
+    padding: 24px;
+    margin-top: 16px;
+    
+}
