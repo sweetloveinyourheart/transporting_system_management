@@ -1,8 +1,13 @@
 import './header.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import logo from '../../assets/images/header/logo.png'
+import { Link } from 'react-router-dom'
+import { useAuth } from '../../contexts/auth'
 
 export default function Header() {
+
+    const { user } = useAuth()
+
     return (
         <section className="nav-bar">
             <div className="header-container">
@@ -18,16 +23,24 @@ export default function Header() {
                     <div className="col">
                         <ul className="nav-bar__menu-list">
                             <li>
-                                <a href="#"><i>Home</i></a>
+                                <Link to={"#"}><i>Home</i></Link>
                             </li>
                             <li>
-                                <a href="#"><i>My Booking</i></a>
+                                <Link to={"#"}><i>My Booking</i></Link>
                             </li>
                             <li>
-                                <a href="#"><i>About</i></a>
+                                <Link to={"#"}><i>About</i></Link>
                             </li>
+                            {user
+                                ? (
+                                    <li>
+                                        <Link to={"/profile"}><i>Account</i></Link>
+                                    </li>
+                                )
+                                : null
+                            }
                             <li>
-                                <a href="#"><i>Login</i></a>
+                                {user ? "Logout" : <Link to={"/login"}><i>Login</i></Link>}
                             </li>
                         </ul>
                     </div>

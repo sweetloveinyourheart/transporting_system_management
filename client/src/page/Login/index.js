@@ -3,12 +3,19 @@ import './style.css';
 import { Form, Input, Button, Typography, message } from 'antd';
 import { LockFilled, UserOutlined, RightCircleFilled } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../contexts/auth';
 
 function Login() {
     const [form] = Form.useForm();
+
+    const { signIn } = useAuth()
+
+    const handleSubmit = async (value) => {
+       await signIn(value.username, value.password)
+    }
     return (
         <div className='appBg'>
-            <Form form={form} className='loginForm' >
+            <Form onFinish={handleSubmit} form={form} className='loginForm' >
                 <Typography.Title>Login</Typography.Title>
                 <Form.Item
                     rules={[{
