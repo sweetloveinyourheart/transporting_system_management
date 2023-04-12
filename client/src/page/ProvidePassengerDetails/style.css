@@ -1,0 +1,209 @@
+.provide-passenger-details {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.passenger-title {
+	text-align: center;
+	font-size: 48px;
+	font-weight: 400;
+	margin: 40px 0px;
+}
+
+.inp-details {
+	padding: 30px;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+	border-radius: 5px;
+	margin: 30px 0px;
+
+}
+
+.inp-details .inp-name-age {
+	display: flex;
+	gap: 20px;
+	font-size: 24px;
+	margin: 10px 0px;
+}
+
+.inp-details .inp-name-age .inp-name {
+	display: flex;
+	padding: 10px 20px;
+	border: 1px solid #E4DFDF;
+	border-radius: 5px;
+	gap: 20px;
+	align-items: center;
+}
+
+.inp-details .inp-name-age .inp-age {
+	display: flex;
+	padding: 10px 20px;
+	border: 1px solid #E4DFDF;
+	border-radius: 5px;
+	gap: 20px;
+	align-items: center;
+}
+
+.inp-details .inp-name-age .inp-name input {
+	border: none;
+	outline: none;
+	font-size: 24px;
+}
+
+.inp-details .inp-name-age .inp-age input {
+	border: none;
+	outline: none;
+	font-size: 24px;
+	width: 90px;
+
+}
+
+.inp-details .inp-gender {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 24px;
+	gap: 15px;
+	margin: 10px 0px;
+
+}
+
+.inp-details .inp-gender .title-gender {
+	font-weight: 600;
+}
+
+.inp-details .inp-gender form {
+	display: flex;
+	gap: 15px;
+}
+
+.submit-details {
+	display: flex;
+	justify-content: end;
+	cursor: pointer;
+	margin: 10px 0px;
+
+
+}
+
+.right-col {
+	display: flex;
+	background-color: #5669FF;
+	padding: 20px;
+	border-radius: 10px;
+	gap: 10px;
+	transition: 0.2s;
+
+}
+
+.right-col:hover {
+	box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
+
+.right-col button {
+	cursor: pointer;
+	border: none;
+	background-color: inherit;
+	color: white;
+	font-size: 24px;
+}
+
+.arrow-icon {
+	background-color: #3D56F0;
+	padding: 5px 10px;
+	border-radius: 50%;
+	color: white;
+	cursor: pointer;
+}
+
+.passenger-details {
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	margin: 30px;
+}
+
+.passenger-details .details-title {
+	font-size: 36px;
+}
+
+.passenger-details .wrap-details {
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+	border-radius: 5px;
+	margin: 50px 0px;
+
+}
+
+.passenger-details .wrap-details .details {
+	font-size: 24px;
+}
+
+
+
+.passenger-details .wrap-details .details td {
+	padding: 5px 25px;
+}
+
+.btn-continue {
+	display: flex;
+	background-color: #5669FF;
+	padding: 20px;
+	border-radius: 10px;
+	gap: 10px;
+	margin: 50px 0px 100px 0px;
+	transition: 0.2s;
+
+}
+
+.btn-continue:hover {
+	box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
+
+.btn-continue button {
+	cursor: pointer;
+	border: none;
+	background-color: inherit;
+	color: white;
+	font-size: 24px;
+}
+
+/* Mobile: width < 740px */
+@media screen and (max-width: 46.1875em) {
+
+
+	.inp-details .inp-name-age {
+		flex-direction: column;
+	}
+
+	.passenger-details .wrap-details .details td {
+		padding: 5px 20px;
+	}
+
+	.passenger-details .wrap-details .details {
+		padding: 20px;
+	}
+
+	.inp-details .inp-gender {
+		flex-direction: column;
+		align-items: start;
+	}
+
+	.inp-details .inp-gender form {
+		flex-direction: column;
+		align-items: start;
+	}
+
+	.btn-continue {
+		margin: 50px 0px 200px 0px;
+	}
+
+
+}
+
+/* Tablet: width >= 740px and width < 1024px */
+@media screen and (min-width: 46.25em) and (max-width: 63.9375em) {}
+
+/* Mobile & tablet: width >= 1024px */
+@media screen and (max-width: 64em) {}

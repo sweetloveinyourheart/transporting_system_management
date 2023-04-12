@@ -1,19 +1,38 @@
-import logo from './logo.svg';
 import './assets/styles/fonts.css'
 import "./assets/fontawesome"
 import './App.css';
-import Main from './components/layout/Main/Main';
+import Home from './page/Home';
+import { Route, Routes } from 'react-router-dom';
+import Login from './page/Login';
+import Register from './page/Register';
+import ProvideContactDetails from './page/ProvideContactDetails';
+import ProvidePassengerDetails from './page/ProvidePassengerDetails';
+import SelectCarPage from './page/SelectTrip/SelectCarPage';
+import SelectSeatPage from './page/SelectTrip/SelectSeat';
+import MyBookingPage from './page/Mybooking/Mybooking';
+import PayTickets from './page/Payment'
+import BookingDetails from './page/BookingDetails';
+import VerifyAllDetails from './page/VerifyAllDetails';
 
 
 function App() {
-  return (
-    <div className="App">
-      <Main >
-       
-        
-      </Main>
-    </div>
-  );
+	return (
+		<div className="App">
+			<Routes>
+				<Route path='/' element={<Home />} />
+				<Route path='/login' element={<Login />} />
+				<Route path='/register' element={<Register />} />
+				<Route path='/contact-detail' element={<ProvideContactDetails />} />
+				<Route path='/passenger-detail' element={<ProvidePassengerDetails />} />
+				<Route path='/trip/select-car' element={<SelectCarPage />} />
+				<Route path='/trip/select-seat' element={<SelectSeatPage />} />
+				<Route path='/my-booking' element={<MyBookingPage />} />z
+				<Route path='/payment' element={<PayTickets />} />
+				<Route path='/booking-detail' element={<BookingDetails />} />
+				<Route path='/verify-detail' element={<VerifyAllDetails />} />
+			</Routes>
+		</div>
+	);
 }
 
 export default App;
