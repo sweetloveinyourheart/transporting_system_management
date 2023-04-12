@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
-import Header from '../../components/layout/Header/Header';
-import Footer from '../../components/layout/Footer/Footer';
+import Header from '../../layout/Header/Header';
+import Footer from '../../layout/Footer/Footer';
 import panelImage from '../../assets/home/1760844.webp';
 import homeIcon from '../../assets/home/Rectangle 4240.png';
 import arrowIcon from '../../assets/home/arr.png';

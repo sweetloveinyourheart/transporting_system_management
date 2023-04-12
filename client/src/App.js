@@ -11,6 +11,9 @@ import SelectCarPage from './page/SelectTrip/SelectCarPage';
 import SelectSeatPage from './page/SelectTrip/SelectSeat';
 import MyBookingPage from './page/Mybooking/Mybooking';
 import PayTickets from './page/Payment'
+import BookingDetails from './page/BookingDetails';
+import VerifyAllDetails from './page/VerifyAllDetails';
+
 
 function App() {
 	return (
@@ -25,6 +28,8 @@ function App() {
 				<Route path='/trip/select-seat' element={<SelectSeatPage />} />
 				<Route path='/my-booking' element={<MyBookingPage />} />z
 				<Route path='/payment' element={<PayTickets />} />
+				<Route path='/booking-detail' element={<BookingDetails />} />
+				<Route path='/verify-detail' element={<VerifyAllDetails />} />
 			</Routes>
 		</div>
 	);
