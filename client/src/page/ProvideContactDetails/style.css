@@ -1,0 +1,94 @@
+.provide-contact-details {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.provide-contact-details .contact-title {
+	text-align: center;
+	font-size: 48px;
+	font-weight: 400;
+	margin: 40px 0px;
+}
+
+.provide-contact-details .inp-details {
+	padding: 50px 100px;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+	border-radius: 5px;
+	margin: 30px 0px;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	font-size: 24px;
+
+}
+
+.provide-contact-details .inp-details .inp-email,
+.provide-contact-details .inp-details .inp-phone-number {
+	display: flex;
+	padding: 10px 20px;
+	border: 1px solid #E4DFDF;
+	border-radius: 5px;
+	gap: 20px;
+	align-items: center;
+}
+
+.provide-contact-details .inp-details .inp-email input,
+.provide-contact-details .inp-details .inp-phone-number input {
+	border: none;
+	outline: none;
+	font-size: 24px;
+}
+
+.note {
+	text-align: left;
+	word-wrap: break-word;
+	width: 500px;
+}
+
+.btn-continue {
+	display: flex;
+	background-color: #5669FF;
+	padding: 20px;
+	border-radius: 10px;
+	gap: 10px;
+	margin: 50px 0px 100px 0px;
+	transition: 0.2s;
+
+}
+
+.btn-continue:hover {
+	box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
+
+.btn-continue button {
+	cursor: pointer;
+	border: none;
+	background-color: inherit;
+	color: white;
+	font-size: 24px;
+}
+
+.arrow-icon {
+	background-color: #3D56F0;
+	padding: 5px 10px;
+	border-radius: 50%;
+	color: white;
+	cursor: pointer;
+}
+
+/* Mobile: width < 740px */
+@media screen and (max-width: 46.1875em) {
+	.note {
+		width: auto;
+	}
+
+	.provide-contact-details .inp-details {
+		padding: 30px;
+	}
+
+	.btn-continue {
+		margin: 50px 0px 200px 0px;
+	}
+}
