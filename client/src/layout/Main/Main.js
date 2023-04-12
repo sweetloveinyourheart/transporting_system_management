@@ -7,15 +7,6 @@ import Router from '../../Routers'
 
 export default function Main() {
     return (
-        // <Layout>
-        //     <Header></Header>
-        //     <Layout>
-        //         {/* Add page content here */}
-        //     </Layout>
-        //     <Layout>
-        //         <Footer></Footer>
-        //     </Layout>
-        // </Layout>
         <body>
             <div className='page-container'>
                 <Header></Header>
