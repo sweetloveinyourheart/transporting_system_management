@@ -6,14 +6,47 @@ import { Link } from 'react-router-dom';
 
 function Register(props) {
     const [form] = Form.useForm();
+    const validateFullname = (_, value) => {
+        const trimmedValue = value.trim();
+        const words = trimmedValue.split(' ');
+        const formattedWords = words.map(word => word.charAt(0).toUpperCase() + word.slice(1));
 
+        if (words.length > 6 || /\s\s/.test(value)) {
+            return Promise.reject(new Error('Fullname must start with uppercase and have no more than 2 spaces'));
+        }
+        const formattedValue = formattedWords.join(' ');
+        if (trimmedValue !== formattedValue) {
+            return Promise.reject(new Error('Fullname must start with uppercase and have no space'));
+        }
+
+        if (/\d/.test(trimmedValue)) {
+            return Promise.reject(new Error('Fullname cannot contain numbers'));
+        }
+
+        return Promise.resolve();
+    }
+    const validateUserName = (_, value) => {
+        const trimmedValue = value.trim();
+        const words = trimmedValue.split(' ');
+        if (words.length > 1 || /\s\s/.test(value)) {
+            return Promise.reject(new Error('UserName have no spaces'));
+        }
+        return Promise.resolve();
+    }
+    const validateAddress = (_, value) => {
+        const trimmedValue = value.trim();
+        const words = trimmedValue.split(' ');
+        if (words.length > 6 || /\s\s/.test(value)) {
+            return Promise.reject(new Error('Adress have no spaces'));
+        }
+        return Promise.resolve();
+    }
     const validatePassword = (_, value) => {
         if (!value.match(/[A-Z]/)) {
             return Promise.reject('Password must include at least one uppercase letter')
         }
         return Promise.resolve();
     }
-
     const validateConfirmPassword = (_, value) => {
         const passwordFieldValue = form.getFieldValue('password');
         if (!value || passwordFieldValue === value) {
@@ -45,6 +78,9 @@ function Register(props) {
                         max: 50,
                         message: 'Fullname cannot be longer than 50 characters'
                     },
+                    {
+                        validator: validateFullname
+                    }
                     ]}
                     name={'fullname'}
                     hasFeedback>
@@ -58,6 +94,9 @@ function Register(props) {
                     {
                         min: 3,
                         message: 'Username must be at least 3 characters'
+                    },
+                    {
+                        validator: validateUserName
                     },
                     {
                         max: 50,
@@ -135,6 +174,9 @@ function Register(props) {
                         message: 'Address must be at least 6 characters'
                     },
                     {
+                        validator: validateAddress
+                    },
+                    {
                         max: 50,
                         message: 'Adress cannot be longer than 50 characters'
                     },
@@ -145,7 +187,7 @@ function Register(props) {
                 </Form.Item>
                 <Form.Item
                     rules={[{
-                        
+
                         required: true,
                         message: 'Please input your phonenumber',
 
