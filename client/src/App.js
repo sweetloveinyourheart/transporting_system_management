@@ -7,19 +7,21 @@ import Login from './page/Login';
 import Register from './page/Register';
 import ProvideContactDetails from './page/ProvideContactDetails';
 import ProvidePassengerDetails from './page/ProvidePassengerDetails';
+import PayTickets from './page/Payment';
 
 function App() {
-  return (
-    <div className="App">
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/register' element={<Register />} />
-        <Route path='/contact-detail' element={<ProvideContactDetails />} />
-        <Route path='/passenger-detail' element={<ProvidePassengerDetails />} />
-      </Routes>
-    </div>
-  );
+	return (
+		<div className="App">
+			<Routes>
+				<Route path='/' element={<Home />} />
+				<Route path='/login' element={<Login />} />
+				<Route path='/register' element={<Register />} />
+				<Route path='/contact-detail' element={<ProvideContactDetails />} />
+				<Route path='/passenger-detail' element={<ProvidePassengerDetails />} />
+				<Route path='/payment' element={<PayTickets />} />
+			</Routes>
+		</div>
+	);
 }
 
 export default App;
