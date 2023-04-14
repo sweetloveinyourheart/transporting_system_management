@@ -11,12 +11,14 @@ import MyBookingPage from '../page/Mybooking/Mybooking';
 import PayTickets from '../page/Payment'
 import BookingDetails from '../page/BookingDetails';
 import VerifyAllDetails from '../page/VerifyAllDetails';
+import MySchedulePage from '../page/MySchedule';
 
 function Router() {
     return (
         <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/login' element={<Login />} />
+            <Route path='/my-schedule' element={<MySchedulePage />} />
             <Route path='/register' element={<Register />} />
             <Route path='/contact-detail' element={<ProvideContactDetails />} />
             <Route path='/passenger-detail' element={<ProvidePassengerDetails />} />
