@@ -1,28 +1,14 @@
 import React from 'react';
 import './style.css'
 import { DownOutlined } from '@ant-design/icons';
-import { Badge, Dropdown, Menu, Space, Table } from 'antd';
-import { CoffeeOutlined, UserOutlined, ScheduleOutlined } from '@ant-design/icons';
-import Sider from 'antd/es/layout/Sider';
-
+import { Badge, Dropdown, Space, Table } from 'antd';
 
 export default function MySchedulePage() {
-
-    //Menu items
-    function getItemMenu(label, key, icon, children, type) {
-        return { label, key, icon, children, type }
-    }
 
     //Table content
     const getItems = (title, dataIndex, key, render) => {
         return { title, dataIndex, key, render };
     }
-
-    const items2 = [
-        getItemMenu('My Information', 'my-information', <UserOutlined />),
-        getItemMenu('My Schedule', 'my-schedule', <ScheduleOutlined />),
-        getItemMenu('My Leave', 'my-leave', <CoffeeOutlined />),
-    ];
 
     //Expend Row
     const expandedRowRender = () => {
@@ -92,28 +78,18 @@ export default function MySchedulePage() {
         });
     }
 
-
     return (
-        <>
-            <div className='my-schedule-page'>
-                <Sider>
-                    <Menu
-                        mode="inline"
-                        defaultSelectedKeys={['1']}
-                        defaultOpenKeys={['sub1']}
-                        style={{ height: '100%', borderRight: 0 }}
-                        items={items2}></Menu>
-                </Sider>
-                <Table
-                    style={{ marginLeft: "50px" }}
-                    columns={columns}
-                    expandable={{
-                        expandedRowRender,
-                        // defaultExpandedRowKeys: ['0'],
-                    }}
-                    dataSource={data}
-                />
-            </div>
-        </>
+        <Table
+            style={{ marginLeft: "50px" }}
+            columns={columns}
+            expandable={{
+                expandedRowRender,
+                // defaultExpandedRowKeys: ['0'],
+            }}
+            dataSource={data}
+            pagination={{
+                position: ["bottomCenter"]
+            }}
+        />
     )
 }
