@@ -6,50 +6,35 @@
 
 .provide-contact-details .contact-title {
 	text-align: center;
-	font-size: 48px;
-	font-weight: 400;
-	margin: 40px 0px;
-	color: white;
+	font-size: 38px;
+	margin: 50px 0px;
 }
 
 .provide-contact-details .inp-details {
-	padding: 50px 100px;
+	padding: 50px;
 	box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 	border-radius: 5px;
-	margin: 30px 0px;
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
-	font-size: 24px;
-
-}
-
-.provide-contact-details .inp-details .inp-email,
-.provide-contact-details .inp-details .inp-phone-number {
-	display: flex;
-	padding: 10px 20px;
-	border: 1px solid #E4DFDF;
-	border-radius: 5px;
-	gap: 20px;
-	align-items: center;
+	width: 40%;
+	margin: 0px !important;
 }
 
 .provide-contact-details .inp-details .inp-email input,
 .provide-contact-details .inp-details .inp-phone-number input {
 	border: none;
 	outline: none;
-	font-size: 24px;
 }
 
 .note {
 	text-align: left;
 	word-wrap: break-word;
-	width: 500px;
 }
 
 .btn-continue {
 	display: flex;
-	background-color: #5669FF;
+	background-color: #165F81;
 	padding: 20px;
 	border-radius: 10px;
 	gap: 10px;
@@ -59,7 +44,7 @@
 }
 
 .btn-continue:hover {
-	box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+	box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 }
 
 
@@ -68,12 +53,11 @@
 	border: none;
 	background-color: inherit;
 	color: white;
-	font-size: 24px;
 }
 
 .arrow-icon {
 	background-color: #3D56F0;
-	padding: 5px 10px;
+	padding: 3px 7px;
 	border-radius: 50%;
 	color: white;
 	cursor: pointer;
@@ -81,15 +65,25 @@
 
 /* Mobile: width < 740px */
 @media screen and (max-width: 46.1875em) {
-	.note {
-		width: auto;
-	}
 
 	.provide-contact-details .inp-details {
 		padding: 30px;
+		width: 70%;
 	}
 
 	.btn-continue {
-		margin: 50px 0px 200px 0px;
+		margin: 50px 0px 100px 0px;
+	}
+}
+
+@media screen and (max-width: 900px) {
+	.provide-contact-details .inp-details {
+		width: 50%;
+	}
+}
+
+@media screen and (max-width: 560px) {
+	.provide-contact-details .inp-details {
+		width: 80%;
 	}
 }

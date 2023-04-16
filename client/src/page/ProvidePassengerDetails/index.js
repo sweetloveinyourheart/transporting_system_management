@@ -1,9 +1,10 @@
 import React, { useState } from "react"
 import "./style.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser } from "@fortawesome/free-regular-svg-icons"
-import { faUserClock, faUserXmark } from "@fortawesome/free-solid-svg-icons"
+import { faUserXmark } from "@fortawesome/free-solid-svg-icons"
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons"
+import { Input, Typography } from "antd"
+import { UserOutlined, ClockCircleOutlined } from '@ant-design/icons';
 
 
 export default function ProvidePassengerDetails() {
@@ -20,24 +21,18 @@ export default function ProvidePassengerDetails() {
 
 	return (
 		<div className="provide-passenger-details">
-			<div className="passenger-title">
+			<Typography.Title className="passenger-title">
 				Provide Passenger Details
-			</div>
+			</Typography.Title>
 			<div className="inp-details" >
 				<div className="inp-name-age" >
 					<div className="inp-name">
-						<i>
-							<FontAwesomeIcon icon={faUser} style={{ color: "#807A7A" }} />
-						</i>
-						<input type='text' placeholder='Enter Passenger Name' name='name' value={inputPassengerName} onChange={(e) => {
+						<Input prefix={<UserOutlined className="site-form-item-icon" />} type='text' placeholder='Enter Passenger Name' name='name' value={inputPassengerName} onChange={(e) => {
 							setInputPassengerName(e.target.value)
 						}} />
 					</div>
 					<div className="inp-age">
-						<i>
-							<FontAwesomeIcon icon={faUserClock} style={{ color: "#807A7A" }} />
-						</i>
-						<input type='text' placeholder='Age' name='age' value={inputAge} onChange={(e) => {
+						<Input prefix={<ClockCircleOutlined className="site-form-item-icon" />} type='text' placeholder='Age' name='age' value={inputAge} onChange={(e) => {
 							setInputAge(e.target.value)
 						}} />
 					</div>

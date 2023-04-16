@@ -5,13 +5,13 @@
 }
 
 .payment-tickets .payment-title {
-	font-size: 48px;
+	font-size: 38px;
 	margin: 50px 0px;
 }
 
 .payment-tickets .payment-wrapper {
 	padding: 20px;
-	width: 60%;
+	width: 50%;
 
 
 }
@@ -27,10 +27,10 @@
 }
 
 .payment-tickets .payment-wrapper .select-option .option-title {
-	background-color: #5669FF;
+	background-color: #165F81;
 	padding: 20px 10px;
 	border-radius: 15px;
-	font-size: 24px;
+	font-size: 20px;
 	width: 97%;
 	color: white;
 }
@@ -43,7 +43,7 @@
 	padding: 10px;
 	border-radius: 10px;
 	box-shadow: rgba(203, 131, 87, 0.25) 0px 2px 5px -1px, rgba(221, 157, 61, 0.3) 0px 1px 3px -1px;
-
+	cursor: pointer;
 }
 
 .payment-tickets .payment-wrapper .select-option .online .wrap-logo-title {
@@ -63,12 +63,11 @@
 
 .payment-tickets .payment-wrapper .select-option .online .wrap-logo-title .title-description .title,
 .payment-tickets .payment-wrapper .select-option .physically .title-description .title {
-	font-size: 24px;
+	font-size: 18px;
 }
 
 .payment-tickets .payment-wrapper .select-option .online .wrap-logo-title .title-description .description,
 .payment-tickets .payment-wrapper .select-option .physically .title-description .description {
-	font-size: 18px;
 	color: rgb(119, 115, 115);
 }
 
@@ -113,7 +112,6 @@
 	border-radius: 5px;
 	padding: 20px 40px;
 	margin: 70px 0px;
-	font-size: 24px;
 }
 
 .payment-wrapper .payment-sub {
@@ -123,11 +121,20 @@
 }
 
 .payment-wrapper .payment-sub button {
-	background-color: #5669FF;
-	padding: 10px 50px;
-	border-radius: 15px;
-	font-size: 24px;
+	background-color: #165F81;
+	padding: 10px 30px;
+	border-radius: 10px;
 	color: white;
+}
+
+.payment-wrapper .payment-sub button:hover {
+	box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+@media screen and (max-width: 900px) and (min-width: 741px) {
+	.payment-tickets .payment-wrapper {
+		width: 70%;
+	}
 }
 
 /* Mobile: width < 740px */

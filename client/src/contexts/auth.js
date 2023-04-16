@@ -42,7 +42,7 @@ export default function AuthProvider({ children }) {
 	const getUserByAccessToken = async () => {
 		const user = await getUser()
 		if (!user) {
-			navigate("/login")
+			// navigate("/login")
 			setLoading(false)
 			return setUser(null)
 		}
