@@ -1,0 +1,24 @@
+.ant-select-selector {
+  width: 270px !important;
+  padding: 2px 30px !important;
+  height: 40px !important;
+  min-width: 200px;
+}
+.ant-select-selection-item {
+  text-align: center;
+  font-size: 17px;
+  margin: 1px;
+}
+.ant-select-selector .ant-select-selection-placeholder {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ant-select-selector
+  .ant-select-selection-search
+  .ant-select-selection-search-input {
+  padding: 4px 20px;
+  text-align: center;
+  margin-top: 4px !important;
+}
