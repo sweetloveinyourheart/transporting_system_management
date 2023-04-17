@@ -28,7 +28,7 @@ function Mybooking() {
 		<div className='container'>
 			<div className='title-all-booking'>
 				<Typography.Title className='title'>My Bookings</Typography.Title>
-				<div className='all-booking'>
+				{/* <div className='all-booking'>
 					<Select
 						defaultValue="All Booking"
 						style={{ width: 120 }}
@@ -40,7 +40,7 @@ function Mybooking() {
 							{ value: 'disabled', label: 'Disabled' },
 						]}
 					/>
-				</div>
+				</div> */}
 			</div>
 			<div className='booking-items'>
 				{

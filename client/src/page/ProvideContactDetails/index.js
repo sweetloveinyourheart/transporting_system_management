@@ -4,6 +4,7 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons"
 import { useState } from "react";
 import { Input, Typography } from "antd";
 import { MailOutlined, PhoneOutlined } from "@ant-design/icons"
+import { BackToFront } from "../../components/Back/Back";
 export default function ProvideContactDetails() {
 	const [inputEmail, setInputEmail] = useState("");
 	const [inputPhoneNumber, setInputPhoneNumber] = useState("");
@@ -29,11 +30,14 @@ export default function ProvideContactDetails() {
 					</p>
 				</div>
 			</div>
-			<div className='btn-continue' onClick={() => {
-				setContactDetailsList([...contactDetailsList, { id: inCreId + 1, email: inputEmail, phoneNumber: inputPhoneNumber }])
-			}}>
-				<button>CONTINUE</button>
-				<i className="arrow-icon"><FontAwesomeIcon icon={faArrowRight} /></i>
+			<div className="btn-back-continue">
+				<BackToFront />
+				<div className='btn-continue' onClick={() => {
+					setContactDetailsList([...contactDetailsList, { id: inCreId + 1, email: inputEmail, phoneNumber: inputPhoneNumber }])
+				}}>
+					<button>CONTINUE</button>
+					<i className="arrow-icon"><FontAwesomeIcon icon={faArrowRight} /></i>
+				</div>
 			</div>
 		</div>
 	)

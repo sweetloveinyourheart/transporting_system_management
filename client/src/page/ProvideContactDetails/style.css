@@ -32,13 +32,21 @@
 	word-wrap: break-word;
 }
 
+.btn-back-continue {
+	display: flex;
+	justify-content: center;
+	gap: 30px;
+	align-items: center;
+	margin: 50px 0px 100px 0px;
+}
+
 .btn-continue {
 	display: flex;
 	background-color: #165F81;
 	padding: 20px;
 	border-radius: 10px;
 	gap: 10px;
-	margin: 50px 0px 100px 0px;
+	/* margin: 50px 0px 100px 0px; */
 	transition: 0.2s;
 
 }
@@ -69,10 +77,6 @@
 	.provide-contact-details .inp-details {
 		padding: 30px;
 		width: 70%;
-	}
-
-	.btn-continue {
-		margin: 50px 0px 100px 0px;
 	}
 }
 

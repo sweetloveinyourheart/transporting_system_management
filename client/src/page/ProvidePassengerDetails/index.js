@@ -5,6 +5,7 @@ import { faUserXmark } from "@fortawesome/free-solid-svg-icons"
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons"
 import { Input, Typography } from "antd"
 import { UserOutlined, ClockCircleOutlined } from '@ant-design/icons';
+import { BackToFront } from "../../components/Back/Back"
 
 
 export default function ProvidePassengerDetails() {
@@ -80,9 +81,12 @@ export default function ProvidePassengerDetails() {
 					))}
 				</table>
 			</div>
-			<div className='btn-continue'>
-				<button>CONTINUE</button>
-				<i className="arrow-icon"><FontAwesomeIcon icon={faArrowRight} /></i>
+			<div className="btn-back-continue">
+				<BackToFront />
+				<div className='btn-continue'>
+					<button>CONTINUE</button>
+					<i className="arrow-icon"><FontAwesomeIcon icon={faArrowRight} /></i>
+				</div>
 			</div>
 		</div>
 	)

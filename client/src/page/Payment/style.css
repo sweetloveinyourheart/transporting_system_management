@@ -114,6 +114,13 @@
 	margin: 70px 0px;
 }
 
+.payment-wrapper .btn-back-sub {
+	display: flex;
+	justify-content: center;
+	gap: 30px;
+	/* align-items: center; */
+}
+
 .payment-wrapper .payment-sub {
 	display: flex;
 	justify-content: center;

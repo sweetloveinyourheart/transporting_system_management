@@ -3,6 +3,7 @@ import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import "./style.css"
 import { useState } from 'react';
 import { Typography } from 'antd';
+import { BackToFront } from '../../components/Back/Back';
 export default function PayTickets() {
 	const [showDetail, setShowDetail] = useState(false);
 	const onlinePaymentDetails = [
@@ -89,8 +90,11 @@ export default function PayTickets() {
 					<p className="title">Price</p>
 					<p className="value">6.5$</p>
 				</div>
-				<div className="payment-sub">
-					<button>PAYMENT</button>
+				<div className='btn-back-sub'>
+					<BackToFront />
+					<div className="payment-sub">
+						<button>PAYMENT</button>
+					</div>
 				</div>
 			</div>
 		</div>
