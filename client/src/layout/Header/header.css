@@ -44,8 +44,7 @@
 
 /* nav-bar__menu-list li hover */
 .nav-bar__menu-list>li:hover {
-    opacity: 0;
-    transform: translateY(-10px);
+    text-decoration: underline;
     transition: all 0.5s;
 }
 
