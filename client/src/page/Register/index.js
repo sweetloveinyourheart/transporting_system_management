@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
 import './style.css';
 import { Form, Input, Button, Typography, message } from 'antd';
 import { LockFilled, UserOutlined, RightCircleFilled, MailFilled, PhoneFilled, EnvironmentFilled } from '@ant-design/icons';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { register } from '../../services/auth';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 function Register(props) {
 	const [form] = Form.useForm();
@@ -77,8 +79,8 @@ function Register(props) {
 
 	return (
 		<div className='appBg'>
+			<Typography.Title className='title'>Register</Typography.Title>
 			<Form form={form} className='registerForm' onFinish={handleSubmit}>
-				<Typography.Title>Register</Typography.Title>
 				<Form.Item
 					rules={[{
 						required: true,
@@ -214,12 +216,18 @@ function Register(props) {
 					<Input className='input' onBeforeInput={onKeyPhoneNumber} prefix={<PhoneFilled className="site-form-item-icon" />} placeholder='Enter Phone' maxLength={11} />
 				</Form.Item>
 				<Form.Item className='form-item-register'>
-					<Button className='btn-register' type='primary' htmlType='submit'
-						icon={<RightCircleFilled className='RightCircleFilled' />}>Register</Button>
-					<br />
-					<span style={{ fontWeight: '700' }}>
-						Already have an account <Link to='/login'>Log in</Link>
-					</span>
+					<div className='wrap-btn'>
+						<button className='btn-register' htmlType='submit'>REGISTER </button>
+						<i className='arrow-icon'>
+							<FontAwesomeIcon icon={faArrowRight} />
+						</i>
+					</div>
+					<div className='to-login' style={{ marginTop: "10px" }}>
+						<span style={{ fontWeight: '700' }}>
+							Already have an account?
+						</span>
+						<Link style={{ fontWeight: '700' }} to='/login'>Login</Link>
+					</div>
 				</Form.Item>
 			</Form>
 
