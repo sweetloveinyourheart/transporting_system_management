@@ -11,6 +11,7 @@ import MyBookingPage from '../page/Mybooking';
 import PayTickets from '../page/Payment'
 import BookingDetails from '../page/BookingDetails';
 import VerifyAllDetails from '../page/VerifyAllDetails';
+import DriverPage from '../page/Driver';
 
 function Router() {
 	return (
