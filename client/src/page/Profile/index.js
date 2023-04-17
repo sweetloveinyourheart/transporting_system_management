@@ -2,12 +2,12 @@ import { Avatar, Layout, Menu, theme } from 'antd';
 import { UserOutlined, UnlockOutlined } from '@ant-design/icons';
 
 import './style.css';
-import {React, useState} from 'react';
+import { React, useState } from 'react';
 import Infor from './Infor';
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Content, Sider } = Layout;
 
-function Profile(props) {
+function Profile() {
     const [currentPage, setCurrentPage] = useState('profile');
     const handleProfileClick = () => {
         setCurrentPage('profile');
@@ -20,7 +20,7 @@ function Profile(props) {
             <Sider>
                 <Menu mode="inline" className='menu' selectedKeys={[currentPage]}>
                     <Menu.Item disabled="true" key="avatar" >
-                        <Avatar size="large" icon={<UserOutlined />}  />
+                        <Avatar size="small" icon={<UserOutlined />} />
                     </Menu.Item>
                     <Menu.Item key="profile" icon={<UserOutlined />} onClick={handleProfileClick}>
                         Profile
