@@ -12,21 +12,24 @@ import PayTickets from '../page/Payment'
 import BookingDetails from '../page/BookingDetails';
 import VerifyAllDetails from '../page/VerifyAllDetails';
 import DriverPage from '../page/Driver';
+import { Error } from '../page/Error/Error';
 
 function Router() {
 	return (
 		<Routes>
-			<Route path='/' element={<Home />} />   {/* boqua */}
-			<Route path='/login' element={<Login />} /> {/* done */}
-			<Route path='/register' element={<Register />} />  {/* done */}
-			<Route path='/contact-detail' element={<ProvideContactDetails />} /> {/* done */}
-			<Route path='/passenger-detail' element={<ProvidePassengerDetails />} /> {/* done */}
-			<Route path='/trip/select-car' element={<SelectCarPage />} /> 						{/* boqua */}
-			<Route path='/my-booking' element={<MyBookingPage />} /> {/* done */}
-			<Route path='/payment' element={<PayTickets />} /> {/* done */}
-			<Route path='/booking-details' element={<BookingDetails />} /> {/* done */}
+			<Route path='/' element={<Home />} />
+			<Route path='/login' element={<Login />} />
+			<Route path='/register' element={<Register />} />
+			<Route path='/contact-detail' element={<ProvideContactDetails />} />
+			<Route path='/passenger-detail' element={<ProvidePassengerDetails />} />
+			<Route path='/trip/select-car' element={<SelectCarPage />} />
+			<Route path='/my-booking' element={<MyBookingPage />} />
+			<Route path='/payment' element={<PayTickets />} />
+			<Route path='/booking-details' element={<BookingDetails />} />
 			<Route path='/verify-details' element={<VerifyAllDetails />} />
-			<Route path="/profile" element={<Profile />} />         {/* boqua */}
+			<Route path="/profile" element={<Profile />} />
+			<Route path="/driver" element={<DriverPage />} />
+			<Route path="/error" element={<Error />} />
 		</Routes>
 	);
 }
