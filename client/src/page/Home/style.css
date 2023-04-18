@@ -1,24 +1,72 @@
+.home {
+	position: relative;
+}
+
+.main {
+	position: absolute;
+	top: 9%;
+	left: 0px;
+	right: 0px;
+	width: 400px;
+	margin: 0px auto;
+	background-color: white;
+	padding: 50px;
+	border-radius: 10px;
+
+}
+
+.home .panel img {
+	height: 500px;
+	width: 100%;
+	object-fit: cover;
+	/* filter: brightness(90%); */
+}
+
 .ant-select-selector {
-  width: 270px !important;
-  padding: 2px 30px !important;
-  height: 40px !important;
-  min-width: 200px;
+	width: 250px !important;
+	padding: 5px 30px !important;
+	height: 40px !important;
 }
-.ant-select-selection-item {
-  text-align: center;
-  font-size: 17px;
-  margin: 1px;
-}
+
 .ant-select-selector .ant-select-selection-placeholder {
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	margin-left: 10px;
 }
-.ant-select-selector
-  .ant-select-selection-search
-  .ant-select-selection-search-input {
-  padding: 4px 20px;
-  text-align: center;
-  margin-top: 4px !important;
+
+.ant-select-selector .ant-select-selection-search .ant-select-selection-search-input {
+	padding: 4px 30px !important;
+	margin-top: 6px !important;
+}
+
+.main .calendar {
+	width: 330px;
+}
+
+.btn-search {
+	display: flex;
+	background-color: #165F81;
+	padding: 10px 30px;
+	border-radius: 10px;
+	gap: 10px;
+	transition: 0.2s;
+
+}
+
+.btn-search:hover {
+	box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+
+.btn-search button {
+	cursor: pointer;
+	border: none;
+	background-color: inherit;
+	color: white;
+}
+
+@media screen and (max-width:540px) {
+	.main {
+		width: 330px;
+		margin: 0px auto;
+	}
+
 }
