@@ -43,10 +43,9 @@
 .btn-continue {
 	display: flex;
 	background-color: #165F81;
-	padding: 20px;
+	padding: 10px 30px;
 	border-radius: 10px;
 	gap: 10px;
-	/* margin: 50px 0px 100px 0px; */
 	transition: 0.2s;
 
 }
