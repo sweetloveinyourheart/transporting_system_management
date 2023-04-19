@@ -25,7 +25,7 @@ export default function SelectCarPage() {
             </div>
             <div>
                 <div className="col">
-                    {content.length > 0 ? (
+                    {content && content.length > 0 ? (
                         <div className="select-car-page__list">
                             {content ? content.map((trip, index) => (
                                 <div key={trip.tripId || ""} className="car">
