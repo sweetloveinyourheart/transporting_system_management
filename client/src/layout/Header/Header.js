@@ -21,9 +21,11 @@ export default function Header() {
 		{
 			key: '2',
 			label: (
-				<Link className='drop-item' target="_blank" rel="noopener noreferrer" to={"/my-booking"}>
-					<b><i>My Booking</i></b>
-				</Link>
+				user ? (
+					<Link className='drop-item' target="_blank" rel="noopener noreferrer" to={"/my-booking"}>
+						<b><i>My Booking</i></b>
+					</Link>
+				) : null
 			),
 		},
 		{
@@ -52,14 +54,18 @@ export default function Header() {
 						<li>
 							<Link to={"/"}><i>Home</i></Link>
 						</li>
-						<li>
-							<Link to={"/my-booking"}><i>My Booking</i></Link>
-						</li>
+
 						{user
 							? (
-								<li>
-									<Link to={"/profile"}><FontAwesomeIcon icon={faCircleUser} /></Link>
-								</li>
+								<>
+									<li>
+										<Link to={"/my-booking"}><i>My Booking</i></Link>
+									</li>
+									<li>
+										<Link to={"/profile"}><FontAwesomeIcon icon={faCircleUser} /></Link>
+									</li>
+								</>
+
 							)
 							: null
 						}
