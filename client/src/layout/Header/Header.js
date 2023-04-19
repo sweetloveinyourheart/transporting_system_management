@@ -54,9 +54,9 @@ export default function Header() {
 						<li>
 							<Link to={"/"}><i>Home</i></Link>
 						</li>
-
-						{user
-							? (
+						{
+							user && user.role.roleId !== "DRIVER" ? 
+							(
 								<>
 									<li>
 										<Link to={"/my-booking"}><i>My Booking</i></Link>
@@ -65,12 +65,11 @@ export default function Header() {
 										<Link to={"/profile"}><FontAwesomeIcon icon={faCircleUser} /></Link>
 									</li>
 								</>
-
 							)
 							: null
 						}
 						<li>
-							{user ? "Logout" : <Link to={"/login"}><i>Login</i></Link>}
+							{user ? <Link to={"#"}><i>Logout</i></Link> : <Link to={"/login"}><i>Login</i></Link>}
 						</li>
 					</ul>
 					<Dropdown className="nav"
