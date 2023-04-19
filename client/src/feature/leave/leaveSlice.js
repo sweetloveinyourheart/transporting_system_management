@@ -10,7 +10,15 @@ const fetchAllLeave = createAsyncThunk(
         return res.data.content;
     }
 );
-export { fetchAllLeave }
+const addLeave = createAsyncThunk(
+    "leave/addLeave",
+    async (leave) => {
+        const res = await axios.post(BASE_URL + "/api/v1/leaves", leave);
+        return res.data;
+    }
+);
+
+export { fetchAllLeave, addLeave }
 
 const leaveSlice = createSlice({
     name: "leaveSlice",
@@ -25,6 +33,13 @@ const leaveSlice = createSlice({
             state.leaves = action.payload;
         }),
         builder.addCase(fetchAllLeave.rejected, (state, action) => {
+            message.error("System is error");
+        }),
+        builder.addCase(addLeave.fulfilled, (state, action) => {
+            state.leaves.push(action.payload);
+            message.success("Request leave success !!!");
+        }),
+        builder.addCase(addLeave.rejected, (state, action) => {
             message.error("System is error");
         })
     }

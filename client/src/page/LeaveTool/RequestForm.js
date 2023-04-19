@@ -1,22 +1,23 @@
-import { memo, useRef } from "react";
+import { memo, useState } from "react";
 import arrWhite from "../../assets/home/arrowWhite.png";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../contexts/auth";
+import { useDispatch } from "react-redux";
+import { addLeave } from "../../feature/leave/leaveSlice";
 
 function RequestForm() {
     const navigate = useNavigate();
-
-    const startDateRef = useRef(null);
-    const endDateRef = useRef(null);
-
-    const { accessToken } = useAuth();
+    const [start, setStart] = useState(new Date().toLocaleDateString("fr-CA"));
+    const [end, setEnd] = useState(new Date().toLocaleDateString("fr-CA"));
+    const [reason, setReason] = useState("");
+    const dispatch = useDispatch();
 
     const onClickRequest = () => {
-        const startDate = startDateRef.current.value;
-        const endDate = endDateRef.current.value;
-
-        console.log(startDate);
-        console.log(endDate);
+        const leave = {
+            dateStart: start,
+            dateEnd: end,
+            reason
+        }
+        dispatch(addLeave(leave));
     }
 
     return (
@@ -33,16 +34,22 @@ function RequestForm() {
             <div className="my-3 flex flex-col">
                 <div>
                     <span className="font-medium mr-2">Start date:</span>
-                    <input ref={startDateRef} type="date" className="my-2" />
+                    <input type="date" value={start} className="my-2"
+                        onChange={(e) => { setStart(e.target.value) }}/>
                 </div>
                 <div>
                     <span className="font-medium mr-2">End date:</span>
-                    <input ref={endDateRef} type="date" className="my-2" />
+                    <input type="date" value={end} className="my-2"
+                        onChange={(e) => { setEnd(e.target.value) }}/>
                 </div>
                 <input placeholder="Input reason to leave..."
-                    className="outline-none p-2 border rounded my-2" />
-                <button onClick={onClickRequest} className="bg-main-blue text-white p-2 rounded hover:bg-dark-blue transition
-                    w-fit ml-auto my-2">
+                    className="outline-none p-2 border rounded my-2" 
+                    value={reason}
+                    onChange={(e) => { setReason(e.target.value) }}
+                />
+                <button className="bg-main-blue text-white p-2 rounded hover:bg-dark-blue transition
+                    w-fit ml-auto my-2"
+                    onClick={onClickRequest} >
                     Request
                 </button>
             </div>
