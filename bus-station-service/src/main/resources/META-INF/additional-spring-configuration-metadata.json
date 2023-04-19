@@ -1,0 +1,5 @@
+{"properties": [{
+  "name": "spring.database-platform",
+  "type": "java.lang.String",
+  "description": "A description for 'spring.database-platform'"
+}]}

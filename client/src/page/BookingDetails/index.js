@@ -1,7 +1,9 @@
 import React from "react";
 import "./style.css";
 import { Typography } from "antd";
+
 function BookingDetails() {
+	
 	const invoice = {
 		departure: "Banglore ",
 		destination: " Chennai",
@@ -31,7 +33,6 @@ function BookingDetails() {
 	};
 
 	return (
-
 		<div className="booking-details">
 			<Typography.Title className="title">Booking Details</Typography.Title>
 			<div className="details">

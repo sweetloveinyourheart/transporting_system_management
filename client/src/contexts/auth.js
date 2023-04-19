@@ -20,9 +20,9 @@ export default function AuthProvider({ children }) {
 	const navigate = useNavigate();
 
 	const signIn = async (username, password) => {
-		const { access_token, refresh_token } = await login(username, password)
+		const { access_token } = await login(username, password)
 		setLoading(false)
-		if (!access_token && !refresh_token) {
+		if (!access_token ) {
 			message.error("Login failed!")
 			return setUser(null)
 		}
@@ -30,11 +30,11 @@ export default function AuthProvider({ children }) {
 		message.success("Login successfully !")
 		axios.defaults.headers.common.Authorization = `Bearer ${access_token}`
 		setAccessToken(access_token)
-		Cookies.set('refresh_token', refresh_token)
+		Cookies.set('access_token', access_token)
 	}
 
 	const signOut = async () => {
-		Cookies.remove("refresh_token")
+		Cookies.remove("access_token")
 		setAccessToken(null)
 		setUser(null)
 		navigate("/login")
@@ -51,20 +51,15 @@ export default function AuthProvider({ children }) {
 		return setUser(user)
 	}
 
-	// const refreshNewToken = async () => {
-	//     const rfToken = Cookies.get("refresh_token")
-	//     const { access_token } = await refreshToken(rfToken)
-	//     axios.defaults.headers.common.Authorization = `Bearer ${access_token}`
-	//     setAccessToken(access_token)
-	// }
+	const getTokenFromCookie = () => {
+	    const token = Cookies.get("access_token")
+	    axios.defaults.headers.common.Authorization = `Bearer ${token}`
+	    setAccessToken(token)
+	}
 
-	// useEffect(() => {
-	//     (async () => {
-	//         await refreshNewToken()
-	//         const refreshAfter15Min = setInterval(refreshNewToken, 15 * 60 * 1000)
-	//         return () => clearInterval(refreshAfter15Min)
-	//     })()
-	// }, [])
+	useEffect(() => {
+	    getTokenFromCookie()
+	}, [])
 
 	useEffect(() => {
 		(async () => {
@@ -78,6 +73,7 @@ export default function AuthProvider({ children }) {
 	return (
 		<AuthContext.Provider value={{
 			user,
+			accessToken,
 			signIn,
 			signOut
 		}}>
