@@ -1,29 +1,37 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Select, Divider, Typography, } from 'antd';
 import './style.css';
 import { faArrowRightLong } from '@fortawesome/free-solid-svg-icons';
+import { useAuth } from '../../contexts/auth';
+import { getOderByUser } from '../../services/mybooking';
 
-
-const handleChange = (value) => {
-	console.log(`selected ${value}`);
-};
-const myBooking = [
-	{
-		departure: "Banglore",
-		destination: "Chennai",
-		time: "28 Dec 2021",
-		car: "AC Sleeper(2+1)"
-	},
-	{
-		departure: "Banglore",
-		destination: "Chennai",
-		time: "28 Dec 2021",
-		car: "AC Sleeper(2+1)"
-	},
-]
 
 function Mybooking() {
+	const [order, setOrder] = useState([]);
+	const { accessToken } = useAuth();
+	// console.log(order);
+	useEffect(() => {
+		getOderByUser(accessToken).then(res => {
+			setOrder(res.content)
+			// console.log(accessToken);
+		})
+	}, [])
+
+
+	const myBooking = [];
+
+	for (let i = 0; i < order.length; i++) {
+		myBooking.push({
+			key: i.toString(),
+			departure: order[i].ticket.addressStart,
+			destination: order[i].ticket.addressEnd,
+			time: order[i].ticket.time,
+			state: order[i].ticket.state,
+			price: order[i].ticket.price,
+		});
+	}
+
 	return (
 		<div className='container'>
 			<div className='title-all-booking'>
@@ -63,10 +71,10 @@ function Mybooking() {
 									{detail.time}
 								</div>
 								<div className='state'>
-									Up Coming
+									{detail.state}
 								</div>
-								<div className='car'>
-									{detail.car}
+								<div className='price'>
+									{detail.price}đ
 								</div>
 
 							</div>

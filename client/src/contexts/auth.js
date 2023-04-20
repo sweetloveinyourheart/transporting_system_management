@@ -72,6 +72,7 @@ export default function AuthProvider({ children }) {
 
 	return (
 		<AuthContext.Provider value={{
+			accessToken,
 			user,
 			accessToken,
 			signIn,
