@@ -88,7 +88,7 @@ export default function SelectSeat({ trip, car }) {
         if (stompClient) {
             const cancelSubscription = stompClient.subscribe('/topic/cancel', function (message) {
                 const orderHasCancelRequest = message.body;
-                
+
                 setDisabledSeats(prevS => {
                     let list = [...prevS]
                     const updatedList = list.filter(item => item.orderId !== orderHasCancelRequest);
@@ -179,20 +179,20 @@ export default function SelectSeat({ trip, car }) {
     }
 
     const onSubmitOrder = async () => {
-        if(!order || !order?.orderId) {
+        if (!order || !order?.orderId) {
             message.error("Please pick a car before submit order !")
             return;
         }
 
         const data = await submitOrder({ orderId: order.orderId, tripId: trip.tripId })
 
-        if(!data) {
+        if (!data) {
             message.error("Oops! Something went wrong @@")
             return;
         }
 
         message.success("Create order successfully !")
-        navigate("/booking-details")
+        navigate("/my-booking")
     }
 
     return (
