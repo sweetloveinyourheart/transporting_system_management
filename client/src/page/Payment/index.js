@@ -29,6 +29,7 @@ export default function PayTickets() {
 	const [rotate, setRotate] = useState(false);
 
 	function handleClick() {
+		setShowDetail(!showDetail)
 		setRotate(!rotate);
 	}
 
@@ -45,9 +46,7 @@ export default function PayTickets() {
 					<div className="option-title">
 						SELECT OPTION TO PAY
 					</div>
-					<div className="online" onClick={() => {
-						setShowDetail(!showDetail)
-					}}>
+					<div className="online" onClick={handleClick}>
 						<div className='wrap-logo-title'>
 							<div className="logo-onl">
 								<img src="images/epay.png" alt="logo" />
@@ -59,7 +58,7 @@ export default function PayTickets() {
 						</div>
 						<div className="arrow-drop" >
 							<FontAwesomeIcon icon={faAngleRight}
-								onClick={handleClick} style={charStyle}
+								style={charStyle}
 							/>
 						</div>
 					</div>
