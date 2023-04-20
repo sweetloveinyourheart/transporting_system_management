@@ -1,21 +1,27 @@
 import { Table, Badge } from "antd";
 import { memo, useEffect, useState } from "react";
-import { useAuth } from '../../contexts/auth'
 import { useNavigate } from "react-router-dom";
-import { getLeave } from "../../services/leave";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllLeave } from "../../feature/leave/leaveSlice";
+import { fetchAllLeave, updateCurrentPage } from "../../feature/leave/leaveSlice";
 
 function LeavePage() {
-    const [allLeave, setAllLeave] = useState([]);
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const leaves = useSelector(state => state.leave.leaves);
+    const totalLeave = useSelector(state => state.leave.totalLeave);
+    const currentPage = useSelector(state => state.leave.currentPage);
+    const [loadingPage, setLoadingPage] = useState(true);
 
     //get all leave by user id
     useEffect(() => {
-        dispatch(fetchAllLeave());
-    }, [])
+        setLoadingPage(true);
+        dispatch(fetchAllLeave({
+            currentPage,
+            onComplete: () => {
+                setLoadingPage(false);
+            }
+        }));
+    }, [dispatch, currentPage])
 
     const columns = [
         {
@@ -50,15 +56,22 @@ function LeavePage() {
             <Table
                 style={{ marginLeft: "50px" }}
                 columns={columns}
+                loading={loadingPage}
                 pagination={{
-                    position: ["bottomCenter"]
+                    position: ["bottomCenter"],
+                    pageSize: 5,
+                    total: totalLeave,
+                    current: currentPage + 1,
+                    onChange: (page) => {
+                        dispatch(updateCurrentPage(page - 1));
+                    }
                 }}
                 dataSource={leaves.map((leave, i) => {
                     return {
                         key: leave.leaveId,
                         index: i + 1,
                         startDate: leave.dateStart,
-                        endDate: leave.dateEnd.substring(0, 10),
+                        endDate: leave.dateEnd,
                         reason: leave.reason,
                         approved: leave.approved ? <Badge status="success" text="Approved" /> : <Badge status="error" text="Not Approved" />,
                     };

@@ -5,9 +5,12 @@ import { message } from "antd";
 
 const fetchAllLeave = createAsyncThunk(
     "leave/fetchAllLeave",
-    async () => {
-        const res = await axios.get(BASE_URL + "/api/v1/leaves");
-        return res.data.content;
+    async (payload) => {
+        const { currentPage, onComplete } = payload;
+        const res = await axios.get(BASE_URL + `/api/v1/leaves?pageNumber=${currentPage}`);
+        onComplete();
+
+        return res.data;
     }
 );
 const addLeave = createAsyncThunk(
@@ -23,22 +26,23 @@ export { fetchAllLeave, addLeave }
 const leaveSlice = createSlice({
     name: "leaveSlice",
     initialState: {
-        leaves: []
+        leaves: [],
+        totalLeave: 0,
+        currentPage: 0
     },
     reducers: {
-
+        updateCurrentPage: (state, action) => {
+            state.currentPage = action.payload;
+        }
     },
     extraReducers: (builder) => {
         builder.addCase(fetchAllLeave.fulfilled, (state, action) => {
-            state.leaves = action.payload.sort((l1, l2) => {
-                const t1 = new Date(l1.createdAt).getTime();
-                const t2 = new Date(l2.createdAt).getTime();
-
-                return t2 - t1;
-            });
+            state.totalLeave = action.payload.totalElements;
+            state.leaves = action.payload.content;
         });
         builder.addCase(fetchAllLeave.rejected, (state, action) => {
             message.error("System is error");
+            console.log(action.error);
         });
         builder.addCase(addLeave.fulfilled, (state, action) => {
             state.leaves.shift(action.payload);
@@ -51,3 +55,4 @@ const leaveSlice = createSlice({
 });
 
 export default leaveSlice.reducer;
+export const { updateCurrentPage } = leaveSlice.actions;
