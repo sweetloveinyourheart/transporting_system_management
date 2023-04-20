@@ -6,10 +6,9 @@ import MySchedulePage from '../MySchedule';
 import LeaveTool from '../LeaveTool';
 import RequestForm from '../LeaveTool/RequestForm';
 
-function DriverPage(){
+function DriverPage() {
     const location = useLocation();
     const navigate = useNavigate();
-
     //Menu items
     function getItemMenu(label, key, icon, children, type) {
         return { label, key, icon, children, type }
@@ -36,10 +35,10 @@ function DriverPage(){
                 />
             </Sider>
             <Routes>
-                <Route path='my-information' element={<div>Continue make info component here...</div>}/>
-                <Route path='my-schedule' element={<MySchedulePage />}/>
-                <Route path='my-leave' element={<LeaveTool />}/>
-                <Route path='my-leave/request' element={<RequestForm />}/>
+                <Route path='my-information' element={<div>Continue make info component here...</div>} />
+                <Route path='my-schedule' element={<MySchedulePage />} />
+                <Route path='my-leave' element={<LeaveTool />} />
+                <Route path='my-leave/request' element={<RequestForm />} />
             </Routes>
         </div>
     );
