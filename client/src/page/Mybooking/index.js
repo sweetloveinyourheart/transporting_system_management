@@ -33,7 +33,7 @@ function Mybooking() {
 	}
 
 	return (
-		<div className='container'>
+		<div className='my-booking'>
 			<div className='title-all-booking'>
 				<Typography.Title className='title'>My Bookings</Typography.Title>
 				{/* <div className='all-booking'>

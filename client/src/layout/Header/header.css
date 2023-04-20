@@ -34,24 +34,22 @@
 
 }
 
-
-.nav-bar__menu-list li {
+.nav-bar__menu-list li a {
 	padding: 10px 30px;
 	transition: 0.2s;
 	border: 1px solid white;
+	font-weight: bold;
+	text-decoration: none;
 }
 
-/* nav-bar__menu-list li hover */
-.nav-bar__menu-list li:hover {
+/* nav-bar__menu-list li a hover */
+.nav-bar__menu-list li a:hover {
 	color: #014D6F;
 	box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 	border-bottom: 2px solid #085071;
 }
 
-.nav-bar__menu-list li a {
-	font-weight: bold;
-	text-decoration: none;
-}
+
 
 .nav {
 	display: none;
