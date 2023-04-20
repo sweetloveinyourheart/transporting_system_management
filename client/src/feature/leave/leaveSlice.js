@@ -30,18 +30,23 @@ const leaveSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(fetchAllLeave.fulfilled, (state, action) => {
-            state.leaves = action.payload;
-        }),
+            state.leaves = action.payload.sort((l1, l2) => {
+                const t1 = new Date(l1.createdAt).getTime();
+                const t2 = new Date(l2.createdAt).getTime();
+
+                return t2 - t1;
+            });
+        });
         builder.addCase(fetchAllLeave.rejected, (state, action) => {
             message.error("System is error");
-        }),
+        });
         builder.addCase(addLeave.fulfilled, (state, action) => {
-            state.leaves.push(action.payload);
+            state.leaves.shift(action.payload);
             message.success("Request leave success !!!");
-        }),
+        });
         builder.addCase(addLeave.rejected, (state, action) => {
             message.error("System is error");
-        })
+        });
     }
 });
 

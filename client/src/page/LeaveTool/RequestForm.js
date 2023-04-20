@@ -3,21 +3,31 @@ import arrWhite from "../../assets/home/arrowWhite.png";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addLeave } from "../../feature/leave/leaveSlice";
+import { message } from "antd";
 
 function RequestForm() {
     const navigate = useNavigate();
-    const [start, setStart] = useState(new Date().toLocaleDateString("fr-CA"));
-    const [end, setEnd] = useState(new Date().toLocaleDateString("fr-CA"));
+    const [start, setStart] = useState(new Date());
+    const [end, setEnd] = useState(new Date());
     const [reason, setReason] = useState("");
     const dispatch = useDispatch();
 
     const onClickRequest = () => {
+        if(start.getTime() >= end.getTime() - (1000 * 60 * 60)){
+            message.warning("Please input time leave > 60 minus !!");
+            return;
+        }
+        if(reason === ''){
+            message.warning("Please input reason !!");
+            return;
+        }
         const leave = {
-            dateStart: start,
-            dateEnd: end,
+            dateStart: start.toLocaleString("sv"),
+            dateEnd: end.toLocaleString("sv"),
             reason
         }
         dispatch(addLeave(leave));
+        navigate("/driver/my-leave");
     }
 
     return (
@@ -34,13 +44,13 @@ function RequestForm() {
             <div className="my-3 flex flex-col">
                 <div>
                     <span className="font-medium mr-2">Start date:</span>
-                    <input type="date" value={start} className="my-2"
-                        onChange={(e) => { setStart(e.target.value) }}/>
+                    <input type="datetime-local" value={start.toLocaleString("sv")} className="my-2"
+                        onChange={(e) => { setStart(new Date(e.target.value)) }}/>
                 </div>
                 <div>
                     <span className="font-medium mr-2">End date:</span>
-                    <input type="date" value={end} className="my-2"
-                        onChange={(e) => { setEnd(e.target.value) }}/>
+                    <input type="datetime-local" value={end.toLocaleString("sv")} className="my-2"
+                        onChange={(e) => { setEnd(new Date(e.target.value)) }}/>
                 </div>
                 <input placeholder="Input reason to leave..."
                     className="outline-none p-2 border rounded my-2" 
