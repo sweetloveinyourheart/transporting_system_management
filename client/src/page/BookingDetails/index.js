@@ -1,36 +1,12 @@
-import React from "react";
+import React, { useMemo } from "react";
 import "./style.css";
 import { Typography } from "antd";
 
-function BookingDetails() {
-	
-	const invoice = {
-		departure: "Banglore ",
-		destination: " Chennai",
-		journeyDate: " 28/09/2021",
-		bookingDate: " 21/092021",
-		bookingStatus: " Successfully Booked.",
-		ticketNumber: " BMT0000XXX5419780",
-		bookingId: " 00001234",
-		mobileNumber: " 1234567890",
-		email: " patilgajanan1807@gmail.com",
-		passengers: [
-			{
-				id: "1",
-				number: "1",
-				name: "Gajanan Patil",
-				gender: "M",
-				age: "21"
-			},
-			{
-				id: "2",
-				number: "2",
-				name: "Suhas Patil",
-				gender: "M",
-				age: "46"
-			},
-		],
-	};
+function BookingDetails(props) {
+
+	const detail = useMemo(() => props.bookingDetail);
+
+	console.log(detail);
 
 	return (
 		<div className="booking-details">
@@ -40,46 +16,45 @@ function BookingDetails() {
 					<tbody>
 						<tr>
 							<td className="details-title">Departure:</td>
-							<td className="details-des">{invoice.departure}</td>
+							<td className="details-des">{detail.ticket.addressStart}</td>
 						</tr>
 						<tr>
 							<td className="details-title">Destination:</td>
-							<td className="details-des">{invoice.destination}</td>
+							<td className="details-des">{detail.ticket.addressEnd}</td>
 						</tr>
 						<tr>
 							<td className="details-title">Journey date:</td>
-							<td className="details-des">{invoice.journeyDate}</td>
+							<td className="details-des">{detail.order.trip.timeStart.substring(0, 10)}</td>
 						</tr>
-						<tr>
+						{/* <tr>
 							<td className="details-title">Booking date:</td>
-							<td className="details-des">{invoice.bookingDate}</td>
-						</tr>
+							<td className="details-des"></td>
+						</tr> */}
 						<tr>
 							<td className="details-title">Booking status:</td>
-							<td className="details-des">{invoice.bookingStatus}</td>
+							{detail.status === true ? <td style={{ color: "green" }} className="details-des">Booking Success</td>
+								: <td style={{ color: "red" }} className="details-des">Cancel</td>}
 						</tr>
 						<tr>
-							<td className="details-title">Ticket number:</td>
-							<td className="details-des">{invoice.ticketNumber}</td>
+							<td className="details-title">Chair number:</td>
+							<td className="details-des">{detail.chair.chairNumber}</td>
 						</tr>
 						<tr>
 							<td className="details-title">Booking ID:</td>
-							<td className="details-des">{invoice.bookingId}</td>
+							<td className="details-des">{detail.order.orderId}</td>
+						</tr>
+						<tr>
+							<td className="details-title">Passenger:</td>
+							<td className="details-des">{detail.order.user.fullName}</td>
 						</tr>
 						<tr>
 							<td className="details-title">Mobile number:</td>
-							<td className="details-des">{invoice.mobileNumber}</td>
+							<td className="details-des">{detail.order.user.phoneNumber}</td>
 						</tr>
 						<tr>
 							<td className="details-title">Email:</td>
-							<td className="details-des">{invoice.email}</td>
+							<td className="details-des">{detail.order.user.email}</td>
 						</tr>
-						{invoice.passengers.map((inv, ind) => (
-							<tr>
-								<td className="details-title">Passenger {inv.number}:</td>
-								<td className="details-des">{inv.name} {inv.gender} {inv.age}</td>
-							</tr>
-						))}
 					</tbody>
 				</table>
 			</div>
