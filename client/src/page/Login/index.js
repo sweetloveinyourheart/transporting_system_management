@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './style.css';
-import { Form, Input, Button, Typography } from 'antd';
-import { LockFilled, UserOutlined, RightCircleFilled } from '@ant-design/icons';
-import { Link } from 'react-router-dom';
+import { Form, Input, Typography } from 'antd';
+import { LockFilled, UserOutlined } from '@ant-design/icons';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
@@ -10,7 +10,14 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 function Login() {
 	const [form] = Form.useForm();
 
-	const { signIn } = useAuth()
+	const { signIn, user } = useAuth()
+	const navigate = useNavigate()
+
+	useEffect(() => {
+		if(user) {
+			navigate('/')
+		}
+	}, [user])
 
 	const handleSubmit = async (value) => {
 		await signIn(value.username, value.password)

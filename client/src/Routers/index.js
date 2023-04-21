@@ -29,7 +29,7 @@ function Router() {
 			<Route path='/verify-details' element={<VerifyAllDetails />} />
 			<Route path="/profile" element={<Profile />} />
 			<Route path="/driver/*" element={<DriverPage />} />
-			<Route path="/error" element={<Error />} />
+			<Route path="/*" element={<Error />} />
 		</Routes>
 	);
 }

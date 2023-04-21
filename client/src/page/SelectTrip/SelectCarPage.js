@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import SelectSeat from './SelectSeat';
 import './css/SelectCarPage.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

@@ -30,37 +30,10 @@ function Mybooking() {
 		}
 	}
 
-
-	// const myBooking = [];
-
-	// for (let i = 0; i < order.length; i++) {
-	// 	myBooking.push({
-	// 		key: i.toString(),
-	// 		departure: order[i].ticket.addressStart,
-	// 		destination: order[i].ticket.addressEnd,
-	// 		time: order[i].ticket.time,
-	// 		state: order[i].ticket.state,
-	// 		price: order[i].ticket.price,
-	// 	});
-	// }
-
 	return (
 		<div className='my-booking'>
-			<div className='title-all-booking'>
+			{/* <div className='title-all-booking'>
 				<Typography.Title className='title'>My Bookings</Typography.Title>
-				{/* <div className='all-booking'>
-					<Select
-						defaultValue="All Booking"
-						style={{ width: 120 }}
-						onChange={handleChange}
-						options={[
-							{ value: 'jack', label: 'All Booking' },
-							{ value: 'lucy', label: 'Lucy' },
-							{ value: 'Yiminghe', label: 'yiminghe' },
-							{ value: 'disabled', label: 'Disabled' },
-						]}
-					/>
-				</div> */}
 			</div>
 			<div className='booking-items'>
 				{
@@ -104,32 +77,43 @@ function Mybooking() {
 						</div>
 					))
 				}
-			</div>
-			{/* <div className='booking-items'>
+			</div> */}
+			<div className='booking-items'>
 				{
-					myBooking.map((detail, index) => (
+					order.map((detail, index) => (
 						<div key={index} className='item'>
 							<div className='place'>
 								<div className='departure'>
-									{detail.departure}
+									{detail.ticket.addressStart}
 								</div>
 								<div className='arrow'>
 									<FontAwesomeIcon icon={faArrowRightLong} style={{ fontSize: "1.5em", color: "#165F81" }} />
 								</div>
 								<div className='destination'>
-									{detail.destination}
+									{detail.ticket.addressEnd}
 								</div>
 							</div>
 							<Divider style={{ padding: "0px 10px" }} />
 							<div className='time-state-car'>
 								<div className='time'>
-									{detail.time}
+									{detail.order.trip.timeStart}
 								</div>
-								<div className='state'>
-									{detail.state}
+								<div class="flex justify-center items-center" >
+									<div class="arrow">
+										{detail.state === true ?
+											<div style={{ background: "green" }} className='state'>
+												Ongoing
+											</div>
+
+											:
+											<div style={{ background: "red" }} className='state'>
+												Cancel
+											</div>
+										}
+									</div>
 								</div>
 								<div className='price'>
-									{detail.price}đ
+									{detail.ticket.price}đ
 								</div>
 							</div>
 							{openDetail === index ?
@@ -147,7 +131,7 @@ function Mybooking() {
 						</div>
 					))
 				}
-			</div> */}
+			</div>
 		</div>
 	);
 }

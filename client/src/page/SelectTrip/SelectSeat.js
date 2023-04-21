@@ -1,7 +1,4 @@
 import './css/SelectSeatPage.css'
-import bookedchair from '../../assets/images/chair/BookedChair.png'
-import selectedchair from '../../assets/images/chair/SelectedChair.png'
-import availablechair from '../../assets/images/chair/AvailableChair.png'
 import Seat from '../../components/Seat/Seat'
 import { useEffect, useState } from 'react'
 import SockJS from 'sockjs-client';
@@ -18,7 +15,7 @@ export default function SelectSeat({ trip, car }) {
     const [disabledSeats, setDisabledSeats] = useState([])
 
     const [stompClient, setStompClient] = useState(null);
-    const { accessToken } = useAuth()
+    const { accessToken, user } = useAuth()
 
     const navigate = useNavigate()
 
@@ -27,14 +24,22 @@ export default function SelectSeat({ trip, car }) {
 
         const stompClient = Stomp.over(socket);
         stompClient.debug = null
+
+        // connect to ws
         stompClient.connect({
             Authorization: `Bearer ${accessToken}`
         }, () => {
             console.log('connected to WebSocket');
             setStompClient(stompClient)
+
+            // Cancel temp order in storage if exist
+            cancelTempOrder(stompClient)
         });
 
         const disconnect = () => {
+            // Cancel temp order if user disconnect
+            cancelTempOrder(stompClient)
+
             stompClient.disconnect(() => {
                 console.log('disconnected from WebSocket');
             });
@@ -106,7 +111,7 @@ export default function SelectSeat({ trip, car }) {
         if (order && order.orderId.length > 0) {
             localStorage.setItem(
                 order.orderId,
-                JSON.stringify({ ...order, expireAt: new Date(new Date().getTime() + 5 * 60000) })
+                JSON.stringify({ ...order, expireAt: new Date(new Date().getTime() + 0.2 * 60000) })
             );
 
             const clearLocalStorageItem = () => {
@@ -123,7 +128,7 @@ export default function SelectSeat({ trip, car }) {
                 setOrder(null)
             };
 
-            const timeoutId = setTimeout(clearLocalStorageItem, 5 * 60000);
+            const timeoutId = setTimeout(clearLocalStorageItem, 0.2 * 60000);
 
             // Clear the timeout when the component unmounts or the `order` prop changes.
             return () => clearTimeout(timeoutId);
@@ -131,6 +136,8 @@ export default function SelectSeat({ trip, car }) {
     }, [order]);
 
     const disabledChairSubscriptionHandler = (disabledChair) => {
+        if (trip.tripId !== disabledChair.tripId) return;
+
         setDisabledSeats(prevS => {
             let chairList = [...prevS]
             const index = chairList.findIndex(item => item.orderId === disabledChair.orderId);
@@ -147,6 +154,8 @@ export default function SelectSeat({ trip, car }) {
     }
 
     const orderSubscriptionHandler = (newOrder) => {
+        if (trip.tripId !== newOrder.tripId) return;
+
         setOrder(prevS => {
             if (prevS?.orderId === "" || prevS?.orderId === newOrder?.orderId) {
                 return newOrder
@@ -156,11 +165,31 @@ export default function SelectSeat({ trip, car }) {
         })
     }
 
+    const cancelTempOrder = (client) => {
+        const trips = { ...localStorage }
+        const tripsWillBeCancel = Object.entries(trips).map(([key, value]) => {
+            return JSON.parse(value);
+        });
+
+        tripsWillBeCancel.forEach((item) => {
+            const payloadData = JSON.stringify({
+                orderId: item.orderId,
+                tripId: item.tripId
+            })
+
+            client.send('/app/chairCancel', {}, payloadData)
+            localStorage.removeItem(item.orderId)
+        })
+    }
+
     const onChooseSeat = async (chair) => {
-        // setSelectedSeat(chair)
+        if (!user) {
+            message.error("You need to login to continue select a seat!")
+            navigate("/login")
+            return;
+        }
 
         if (chair) {
-            // console.log(order?.orderId);
             const orderData = {
                 orderId: order ? order.orderId : "",
                 tripId: trip.tripId,
@@ -191,20 +220,60 @@ export default function SelectSeat({ trip, car }) {
             return;
         }
 
+        localStorage.removeItem(order.orderId);
         message.success("Create order successfully !")
         navigate("/my-booking")
     }
 
     return (
-        <div class="select-seat-page">
+        <div className="select-seat-page">
             <div>
-                <p class="select-seat-page__title">Select The Seats</p>
+                <p className="select-seat-page__title">Select The Seats</p>
             </div>
-            <div class="seat-info">
-                <div class="seat-info__img">
-                    <img src={selectedchair} alt="" />
-                    <img src={availablechair} alt="" />
-                    <img src={bookedchair} alt="" />
+            <div className="seat-info">
+                <div className='seat-info__item'>
+                    <div className='awesome-seat' >
+                        <svg xmlns="http://www.w3.org/2000/svg" width={42} height={42} viewBox="0 0 42 42" className="seat" pos={5}>
+                            <g fill="none" fillRule="evenodd">
+                                <g className={"active"}>
+                                    <path d="M8.625.5c-3.038 0-5.5 2.462-5.5 5.5v27.875c0 .828.672 1.5 1.5 1.5h32.75c.828 0 1.5-.672 1.5-1.5V6c0-3.038-2.462-5.5-5.5-5.5H8.625zM5.75 35.5V38c0 1.933 1.567 3.5 3.5 3.5h23.5c1.933 0 3.5-1.567 3.5-3.5v-2.5H5.75z" />
+                                    <rect width="5.125" height="16.5" x=".5" y="13.625" rx="2.563" />
+                                    <rect width="5.125" height="16.5" x="36.375" y="13.625" rx="2.563" />
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                    <span> Available </span>
+                </div>
+
+                <div className='seat-info__item'>
+                    <div className='awesome-seat' >
+                        <svg xmlns="http://www.w3.org/2000/svg" width={42} height={42} viewBox="0 0 42 42" className="seat" pos={5}>
+                            <g fill="none" fillRule="evenodd">
+                                <g className={"disabled"}>
+                                    <path d="M8.625.5c-3.038 0-5.5 2.462-5.5 5.5v27.875c0 .828.672 1.5 1.5 1.5h32.75c.828 0 1.5-.672 1.5-1.5V6c0-3.038-2.462-5.5-5.5-5.5H8.625zM5.75 35.5V38c0 1.933 1.567 3.5 3.5 3.5h23.5c1.933 0 3.5-1.567 3.5-3.5v-2.5H5.75z" />
+                                    <rect width="5.125" height="16.5" x=".5" y="13.625" rx="2.563" />
+                                    <rect width="5.125" height="16.5" x="36.375" y="13.625" rx="2.563" />
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                    <span> Selected </span>
+                </div>
+
+                <div className='seat-info__item'>
+                    <div className='awesome-seat' >
+                        <svg xmlns="http://www.w3.org/2000/svg" width={42} height={42} viewBox="0 0 42 42" className="seat" pos={5}>
+                            <g fill="none" fillRule="evenodd">
+                                <g className={"selecting"}>
+                                    <path d="M8.625.5c-3.038 0-5.5 2.462-5.5 5.5v27.875c0 .828.672 1.5 1.5 1.5h32.75c.828 0 1.5-.672 1.5-1.5V6c0-3.038-2.462-5.5-5.5-5.5H8.625zM5.75 35.5V38c0 1.933 1.567 3.5 3.5 3.5h23.5c1.933 0 3.5-1.567 3.5-3.5v-2.5H5.75z" />
+                                    <rect width="5.125" height="16.5" x=".5" y="13.625" rx="2.563" />
+                                    <rect width="5.125" height="16.5" x="36.375" y="13.625" rx="2.563" />
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                    <span> Selecting </span>
                 </div>
             </div>
             <div class="seat-map">
