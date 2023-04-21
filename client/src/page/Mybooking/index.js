@@ -18,7 +18,7 @@ function Mybooking() {
 		getOderByUser(accessToken).then(res => {
 			setOrder(res.content)
 		})
-	}, [])
+	}, [accessToken])
 
 	const onClickOrder = (value, index) => {
 		setOpenDetail(index);
@@ -32,9 +32,6 @@ function Mybooking() {
 
 	return (
 		<div className='my-booking'>
-			{/* <div className='title-all-booking'>
-				<Typography.Title className='title'>My Bookings</Typography.Title>
-			</div>
 			<div className='booking-items'>
 				{
 					order.map((detail, index) => (
@@ -54,49 +51,7 @@ function Mybooking() {
 							<div className='time-state-car'>
 								<div className='time'>
 									{detail.order.trip.timeStart}
-								</div>
-								<div className='state'>
-									{detail.state}
-								</div>
-								<div className='price'>
-									{detail.ticket.price}đ
-								</div>
-							</div>
-							{openDetail === index ?
-								<button onClick={() => onClickOrder(detail, index)}
-									style={{ backgroundColor: "#2187b6", padding: "5px 10px", borderRadius: "10px", marginTop: "10px" }}>Close</button>
-								:
-								<button onClick={() => onClickOrder(detail, index)}
-									style={{ backgroundColor: "#2187b6", padding: "5px 10px", borderRadius: "10px", marginTop: "10px" }}>Detail</button>
-							}
-							{
-								openDetail === index
-									? <BookingDetails bookingDetail={getDetail} />
-									: null
-							}
-						</div>
-					))
-				}
-			</div> */}
-			<div className='booking-items'>
-				{
-					order.map((detail, index) => (
-						<div key={index} className='item'>
-							<div className='place'>
-								<div className='departure'>
-									{detail.ticket.addressStart}
-								</div>
-								<div className='arrow'>
-									<FontAwesomeIcon icon={faArrowRightLong} style={{ fontSize: "1.5em", color: "#165F81" }} />
-								</div>
-								<div className='destination'>
-									{detail.ticket.addressEnd}
-								</div>
-							</div>
-							<Divider style={{ padding: "0px 10px" }} />
-							<div className='time-state-car'>
-								<div className='time'>
-									{detail.order.trip.timeStart}
+									{Intl.NumberFormat().format(detail.price)}đ
 								</div>
 								<div class="flex justify-center items-center" >
 									<div class="arrow">
