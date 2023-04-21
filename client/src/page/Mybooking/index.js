@@ -51,7 +51,6 @@ function Mybooking() {
 							<div className='time-state-car'>
 								<div className='time'>
 									{detail.order.trip.timeStart}
-									{Intl.NumberFormat().format(detail.price)}đ
 								</div>
 								<div class="flex justify-center items-center" >
 									<div class="arrow">
@@ -68,7 +67,8 @@ function Mybooking() {
 									</div>
 								</div>
 								<div className='price'>
-									{detail.ticket.price}đ
+									{Intl.NumberFormat().format(detail.ticket.price)}đ
+
 								</div>
 							</div>
 							{openDetail === index ?

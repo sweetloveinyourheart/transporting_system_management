@@ -7,7 +7,6 @@ import { Dropdown, Space } from 'antd';
 import { faCircleUser } from '@fortawesome/free-regular-svg-icons'
 
 export default function Header() {
-
 	const { user, signOut } = useAuth()
 
 	const items = [
@@ -37,8 +36,8 @@ export default function Header() {
 						<Link to={"/profile"} className='drop-item' target="_blank" rel="noopener noreferrer"><b><i>Account</i></b></Link>
 					)
 					: null,
-				user 
-					? <div onClick={() => signOut()}>Logout</div> 
+				user
+					? <div onClick={() => signOut()}>Logout</div>
 					: <Link to={"/login"} className='drop-item' target="_blank" rel="noopener noreferrer"><b><i>Login</i></b></Link>
 
 			),
@@ -58,25 +57,29 @@ export default function Header() {
 							<Link to={"/"}><i>Home</i></Link>
 						</li>
 						{
-							user && user.role.roleId !== "DRIVER" ?
-								(
-									<>
+							user  &&
+							(
+								user?.role.roleId === "DRIVER"
+									? (
 										<li>
-											<Link to={"/my-booking"}><i>My Booking</i></Link>
+											<Link to={"/driver/*"}><i>Driver: {user?.user.fullName}</i></Link>
 										</li>
-										<li>
-											<Link to={"/profile"}><FontAwesomeIcon icon={faCircleUser} /></Link>
-										</li>
-									</>
-								)
-								:
-								<li>
-									<Link to={"/driver/*"}><i>Driver: {user.user.fullName}</i></Link>
-								</li>
+									)
+									: (
+										<>
+											<li>
+												<Link to={"/my-booking"}><i>My Booking</i></Link>
+											</li>
+											<li>
+												<Link to={"/profile"}><FontAwesomeIcon icon={faCircleUser} /></Link>
+											</li>
+										</>
+									)
+							)
 						}
 						<li>
-							{user 
-								? <a href='#' onClick={() => signOut()}><i>Logout</i></a> 
+							{user
+								? <a href='#' onClick={() => signOut()}><i>Logout</i></a>
 								: <Link to={"/login"}><i>Login</i></Link>
 							}
 						</li>

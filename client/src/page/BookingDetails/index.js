@@ -3,10 +3,7 @@ import "./style.css";
 import { Typography } from "antd";
 
 function BookingDetails(props) {
-
 	const detail = useMemo(() => props.bookingDetail);
-
-	console.log(detail);
 
 	return (
 		<div className="booking-details">
