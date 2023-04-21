@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const PAGE_SIZE = 1 
+const PAGE_SIZE = 10
 
 async function getAllTrip(pageNumber) {
     try {

@@ -78,7 +78,7 @@ export default function SelectCarPage() {
                                                 </div>
                                             </div>
                                             <div>
-                                                <button onClick={() => onChooseTrip(trip)} className="btn-choose">{selectedTrip ? "Close" : "Choose a trip"}</button>
+                                                <button onClick={() => onChooseTrip(trip)} className="btn-choose">{selectedTrip?.tripId === trip.tripId ? "Close" : "Choose a trip"}</button>
                                             </div>
                                         </div>
                                         <div className="car__service">
@@ -116,7 +116,7 @@ export default function SelectCarPage() {
                                                 <p>25 Empty Seat</p>
                                             </div>
                                         </div>
-                                        {selectedCar
+                                        {(selectedCar && selectedTrip.tripId === trip.tripId)
                                             ? <SelectSeat trip={selectedTrip} car={selectedCar} />
                                             : (
                                                 <div style={{ display: trip.tripId === selectedTrip?.tripId ? 'block' : 'none' }} className='car-list'>
