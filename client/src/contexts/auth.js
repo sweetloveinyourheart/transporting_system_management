@@ -20,9 +20,9 @@ export default function AuthProvider({ children }) {
 	const navigate = useNavigate();
 
 	const signIn = async (username, password) => {
-		const { access_token, refresh_token } = await login(username, password)
+		const { access_token } = await login(username, password)
 		setLoading(false)
-		if (!access_token && !refresh_token) {
+		if (!access_token) {
 			message.error("Login failed!")
 			return setUser(null)
 		}
@@ -30,15 +30,17 @@ export default function AuthProvider({ children }) {
 		message.success("Login successfully !")
 		axios.defaults.headers.common.Authorization = `Bearer ${access_token}`
 		setAccessToken(access_token)
-		Cookies.set('refresh_token', refresh_token)
+		Cookies.set('access_token', access_token)
+		navigate("/")
 	}
 
 	const signOut = async () => {
-		Cookies.remove("refresh_token")
+		Cookies.remove("access_token")
 		setAccessToken(null)
 		setUser(null)
 		navigate("/login")
 	}
+
 	const getUserByAccessToken = async () => {
 		const user = await getUser()
 		if (!user) {
@@ -46,29 +48,33 @@ export default function AuthProvider({ children }) {
 			setLoading(false)
 			return setUser(null)
 		}
-		navigate("/")
+		//If driver login navigate to driver page
+		if (user.role.roleId === "DRIVER") {
+			navigate("/driver/*")
+			setLoading(false)
+			return setUser(user)
+		}
+
 		setLoading(false)
 		return setUser(user)
 	}
 
-	// const refreshNewToken = async () => {
-	//     const rfToken = Cookies.get("refresh_token")
-	//     const { access_token } = await refreshToken(rfToken)
-	//     axios.defaults.headers.common.Authorization = `Bearer ${access_token}`
-	//     setAccessToken(access_token)
-	// }
+	const getTokenFromCookie = () => {
+		const token = Cookies.get("access_token")
+		axios.defaults.headers.common.Authorization = `Bearer ${token}`
+		setAccessToken(token)
+	}
 
-	// useEffect(() => {
-	//     (async () => {
-	//         await refreshNewToken()
-	//         const refreshAfter15Min = setInterval(refreshNewToken, 15 * 60 * 1000)
-	//         return () => clearInterval(refreshAfter15Min)
-	//     })()
-	// }, [])
+	useEffect(() => {
+		getTokenFromCookie()
+	}, [])
 
 	useEffect(() => {
 		(async () => {
-			await getUserByAccessToken()
+			if (accessToken) {
+				await getUserByAccessToken()
+			}
+
 			setLoading(false)
 		})()
 	}, [accessToken])
@@ -77,7 +83,9 @@ export default function AuthProvider({ children }) {
 
 	return (
 		<AuthContext.Provider value={{
+			accessToken,
 			user,
+			accessToken,
 			signIn,
 			signOut
 		}}>

@@ -1,9 +1,9 @@
 import { Avatar, Layout, Menu, theme } from 'antd';
 import { UserOutlined, UnlockOutlined } from '@ant-design/icons';
-
 import './style.css';
 import { React, useState } from 'react';
 import Infor from './Infor';
+import ChangePassword from './ChangePassword';
 
 const { Content, Sider } = Layout;
 
@@ -32,7 +32,7 @@ function Profile() {
             </Sider>
             <Content className='profile-content'>
                 {currentPage === 'profile' && <Infor />}
-                {currentPage === 'change-password' && <div>Change Password</div>}
+                {currentPage === 'change-password' && <ChangePassword />}
             </Content>
         </Layout>
     );

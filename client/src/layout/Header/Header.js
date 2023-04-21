@@ -7,8 +7,8 @@ import { Dropdown, Space } from 'antd';
 import { faCircleUser } from '@fortawesome/free-regular-svg-icons'
 
 export default function Header() {
+	const { user, signOut } = useAuth()
 
-	const { user } = useAuth()
 	const items = [
 		{
 			key: '1',
@@ -21,9 +21,11 @@ export default function Header() {
 		{
 			key: '2',
 			label: (
-				<Link className='drop-item' target="_blank" rel="noopener noreferrer" to={"/my-booking"}>
-					<b><i>My Booking</i></b>
-				</Link>
+				user ? (
+					<Link className='drop-item' target="_blank" rel="noopener noreferrer" to={"/my-booking"}>
+						<b><i>My Booking</i></b>
+					</Link>
+				) : null
 			),
 		},
 		{
@@ -34,7 +36,9 @@ export default function Header() {
 						<Link to={"/profile"} className='drop-item' target="_blank" rel="noopener noreferrer"><b><i>Account</i></b></Link>
 					)
 					: null,
-				user ? "Logout" : <Link to={"/login"} className='drop-item' target="_blank" rel="noopener noreferrer"><b><i>Login</i></b></Link>
+				user
+					? <div onClick={() => signOut()}>Logout</div>
+					: <Link to={"/login"} className='drop-item' target="_blank" rel="noopener noreferrer"><b><i>Login</i></b></Link>
 
 			),
 		},
@@ -52,19 +56,32 @@ export default function Header() {
 						<li>
 							<Link to={"/"}><i>Home</i></Link>
 						</li>
-						<li>
-							<Link to={"/my-booking"}><i>My Booking</i></Link>
-						</li>
-						{user
-							? (
-								<li>
-									<Link to={"/profile"}><FontAwesomeIcon icon={faCircleUser} /></Link>
-								</li>
+						{
+							user  &&
+							(
+								user?.role.roleId === "DRIVER"
+									? (
+										<li>
+											<Link to={"/driver/*"}><i>Driver: {user?.user.fullName}</i></Link>
+										</li>
+									)
+									: (
+										<>
+											<li>
+												<Link to={"/my-booking"}><i>My Booking</i></Link>
+											</li>
+											<li>
+												<Link to={"/profile"}><FontAwesomeIcon icon={faCircleUser} /></Link>
+											</li>
+										</>
+									)
 							)
-							: null
 						}
 						<li>
-							{user ? "Logout" : <Link to={"/login"}><i>Login</i></Link>}
+							{user
+								? <a href='#' onClick={() => signOut()}><i>Logout</i></a>
+								: <Link to={"/login"}><i>Login</i></Link>
+							}
 						</li>
 					</ul>
 					<Dropdown className="nav"

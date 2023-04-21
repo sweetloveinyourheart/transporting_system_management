@@ -1,93 +1,71 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useAuth } from '../../contexts/auth'
 import './style.css'
 import { DownOutlined } from '@ant-design/icons';
 import { Badge, Dropdown, Space, Table } from 'antd';
+import { getSchedule } from '../../services/schedule';
+import { getCurrentDate } from '../../utils/dateTime';
 
 export default function MySchedulePage() {
+    const [loading, setLoading] = useState(false);
+    const [schedule, setSchedules] = useState([]);
+
+    const date = getCurrentDate();
+
+    const { accessToken } = useAuth();
+
+
+    //Get schedule of driver
+    useEffect(() => {
+        setLoading(true);
+        getSchedule(accessToken).then(res => {
+            setSchedules(res);
+            setLoading(false);
+        })
+    }, [])
 
     //Table content
     const getItems = (title, dataIndex, key, render) => {
         return { title, dataIndex, key, render };
     }
 
-    //Expend Row
-    const expandedRowRender = () => {
-        const columns = [
-            getItems('Date', 'date', 'date'),
-            getItems('Name', 'name', 'name'),
-            getItems('Status', '', 'state', () => <Badge status="success" text="Finished" />),
-            getItems('Upgrade Status', 'upgradeNum', 'upgradeNum'),
-            getItems('Action', 'operation', 'operation', () => (
-                <Space size="middle">
-                    <a>Pause</a>
-                    <a>Stop</a>
-                    {/* <Dropdown
-                        menu={{
-                            items: [
-                                {
-                                    key: '1',
-                                    label: 'Action 1',
-                                },
-                                {
-                                    key: '2',
-                                    label: 'Action 2',
-                                },
-                            ]
-                        }}
-                    >
-                        <a>
-                            More <DownOutlined />
-                        </a>
-                    </Dropdown> */}
-                </Space>
-            ),),
-        ];
-
-        const data = [];
-        for (let i = 0; i < 3; ++i) {
-            data.push({
-                key: i.toString(),
-                date: '2014-12-24',
-                name: 'This is production name',
-                upgradeNum: 'Upgraded: 56',
-            });
-        }
-        return <Table columns={columns} dataSource={data} pagination={false} />;
-    };
-
+    //Table column
     const columns = [
-        getItems('Car number', 'carNumber', 'name'),
-        getItems('Create at', 'createAt', 'platform'),
-        getItems('Province start', 'provinceStart', 'version'),
-        getItems('Province end', 'provinceEnd', 'upgradeNum'),
-        getItems('Status', 'state', 'creator'),
-        getItems('Time start', 'timeStart', 'createdAt'),
-        getItems('Action', '', 'operation', () => <a>Publish</a>),
+        getItems('Trip number', 'tripNumber', 'tripNumber'),
+        getItems('Car number', 'carNumber', 'carNumber'),
+        getItems('Province start', 'provinceStart', 'provinceStart'),
+        getItems('Province end', 'provinceEnd', 'provinceEnd'),
+        getItems('Pickup Location', 'pickupLocation', 'pickupLocation'),
+        getItems('Drop off location', 'dropOffLocation', 'dropOffLocation'),
+        getItems('Status', 'state', 'state'),
+        getItems('Time start', 'timeStart', 'timeStart'),
+        getItems('Action', '', 'action', () => <a>Finish</a>),
     ];
 
     const data = [];
-    for (let i = 0; i < 3; ++i) {
+    for (let i = 0; i < schedule.trip?.length; ++i) {
         data.push({
-            key: i.toString(),
-            carNumber: 'ABC-123456',
-            createAt: '2014-12-24',
-            provinceStart: 'Quy Nhon',
-            provinceEnd: 'TP.HCM',
-            state: <Badge status="success" text="Finished" />,
-            timeStart: '2014-12-24',
+            key: schedule.trip[i].tripId,
+            tripNumber: i + 1,
+            carNumber: schedule.car.carNumber,//
+            provinceStart: schedule.trip[i].provinceStart,
+            provinceEnd: schedule.trip[i].provinceEnd,
+            pickupLocation: schedule.trip[i].pickupLocation,
+            dropOffLocation: schedule.trip[i].dropOffLocation,
+            state: schedule.trip[i].timeStart < date ? <Badge status="success" text="Finished" />
+                : <Badge status="processing" text="Coming" />,
+            timeStart: schedule.trip[i].timeStart.substring(0, 11),
         });
     }
 
     return (
         <Table
+            loading={loading}
             style={{ marginLeft: "50px" }}
             columns={columns}
-            expandable={{
-                expandedRowRender,
-                // defaultExpandedRowKeys: ['0'],
-            }}
             dataSource={data}
             pagination={{
+                pageSize: 5,
                 position: ["bottomCenter"]
             }}
         />

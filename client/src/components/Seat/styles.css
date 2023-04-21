@@ -1,0 +1,38 @@
+.awesome-seat {
+    margin: 4px;
+    text-align: center;
+}
+
+.awesome-seat svg {
+    max-width: 42px;
+    max-height: 42px;
+    width: 42px;
+    height: 42px;
+    background: none;
+    border: none;
+    overflow: hidden;
+    vertical-align: middle;
+    overflow-clip-margin: content-box;
+}
+
+.awesome-seat svg g {
+    fill: none;
+    fill-rule: evenodd;
+}
+
+.awesome-seat .disabled {
+    fill: #d5d9dd;
+    stroke: silver;
+    cursor: not-allowed;
+}
+
+.awesome-seat .active {
+    fill: #def3ff;
+    stroke: #96c5e7;
+    cursor: pointer;
+}
+
+.awesome-seat .selecting {
+    fill: #fdede8;
+    stroke: #f8beab;
+}

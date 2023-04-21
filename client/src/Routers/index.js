@@ -28,8 +28,8 @@ function Router() {
 			<Route path='/booking-details' element={<BookingDetails />} />
 			<Route path='/verify-details' element={<VerifyAllDetails />} />
 			<Route path="/profile" element={<Profile />} />
-			<Route path="/driver" element={<DriverPage />} />
-			<Route path="/error" element={<Error />} />
+			<Route path="/driver/*" element={<DriverPage />} />
+			<Route path="/*" element={<Error />} />
 		</Routes>
 	);
 }

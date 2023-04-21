@@ -1,0 +1,3 @@
+.content-wrap {
+    min-height: calc(100vh - 205px);
+}
