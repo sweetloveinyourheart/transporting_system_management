@@ -8,7 +8,8 @@ import { faCircleUser } from '@fortawesome/free-regular-svg-icons'
 
 export default function Header() {
 
-	const { user } = useAuth()
+	const { user, signOut } = useAuth()
+
 	const items = [
 		{
 			key: '1',
@@ -36,7 +37,9 @@ export default function Header() {
 						<Link to={"/profile"} className='drop-item' target="_blank" rel="noopener noreferrer"><b><i>Account</i></b></Link>
 					)
 					: null,
-				user ? "Logout" : <Link to={"/login"} className='drop-item' target="_blank" rel="noopener noreferrer"><b><i>Login</i></b></Link>
+				user 
+					? <div onClick={() => signOut()}>Logout</div> 
+					: <Link to={"/login"} className='drop-item' target="_blank" rel="noopener noreferrer"><b><i>Login</i></b></Link>
 
 			),
 		},
@@ -69,7 +72,10 @@ export default function Header() {
 							: null
 						}
 						<li>
-							{user ? <Link to={"#"}><i>Logout</i></Link> : <Link to={"/login"}><i>Login</i></Link>}
+							{user 
+								? <a href='#' onClick={() => signOut()}><i>Logout</i></a> 
+								: <Link to={"/login"}><i>Login</i></Link>
+							}
 						</li>
 					</ul>
 					<Dropdown className="nav"

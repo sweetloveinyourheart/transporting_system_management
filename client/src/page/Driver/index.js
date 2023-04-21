@@ -15,7 +15,7 @@ function DriverPage() {
     }
 
     const items2 = [
-        getItemMenu('My Information', 'my-information', <UserOutlined />),
+        // getItemMenu('My Information', 'my-information', <UserOutlined />),
         getItemMenu('My Schedule', 'my-schedule', <ScheduleOutlined />),
         getItemMenu('My Leave', 'my-leave', <CoffeeOutlined />),
     ];
@@ -35,7 +35,7 @@ function DriverPage() {
                 />
             </Sider>
             <Routes>
-                <Route path='my-information' element={<div>Continue make info component here...</div>} />
+                {/* <Route path='my-information' element={<Profile />} /> */}
                 <Route path='my-schedule' element={<MySchedulePage />} />
                 <Route path='my-leave' element={<LeaveTool />} />
                 <Route path='my-leave/request' element={<RequestForm />} />

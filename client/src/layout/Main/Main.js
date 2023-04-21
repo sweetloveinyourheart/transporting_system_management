@@ -1,7 +1,7 @@
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
 import './main.css'
-import Router from '../../Routers'
+import Router from '../../routers'
 import { useAuth } from '../../contexts/auth'
 // import { Layout, theme } from 'antd';
 // import { Content } from 'antd/es/layout/layout';
@@ -9,19 +9,17 @@ import { useAuth } from '../../contexts/auth'
 export default function Main() {
     const { user } = useAuth();
     return (
-        <body>
-            <div className='page-container'>
-                <Header></Header>
-                <div className='content-wrap'>
-                    <div>
-                        <Router />
-                    </div>
+        <div className='page-container'>
+            <Header></Header>
+            <div className='content-wrap'>
+                <div>
+                    <Router />
                 </div>
-                {user?.role.roleId !== "DRIVER" ?
-                    <Footer></Footer>
-                    : null
-                }
             </div>
-        </body>
+            {user?.role.roleId !== "DRIVER" ?
+                <Footer></Footer>
+                : null
+            }
+        </div>
     )
 }
