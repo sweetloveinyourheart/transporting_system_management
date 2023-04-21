@@ -7,16 +7,20 @@ import { getSchedule } from '../../services/schedule';
 import { getCurrentDate } from '../../utils/dateTime';
 
 export default function MySchedulePage() {
-    const [schedule, setSchedule] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [schedule, setSchedules] = useState([]);
 
     const date = getCurrentDate();
 
     const { accessToken } = useAuth();
 
+
     //Get schedule of driver
     useEffect(() => {
+        setLoading(true);
         getSchedule(accessToken).then(res => {
-            setSchedule(res);
+            setSchedules(res);
+            setLoading(false);
         })
     }, [])
 
@@ -25,11 +29,14 @@ export default function MySchedulePage() {
         return { title, dataIndex, key, render };
     }
 
+    //Table column
     const columns = [
         getItems('Trip number', 'tripNumber', 'tripNumber'),
         getItems('Car number', 'carNumber', 'carNumber'),
         getItems('Province start', 'provinceStart', 'provinceStart'),
         getItems('Province end', 'provinceEnd', 'provinceEnd'),
+        getItems('Pickup Location', 'pickupLocation', 'pickupLocation'),
+        getItems('Drop off location', 'dropOffLocation', 'dropOffLocation'),
         getItems('Status', 'state', 'state'),
         getItems('Time start', 'timeStart', 'timeStart'),
         getItems('Action', '', 'action', () => <a>Finish</a>),
@@ -38,11 +45,13 @@ export default function MySchedulePage() {
     const data = [];
     for (let i = 0; i < schedule.trip?.length; ++i) {
         data.push({
-            key: i.toString(),
+            key: schedule.trip[i].tripId,
             tripNumber: i + 1,
-            carNumber: schedule.car.carNumber,
+            carNumber: schedule.car.carNumber,//
             provinceStart: schedule.trip[i].provinceStart,
             provinceEnd: schedule.trip[i].provinceEnd,
+            pickupLocation: schedule.trip[i].pickupLocation,
+            dropOffLocation: schedule.trip[i].dropOffLocation,
             state: schedule.trip[i].timeStart < date ? <Badge status="success" text="Finished" />
                 : <Badge status="processing" text="Coming" />,
             timeStart: schedule.trip[i].timeStart.substring(0, 11),
@@ -51,10 +60,12 @@ export default function MySchedulePage() {
 
     return (
         <Table
+            loading={loading}
             style={{ marginLeft: "50px" }}
             columns={columns}
             dataSource={data}
             pagination={{
+                pageSize: 5,
                 position: ["bottomCenter"]
             }}
         />

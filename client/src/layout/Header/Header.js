@@ -58,18 +58,21 @@ export default function Header() {
 							<Link to={"/"}><i>Home</i></Link>
 						</li>
 						{
-							user && user.role.roleId !== "DRIVER" ? 
-							(
-								<>
-									<li>
-										<Link to={"/my-booking"}><i>My Booking</i></Link>
-									</li>
-									<li>
-										<Link to={"/profile"}><FontAwesomeIcon icon={faCircleUser} /></Link>
-									</li>
-								</>
-							)
-							: null
+							user && user.role.roleId !== "DRIVER" ?
+								(
+									<>
+										<li>
+											<Link to={"/my-booking"}><i>My Booking</i></Link>
+										</li>
+										<li>
+											<Link to={"/profile"}><FontAwesomeIcon icon={faCircleUser} /></Link>
+										</li>
+									</>
+								)
+								:
+								<li>
+									<Link to={"/driver/*"}><i>Driver: {user.user.fullName}</i></Link>
+								</li>
 						}
 						<li>
 							{user 
