@@ -6,10 +6,10 @@ import { Link } from "react-router-dom"
 
 export default function Footer() {
 	return (
-		<section class="footer">
-			<div class="footer-container">
-				<div class="row">
-					<ul class="footer__social-list">
+		<section className="footer">
+			<div className="footer-container">
+				<div className="row">
+					<ul className="footer__social-list">
 						<li>
 							<Link to={"#"}>
 								<i>
@@ -32,7 +32,7 @@ export default function Footer() {
 							</Link>
 						</li>
 					</ul>
-					<div class="footer__list-link">
+					<div className="footer__list-link">
 						<div>
 							<Link to={"#"}>Privacy Policy</Link>
 							<Link to={"#"}>Need Help?</Link>

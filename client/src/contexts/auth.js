@@ -22,7 +22,7 @@ export default function AuthProvider({ children }) {
 	const signIn = async (username, password) => {
 		const { access_token } = await login(username, password)
 		setLoading(false)
-		if (!access_token ) {
+		if (!access_token) {
 			message.error("Login failed!")
 			return setUser(null)
 		}
@@ -31,6 +31,7 @@ export default function AuthProvider({ children }) {
 		axios.defaults.headers.common.Authorization = `Bearer ${access_token}`
 		setAccessToken(access_token)
 		Cookies.set('access_token', access_token)
+		navigate("/")
 	}
 
 	const signOut = async () => {
@@ -39,6 +40,7 @@ export default function AuthProvider({ children }) {
 		setUser(null)
 		navigate("/login")
 	}
+
 	const getUserByAccessToken = async () => {
 		const user = await getUser()
 		if (!user) {
@@ -52,24 +54,27 @@ export default function AuthProvider({ children }) {
 			setLoading(false)
 			return setUser(user)
 		}
-		navigate("/")
+
 		setLoading(false)
 		return setUser(user)
 	}
 
 	const getTokenFromCookie = () => {
-	    const token = Cookies.get("access_token")
-	    axios.defaults.headers.common.Authorization = `Bearer ${token}`
-	    setAccessToken(token)
+		const token = Cookies.get("access_token")
+		axios.defaults.headers.common.Authorization = `Bearer ${token}`
+		setAccessToken(token)
 	}
 
 	useEffect(() => {
-	    getTokenFromCookie()
+		getTokenFromCookie()
 	}, [])
 
 	useEffect(() => {
 		(async () => {
-			await getUserByAccessToken()
+			if (accessToken) {
+				await getUserByAccessToken()
+			}
+
 			setLoading(false)
 		})()
 	}, [accessToken])
