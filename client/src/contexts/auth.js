@@ -87,7 +87,8 @@ export default function AuthProvider({ children }) {
 			user,
 			accessToken,
 			signIn,
-			signOut
+			signOut,
+			setUser
 		}}>
 			{children}
 		</AuthContext.Provider>
