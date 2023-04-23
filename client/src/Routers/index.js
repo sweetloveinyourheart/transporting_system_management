@@ -14,6 +14,7 @@ import VerifyAllDetails from '../page/VerifyAllDetails';
 import DriverPage from '../page/Driver';
 import { Error } from '../page/Error/Error';
 
+
 function Router() {
 	return (
 		<Routes>
