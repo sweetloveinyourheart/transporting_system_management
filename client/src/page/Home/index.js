@@ -53,13 +53,20 @@ function Home() {
 				message.error("Please provide all required search information")
 				return;
 			}
+
+			const payload = {
+				sourceCity,
+				destinationCity,
+				dateTime: getFormattedDate(searchDate["$d"])
+			}
+
 			const response = await searchTrip(
 				sourceCity,
 				destinationCity,
 				getFormattedDate(searchDate["$d"])
 			);
-			console.log("Check ......", response);
-			navigate('/trip/select-car', { state: { data: response } });
+
+			navigate('/trip/select-car', { state: { data: response, payload } });
 		} catch (error) {
 			console.error(error);
 		}

@@ -1,0 +1,41 @@
+version: '3.8'
+services:
+  app:
+    build: 
+      context: client
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+
+  admin:
+    build: 
+      context: dashboard
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    depends_on:
+      - api
+
+  api:
+    build: 
+      context: server
+      dockerfile: Dockerfile
+    ports:
+      - "9999:9999"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: bus_station
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 16072001
+    ports:
+      - "5431:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+volumes:
+  db-data:

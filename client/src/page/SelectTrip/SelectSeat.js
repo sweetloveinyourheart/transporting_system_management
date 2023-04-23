@@ -7,12 +7,14 @@ import { useAuth } from '../../contexts/auth'
 import { submitOrder } from '../../services/order'
 import { message } from 'antd'
 import { useNavigate } from 'react-router-dom'
+import { WS_URL } from '../../constant/network';
 
-export default function SelectSeat({ trip, car }) {
+export default function SelectSeat({ trip, car, refetch }) {
     const [order, setOrder] = useState(null)
+    const [selectedSeats, setSelectedSeats] = useState([])
+    const [disabledSeats, setDisabledSeats] = useState([])
 
     const [seats, setSeats] = useState(car.chair)
-    const [disabledSeats, setDisabledSeats] = useState([])
 
     const [stompClient, setStompClient] = useState(null);
     const { accessToken, user } = useAuth()
@@ -20,7 +22,7 @@ export default function SelectSeat({ trip, car }) {
     const navigate = useNavigate()
 
     useEffect(() => {
-        const socket = new SockJS('http://localhost:9999/chair-booking');
+        const socket = new SockJS(WS_URL);
 
         const stompClient = Stomp.over(socket);
         stompClient.debug = null
@@ -99,6 +101,8 @@ export default function SelectSeat({ trip, car }) {
                     const updatedList = list.filter(item => item.orderId !== orderHasCancelRequest);
                     return updatedList
                 })
+
+                // refetch()
             });
 
             return () => {
@@ -111,7 +115,7 @@ export default function SelectSeat({ trip, car }) {
         if (order && order.orderId.length > 0) {
             localStorage.setItem(
                 order.orderId,
-                JSON.stringify({ ...order, expireAt: new Date(new Date().getTime() + 0.2 * 60000) })
+                JSON.stringify({ ...order, expireAt: new Date(new Date().getTime() + 0.5 * 60000) })
             );
 
             const clearLocalStorageItem = () => {
@@ -126,9 +130,10 @@ export default function SelectSeat({ trip, car }) {
 
                 localStorage.removeItem(order.orderId);
                 setOrder(null)
+                setSelectedSeats([])
             };
 
-            const timeoutId = setTimeout(clearLocalStorageItem, 0.2 * 60000);
+            const timeoutId = setTimeout(clearLocalStorageItem, 0.5 * 60000);
 
             // Clear the timeout when the component unmounts or the `order` prop changes.
             return () => clearTimeout(timeoutId);
@@ -138,19 +143,7 @@ export default function SelectSeat({ trip, car }) {
     const disabledChairSubscriptionHandler = (disabledChair) => {
         if (trip.tripId !== disabledChair.tripId) return;
 
-        setDisabledSeats(prevS => {
-            let chairList = [...prevS]
-            const index = chairList.findIndex(item => item.orderId === disabledChair.orderId);
-
-            if (index === -1) {
-                chairList.push(disabledChair)
-                return chairList
-            } else {
-                // update
-                chairList[index].chairId = disabledChair.chairId
-                return chairList
-            }
-        })
+        setDisabledSeats(prevS => [...prevS, disabledChair])
     }
 
     const orderSubscriptionHandler = (newOrder) => {
@@ -198,7 +191,11 @@ export default function SelectSeat({ trip, car }) {
                 addressEnd: trip.provinceEnd
             }
 
-            setOrder(orderData)
+            setOrder({
+                orderId: orderData.orderId,
+                tripId: orderData.tripId
+            })
+            setSelectedSeats(prevS => [...prevS, chair.chairId])
 
             stompClient.send(
                 '/app/chair',
@@ -287,7 +284,9 @@ export default function SelectSeat({ trip, car }) {
                             <Seat
                                 chair={chair}
                                 key={chair.chairId}
-                                isSelected={order?.chairId === chair.chairId}
+                                // isSelected={order?.chairId === chair.chairId}
+                                isSelected={selectedSeats.includes(chair.chairId)}
+                                // isSelecting={disabledSeats.includes(chair.chairId)}
                                 isSelecting={disabledSeats.some(el => el.chairId === chair.chairId)}
                                 onSelectSeat={onChooseSeat}
                             />
@@ -296,7 +295,9 @@ export default function SelectSeat({ trip, car }) {
                     <div>
                         <Seat
                             chair={seats[7]}
-                            isSelected={(order && (order?.chairId === seats[7]?.chairId))}
+                            // isSelected={(order && (order?.chairId === seats[7]?.chairId))}
+                            isSelected={selectedSeats.includes(seats[7]?.chairId)}
+                            // isSelecting={disabledSeats.includes(seats[7]?.chairId)}
                             isSelecting={disabledSeats.some(el => el.chairId === seats[7]?.chairId)}
                             onSelectSeat={onChooseSeat}
                         />
@@ -306,8 +307,10 @@ export default function SelectSeat({ trip, car }) {
                             <Seat
                                 chair={chair}
                                 key={chair.chairId}
-                                isSelected={order?.chairId === chair.chairId}
+                                // isSelected={order?.chairId === chair.chairId}
                                 isSelecting={disabledSeats.some(el => el.chairId === chair.chairId)}
+                                isSelected={selectedSeats.includes(chair.chairId)}
+                                // isSelecting={disabledSeats.includes(chair.chairId)}
                                 onSelectSeat={onChooseSeat}
                             />
                         ))}
@@ -324,8 +327,10 @@ export default function SelectSeat({ trip, car }) {
                             <Seat
                                 chair={chair}
                                 key={chair.chairId}
-                                isSelected={order?.chairId === chair.chairId}
+                                // isSelected={order?.chairId === chair.chairId}
                                 isSelecting={disabledSeats.some(el => el.chairId === chair.chairId)}
+                                isSelected={selectedSeats.includes(chair.chairId)}
+                                // isSelecting={disabledSeats.includes(chair.chairId)}
                                 onSelectSeat={onChooseSeat}
                             />
                         ))}
@@ -333,8 +338,10 @@ export default function SelectSeat({ trip, car }) {
                     <div>
                         <Seat
                             chair={seats[22]}
-                            isSelected={order && (order?.chairId === seats[22]?.chairId)}
+                            // isSelected={order && (order?.chairId === seats[22]?.chairId)}
                             isSelecting={disabledSeats.some(el => el.chairId === seats[22]?.chairId)}
+                            isSelected={selectedSeats.includes(seats[22]?.chairId)}
+                            // isSelecting={disabledSeats.includes(seats[22]?.chairId)}
                             onSelectSeat={onChooseSeat}
                         />
                     </div>
@@ -343,8 +350,10 @@ export default function SelectSeat({ trip, car }) {
                             <Seat
                                 chair={chair}
                                 key={chair.chairId}
-                                isSelected={order?.chairId === chair.chairId}
+                                // isSelected={order?.chairId === chair.chairId}
                                 isSelecting={disabledSeats.some(el => el.chairId === chair.chairId)}
+                                isSelected={selectedSeats.includes(chair.chairId)}
+                                // isSelecting={disabledSeats.includes(chair.chairId)}
                                 onSelectSeat={onChooseSeat}
                             />
                         ))}

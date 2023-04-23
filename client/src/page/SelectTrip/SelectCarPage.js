@@ -3,23 +3,44 @@ import SelectSeat from './SelectSeat';
 import './css/SelectCarPage.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useLocation } from 'react-router-dom';
+import { searchTrip } from '../../services/trip';
 
 export default function SelectCarPage() {
+    const [trips, setTrips] = useState([])
     const [selectedTrip, setSelectedTrip] = useState(null);
     const [selectedCar, setSelectedCar] = useState(null)
 
-    const onChooseTrip = (trip) => {
+    const location = useLocation();
+
+    const refetch = async () => {
+        const { payload } = location.state
+        const { content } = await searchTrip(
+            payload.sourceCity, 
+            payload.destinationCity, 
+            payload.dateTime
+        );
+        
+        setTrips(content)
+    }
+
+    useEffect(() => {
+        const searchResult = location.state && location.state.data ? location.state.data : [];
+        const { content } = searchResult;
+
+        setTrips(content)
+    }, [location])
+
+    const onChooseTrip = async (trip) => {
         if (selectedTrip && selectedTrip.tripId === trip.tripId) {
             setSelectedCar(null)
             setSelectedTrip(null)
+            await refetch()
             return;
         }
+
+        await refetch()
         setSelectedTrip(trip);
     }
-
-    const location = useLocation();
-    const searchResult = location.state && location.state.data ? location.state.data : [];
-    const { content } = searchResult;
 
     const formatTime = (time) => {
         const timeParts = time.split(" ");
@@ -37,9 +58,9 @@ export default function SelectCarPage() {
             </div>
             <div>
                 <div className="col">
-                    {content && content.length > 0 ? (
+                    {trips && trips.length > 0 ? (
                         <div className="select-car-page__list">
-                            {content.map((trip, index) => (
+                            {trips.map((trip) => (
                                 <div key={trip.tripId} className="car">
 
                                     <div>
@@ -78,7 +99,9 @@ export default function SelectCarPage() {
                                                 </div>
                                             </div>
                                             <div>
-                                                <button onClick={() => onChooseTrip(trip)} className="btn-choose">{selectedTrip?.tripId === trip.tripId ? "Close" : "Choose a trip"}</button>
+                                                <button onClick={() => onChooseTrip(trip)} className="btn-choose">
+                                                    {selectedTrip?.tripId === trip.tripId ? "Close" : "Choose a trip"}
+                                                </button>
                                             </div>
                                         </div>
                                         <div className="car__service">
@@ -117,7 +140,7 @@ export default function SelectCarPage() {
                                             </div>
                                         </div>
                                         {(selectedCar && selectedTrip.tripId === trip.tripId)
-                                            ? <SelectSeat trip={selectedTrip} car={selectedCar} />
+                                            ? <SelectSeat trip={selectedTrip} car={selectedCar} refetch={refetch}/>
                                             : (
                                                 <div style={{ display: trip.tripId === selectedTrip?.tripId ? 'block' : 'none' }} className='car-list'>
                                                     {trip.car.map((car, id) => (
