@@ -1,10 +1,11 @@
 import axios from 'axios'
+import { BASE_URL } from 'constant/network'
 
 const PAGE_SIZE = 10
 
 async function getAllCar(pageNumber) {
     try {
-        const { data } = await axios.get(`http://localhost:9999/api/v1/cars?keyword&pageNo=${pageNumber}&pageSize=${PAGE_SIZE}` )
+        const { data } = await axios.get(`${BASE_URL}/api/v1/cars?keyword&pageNo=${pageNumber}&pageSize=${PAGE_SIZE}` )
         if (!data) throw new Error()
 
         return data
@@ -15,7 +16,7 @@ async function getAllCar(pageNumber) {
 
 async function createCar(newCar) {
     try {
-        const { data } = await axios.post("http://localhost:9999/api/v1/cars", newCar)
+        const { data } = await axios.post(`${BASE_URL}/api/v1/cars`, newCar)
         if (!data) throw new Error()
 
         return data
@@ -26,7 +27,7 @@ async function createCar(newCar) {
 
 async function addTripForCar(info) {
     try {
-        const { data } = await axios.post("http://localhost:9999/api/v1/cars/addTripForCar", info)
+        const { data } = await axios.post(`${BASE_URL}/api/v1/cars/addTripForCar`, info)
         if (!data) throw new Error()
 
         return data
@@ -37,7 +38,7 @@ async function addTripForCar(info) {
 
 async function addDriverForCar(info) {
     try {
-        const { data } = await axios.post("http://localhost:9999/api/v1/cars/addDriverForCar", info)
+        const { data } = await axios.post(`${BASE_URL}/api/v1/cars/addDriverForCar`, info)
         if (!data) throw new Error()
 
         return data
@@ -49,7 +50,7 @@ async function addDriverForCar(info) {
 
 async function editCar(carId, updateData) {
     try {
-        const { data } = await axios.put(`http://localhost:9999/api/v1/cars/${carId}`, updateData)
+        const { data } = await axios.put(`${BASE_URL}/api/v1/cars/${carId}`, updateData)
 
         if (!data) throw new Error()
 
@@ -61,7 +62,7 @@ async function editCar(carId, updateData) {
 
 async function deleteCar(carId) {
     try {
-        const { data } = await axios.delete(`http://localhost:9999/api/v1/cars/${carId}`)
+        const { data } = await axios.delete(`${BASE_URL}/api/v1/cars/${carId}`)
 
         if (!data) throw new Error()
 

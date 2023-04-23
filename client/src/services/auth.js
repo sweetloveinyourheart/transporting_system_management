@@ -1,8 +1,9 @@
 import axios from 'axios'
+import { BASE_URL } from '../constant/network'
 
 async function login(username, password) {
 	try {
-		const { data, error } = await axios.post("http://localhost:9999/api/v1/auth/signin", { username, password })
+		const { data, error } = await axios.post(`${BASE_URL}/api/v1/auth/signin`, { username, password })
 
 		if (!data || error) throw new Error()
 
@@ -18,7 +19,7 @@ async function login(username, password) {
 }
 async function register(username, password, fullname, phoneNumber, email, address) {
 	try {
-		const { data } = await axios.post("http://localhost:9999/api/v1/auth/signupuser", {
+		const { data } = await axios.post(`${BASE_URL}/api/v1/auth/signupuser`, {
 			username: username, password: password,
 			user: {
 				fullName: fullname,
@@ -35,24 +36,7 @@ async function register(username, password, fullname, phoneNumber, email, addres
 	}
 }
 
-// async function refreshToken(token) {
-//     try {
-//         const { data, error } = await axios.get("http://localhost:9000/authentication/refresh-token?token=" + token)
-
-//         if (!data || error) throw new Error()
-
-//         return {
-//             access_token: data.access_token
-//         }
-//     } catch (error) {
-//         return {
-//             access_token: null
-//         }
-//     }
-// }
-
-
 export {
-	login, register
-	// refreshToken,
+	login, 
+	register
 }

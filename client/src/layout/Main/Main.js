@@ -1,7 +1,7 @@
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
 import './main.css'
-import Router from '../../Routers'
+import Router from '../../routers'
 
 import { useAuth } from '../../contexts/auth'
 
