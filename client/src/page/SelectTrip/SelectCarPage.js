@@ -19,7 +19,7 @@ export default function SelectCarPage() {
             payload.destinationCity, 
             payload.dateTime
         );
-        
+
         setTrips(content)
     }
 
@@ -140,7 +140,7 @@ export default function SelectCarPage() {
                                             </div>
                                         </div>
                                         {(selectedCar && selectedTrip.tripId === trip.tripId)
-                                            ? <SelectSeat trip={selectedTrip} car={selectedCar} refetch={refetch}/>
+                                            ? <SelectSeat trip={selectedTrip} car={selectedCar} />
                                             : (
                                                 <div style={{ display: trip.tripId === selectedTrip?.tripId ? 'block' : 'none' }} className='car-list'>
                                                     {trip.car.map((car, id) => (

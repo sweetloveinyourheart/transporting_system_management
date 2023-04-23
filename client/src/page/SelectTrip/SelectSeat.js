@@ -9,7 +9,7 @@ import { message } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import { WS_URL } from '../../constant/network';
 
-export default function SelectSeat({ trip, car, refetch }) {
+export default function SelectSeat({ trip, car }) {
     const [order, setOrder] = useState(null)
     const [selectedSeats, setSelectedSeats] = useState([])
     const [disabledSeats, setDisabledSeats] = useState([])
