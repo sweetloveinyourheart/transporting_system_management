@@ -5,6 +5,7 @@ import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import MySchedulePage from '../MySchedule';
 import LeaveTool from '../LeaveTool';
 import RequestForm from '../LeaveTool/RequestForm';
+import DriverInfo from '../DriverInfo';
 
 function DriverPage() {
     const location = useLocation();
@@ -15,7 +16,7 @@ function DriverPage() {
     }
 
     const items2 = [
-        // getItemMenu('My Information', 'my-information', <UserOutlined />),
+        getItemMenu('My Information', 'my-information', <UserOutlined />),
         getItemMenu('My Schedule', 'my-schedule', <ScheduleOutlined />),
         getItemMenu('My Leave', 'my-leave', <CoffeeOutlined />),
     ];
@@ -35,7 +36,7 @@ function DriverPage() {
                 />
             </Sider>
             <Routes>
-                {/* <Route path='my-information' element={<Profile />} /> */}
+                <Route path='my-information' element={<DriverInfo />} />
                 <Route path='my-schedule' element={<MySchedulePage />} />
                 <Route path='my-leave' element={<LeaveTool />} />
                 <Route path='my-leave/request' element={<RequestForm />} />
