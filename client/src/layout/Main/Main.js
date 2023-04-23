@@ -17,10 +17,7 @@ export default function Main() {
                     <Router />
                 </div>
             </div>
-            {user?.role.roleId !== "DRIVER" ?
-                <Footer></Footer>
-                : null
-            }
+            <Footer></Footer>
         </div>
     )
 }
