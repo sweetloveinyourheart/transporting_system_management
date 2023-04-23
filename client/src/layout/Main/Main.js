@@ -1,7 +1,7 @@
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
 import './main.css'
-import Router from '../../routers'
+import Router from '../../Routers'
 
 import { useAuth } from '../../contexts/auth'
 
@@ -17,10 +17,7 @@ export default function Main() {
                     <Router />
                 </div>
             </div>
-            {user?.role.roleId !== "DRIVER" ?
-                <Footer></Footer>
-                : null
-            }
+            <Footer></Footer>
         </div>
     )
 }
