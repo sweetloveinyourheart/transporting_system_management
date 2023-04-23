@@ -4,6 +4,7 @@ import { useAuth } from "../../contexts/auth";
 import { message } from "antd";
 import axios from "axios";
 import { BASE_URL } from "../../constant/network";
+import ValidateProcess from "./ValidateProcess";
 
 function InfoEditForm({ user }){
     const [info, setInfo] = useState({
@@ -15,6 +16,37 @@ function InfoEditForm({ user }){
     const [editing, setEditing] = useState(false);
     const fullNameInputRef = useRef(null);
     const { setUser } = useAuth();
+    const [infoValidate] = useState({
+        fullName: [
+            {
+                message: "Require 5-20 characters",
+                checkFunc: (v) => {
+                    return /^[\p{L} ]{5,20}$/u.test(v);
+                }
+            }
+        ],
+        phoneNumber: [
+            {
+                message: "Require 10-11 digits",
+                checkFunc: (v) => {
+                    return /^[0-9]{10,11}$/.test(v);
+                }
+            }
+        ],
+        email: [
+            {
+                message: "Email is not valid",
+                checkFunc: (v) => {
+                    return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(v);
+                }
+            }
+        ]
+    });
+    const [infoValid, setInfoValid] = useState({
+        fullName: true,
+        phoneNumber: true,
+        email: true
+    });
 
     useEffect(() => {
         if(editing){
@@ -23,6 +55,18 @@ function InfoEditForm({ user }){
     }, [editing])
 
     const onEditHandle = () => {
+        if(!infoValid.fullName){
+            message.error("Full name not valid !!!");
+            return;
+        }
+        if(!infoValid.phoneNumber){
+            message.error("Phone number not valid !!!");
+            return;
+        }
+        if(!infoValid.email){
+            message.error("Email not valid !!!");
+            return;
+        }
         if
         (
             info.fullName === user.fullName && 
@@ -76,6 +120,16 @@ function InfoEditForm({ user }){
                             }}
                             readOnly={!editing}
                         />
+                        <ValidateProcess value={info.fullName}
+                            chains={infoValidate.fullName}
+                            show={editing}
+                            onValidUpdate={(valid) => {
+                                setInfoValid({
+                                    ...infoValid,
+                                    fullName: valid
+                                });
+                            }}
+                        />
                     </li>
                     <li className="flex flex-col w-1/2 p-3">
                         <span className="opacity-60">Phone</span>
@@ -90,6 +144,16 @@ function InfoEditForm({ user }){
                                 });
                             }}
                             readOnly={!editing}
+                        />
+                        <ValidateProcess value={info.phoneNumber}
+                            chains={infoValidate.phoneNumber}
+                            show={editing}
+                            onValidUpdate={(valid) => {
+                                setInfoValid({
+                                    ...infoValid,
+                                    phoneNumber: valid
+                                });
+                            }}
                         />
                     </li>
                     <li className="flex flex-col w-1/2 p-3">
@@ -120,6 +184,16 @@ function InfoEditForm({ user }){
                                 });
                             }}
                             readOnly={!editing}
+                        />
+                        <ValidateProcess value={info.email}
+                            chains={infoValidate.email}
+                            show={editing}
+                            onValidUpdate={(valid) => {
+                                setInfoValid({
+                                    ...infoValid,
+                                    email: valid
+                                });
+                            }}
                         />
                     </li>
                 </ul>

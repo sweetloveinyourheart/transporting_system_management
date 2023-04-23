@@ -16,7 +16,7 @@ function DriverPage() {
     }
 
     const items2 = [
-        // getItemMenu('My Information', 'my-information', <UserOutlined />),
+        getItemMenu('My Information', 'my-information', <UserOutlined />),
         getItemMenu('My Schedule', 'my-schedule', <ScheduleOutlined />),
         getItemMenu('My Leave', 'my-leave', <CoffeeOutlined />),
     ];

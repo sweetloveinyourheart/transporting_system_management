@@ -3,8 +3,11 @@ import { useAuth } from "../../contexts/auth";
 import InfoEditForm from "./InfoEditForm";
 
 function DriverInfo(){
-    const { user } = useAuth().user;
-    console.log(user);
+    const { user } = useAuth();
+
+    if(!user || !user.user){
+        return (<div>Loading...</div>);
+    }
 
     return (
         <div className="mx-12 w-full">
@@ -15,14 +18,14 @@ function DriverInfo(){
                     className="w-20 rounded-full"/>
                 <ul className="flex flex-col ml-3 w-full">
                     <li>
-                        <span className="font-bold text-lg">{user.fullName}</span>
+                        <span className="font-bold text-lg">{user.user.fullName}</span>
                     </li>
                     <li>
-                        <span className="mr-3 opacity-60">Date in: {user.createdAt}</span>
+                        <span className="mr-3 opacity-60">Date in: {user.user.createdAt}</span>
                         <span className="opacity-60">
                             {
-                                user.updatedAt &&
-                                `Update at: ${user.updatedAt}`
+                                user.user.updatedAt &&
+                                `Update at: ${user.user.updatedAt}`
                             }
                         </span>
                     </li>
@@ -31,7 +34,7 @@ function DriverInfo(){
                     </li>
                 </ul>
             </div>
-            <InfoEditForm user={user}/>
+            <InfoEditForm user={user.user}/>
         </div>
     );
 }
