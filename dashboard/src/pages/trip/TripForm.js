@@ -98,6 +98,8 @@ const TripFormModal = ({ trip, open, handleClose, refresh, mode }) => {
             setFormError("")
             setFormSuccess(true)
             setFormData(initialFormData)
+
+            await refresh()
         } catch (error) {
             setFormSuccess(false)
             setFormError("Update information failed. Please check and try again !")
@@ -154,35 +156,6 @@ const TripFormModal = ({ trip, open, handleClose, refresh, mode }) => {
                     {trip ? "Edit information" : "New trip"}
                 </ArgonTypography>
                 <form onSubmit={handleSubmit}>
-                    {(mode === "VIEW" && trip)
-                        && (
-                            <Tooltip title="Copy">
-                                <ArgonBox sx={{ cursor: 'pointer' }} onClick={handleCopyToClipboard}>
-                                    <ArgonInput
-                                        name="tripId"
-                                        placeholder="ID"
-                                        defaultValue={trip.tripId}
-                                        sx={{ my: 1 }}
-                                        required
-                                        fullWidth
-                                        disabled={mode === "VIEW"}
-                                    />
-                                </ArgonBox>
-                            </Tooltip>
-                        )
-                    }
-
-                    {/* <ArgonInput
-                        name="provinceStart"
-                        placeholder="Province Start*"
-                        value={formData.provinceStart}
-                        onChange={handleInputChange}
-                        sx={{ my: 1 }}
-                        required
-                        fullWidth
-                        disabled={mode === "VIEW"}
-                    /> */}
-
                     <FormControl
                         variant="outlined"
                         fullWidth
@@ -273,10 +246,10 @@ const TripFormModal = ({ trip, open, handleClose, refresh, mode }) => {
                         <ArgonButton type="submit" variant="contained" color="primary">
                             {trip ? "Update" : "Create"}
                         </ArgonButton>
-                        {trip
+                        {trip && trip.status
                             && (
                                 <ArgonButton type="button" variant="outlined" color="error" onClick={handleDelete}>
-                                    Delete
+                                    Disable
                                 </ArgonButton>
                             )
                         }

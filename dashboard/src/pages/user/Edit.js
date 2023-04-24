@@ -1,4 +1,4 @@
-import { Alert, Checkbox, FormControlLabel, Modal, Tooltip } from "@mui/material"
+import { Alert, Checkbox, FormControlLabel, Modal } from "@mui/material"
 import ArgonBox from "components/ArgonBox"
 import ArgonButton from "components/ArgonButton";
 import ArgonInput from "components/ArgonInput";
@@ -25,7 +25,7 @@ const initialFormData = {
     status: true,
 };
 
-const EditUserModal = ({ accountId, user, open, handleClose, refresh, mode }) => {
+const EditUserModal = ({ user, open, handleClose, refresh, mode }) => {
     const [formData, setFormData] = useState(initialFormData);
     const [formError, setFormError] = useState("")
     const [formSuccess, setFormSuccess] = useState(false)
@@ -42,10 +42,6 @@ const EditUserModal = ({ accountId, user, open, handleClose, refresh, mode }) =>
             })
         }
     }, [user])
-
-    const handleCopyToClipboard = async () => {
-        await navigator.clipboard.writeText(accountId);
-    };
 
     const onHandleClose = () => {
         setFormError("")
@@ -98,23 +94,6 @@ const EditUserModal = ({ accountId, user, open, handleClose, refresh, mode }) =>
                     Edit information
                 </ArgonTypography>
                 <form onSubmit={handleSubmit}>
-                    {mode === "VIEW"
-                        && (
-                            <Tooltip title="Copy">
-                                <ArgonBox sx={{ cursor: 'pointer' }} onClick={handleCopyToClipboard}>
-                                    <ArgonInput
-                                        name="accountId"
-                                        placeholder="ID"
-                                        defaultValue={accountId}
-                                        sx={{ my: 1, position: 'relative' }}
-                                        required
-                                        fullWidth
-                                        disabled={mode === "VIEW"}
-                                    />
-                                </ArgonBox>
-                            </Tooltip>
-                        )
-                    }
                     <ArgonInput
                         name="fullName"
                         placeholder="Full Name"

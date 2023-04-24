@@ -2,40 +2,43 @@ import Table from "examples/Tables/Table";
 import ArgonBox from "components/ArgonBox";
 import { Pagination } from "@mui/material";
 import { useEffect, useState } from "react";
+import { Author } from "pages/tables/data/usersTableData";
 import ArgonBadge from "components/ArgonBadge";
 import ArgonTypography from "components/ArgonTypography";
+import { Function } from "pages/tables/data/usersTableData";
+import { userImages } from "pages/tables/data/usersTableData";
+import EditUserModal from "./Edit"
 
 import dayjs from "dayjs";
-import { getAllTrip } from "services/trip";
-import TripFormModal from "./TripForm";
-import ArgonButton from "components/ArgonButton";
+import { getDrivers } from "services/user";
 
 const tableData = {
     columns: [
-        { name: "date", align: "center" },
-        { name: "time_start", align: "center" },
-        { name: "start_at", align: "center" },
-        { name: "end_at", align: "center" },
-        { name: "price", align: "center" },
+        { name: "author", align: "left" },
+        { name: "function", align: "left" },
+        { name: "address", align: "left" },
+        { name: "status", align: "center" },
+        { name: "created_at", align: "center" },
         { name: "action", align: "center" },
     ],
 };
 
-const TripTable = () => {
+const DriverTable = () => {
     const [currentPage, setCurrentPage] = useState(1)
     const [totalPages, setTotalPages] = useState(1)
     const { columns } = tableData;
-    const [trips, setTrips] = useState([])
+    const [accounts, setAccounts] = useState([])
 
-    const [modalMode, setModalMode] = useState("VIEW")
     const [openEdit, setOpenEdit] = useState(false);
-    const [selectedTrip, setSelectedTrip] = useState(null)
+    const [selectedAccount, setSelectedAccount] = useState(null)
+    const [modalMode, setModalMode] = useState("VIEW")
+
 
     const refresh = async () => {
-        const data = await getAllTrip(currentPage - 1)
+        const data = await getDrivers(currentPage - 1)
         if (!data) return;
 
-        setTrips(data.content)
+        setAccounts(data.content)
         setTotalPages(data.totalPages)
     }
 
@@ -49,38 +52,26 @@ const TripTable = () => {
         setCurrentPage(value);
     };
 
-    const onNewTripClick = () => {
-        setModalMode("NEW")
-        setSelectedTrip(null)
-        setOpenEdit(true)
-    }
-
-    const onViewTrip = (acc) => {
+    const onViewAccount = (acc) => {
+        setSelectedAccount(acc)
         setModalMode("VIEW")
-        setSelectedTrip(acc)
         setOpenEdit(true)
     }
 
-    const onEditTrip = (acc) => {
-        setSelectedTrip(acc)
-        setOpenEdit(true)
+    const onEditAccount = (acc) => {
+        setSelectedAccount(acc)
         setModalMode("EDIT")
+        setOpenEdit(true)
     }
 
     const onCloseEdit = () => {
         setOpenEdit(false)
-        setSelectedTrip(null)
         setModalMode("VIEW")
+        setSelectedAccount(null)
     }
 
     return (
         <>
-            <ArgonBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
-                <ArgonTypography variant="h6">Trips table</ArgonTypography>
-                <ArgonButton variant="contained" color="primary" onClick={onNewTripClick}>
-                    New Trip
-                </ArgonButton>
-            </ArgonBox>
             <ArgonBox
                 sx={{
                     "& .MuiTableRow-root:not(:last-child)": {
@@ -93,31 +84,29 @@ const TripTable = () => {
             >
                 <Table
                     columns={columns}
-                    rows={trips.map((trip) => {
+                    rows={accounts.map((account) => {
+                        const user = account.user
+
                         return ({
-                            date: (
+                            author: <Author image={userImages[Math.floor((Math.random() * userImages.length))]} name={user.fullName} email={user.email} />,
+                            function: <Function job={"User"} org="Gradient" />,
+                            address: (
                                 <ArgonTypography variant="caption" color="secondary" fontWeight="medium">
-                                    {dayjs(trip.timeStart).format("DD/MM/YYYY")}
+                                    {user.address}
                                 </ArgonTypography>
                             ),
-                            time_start: (
-                                <ArgonTypography variant="caption" color="secondary" fontWeight="medium">
-                                    {dayjs(trip.timeStart).format("HH:mm:ss")}
-                                </ArgonTypography>
+                            status: (
+                                <ArgonBadge
+                                    variant="gradient"
+                                    badgeContent={user.status ? "available" : "unavailable"}
+                                    color={user.status ? "success" : "secondary"}
+                                    size="xs"
+                                    container
+                                />
                             ),
-                            start_at: (
+                            created_at: (
                                 <ArgonTypography variant="caption" color="secondary" fontWeight="medium">
-                                    {trip.provinceStart}
-                                </ArgonTypography>
-                            ),
-                            end_at: (
-                                <ArgonTypography variant="caption" color="secondary" fontWeight="medium">
-                                    {trip.provinceEnd}
-                                </ArgonTypography>
-                            ),
-                            price: (
-                                <ArgonTypography variant="caption" color="secondary" fontWeight="medium">
-                                    {Intl.NumberFormat().format(trip.price)} đ
+                                    {dayjs(user.createdAt).format("DD/MM/YYYY")}
                                 </ArgonTypography>
                             ),
                             action: (
@@ -128,7 +117,7 @@ const TripTable = () => {
                                         variant="caption"
                                         color="secondary"
                                         fontWeight="medium"
-                                        onClick={() => onViewTrip(trip)}
+                                        onClick={() => onViewAccount(account)}
                                     >
                                         View
                                     </ArgonTypography>
@@ -138,7 +127,7 @@ const TripTable = () => {
                                         variant="caption"
                                         color="secondary"
                                         fontWeight="medium"
-                                        onClick={() => onEditTrip(trip)}
+                                        onClick={() => onEditAccount(account)}
                                         sx={{ ml: 1 }}
                                     >
                                         Edit
@@ -153,15 +142,21 @@ const TripTable = () => {
                 <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} siblingCount={0} boundaryCount={2} />
             </ArgonBox>
 
-            <TripFormModal
-                trip={selectedTrip}
-                open={openEdit}
-                handleClose={onCloseEdit}
-                refresh={refresh}
-                mode={modalMode}
-            />
+            {selectedAccount
+                && (
+                    <EditUserModal
+                        accountId={selectedAccount.accountId}
+                        user={selectedAccount.user}
+                        open={openEdit}
+                        handleClose={onCloseEdit}
+                        role={selectedAccount.role.roleId}
+                        refresh={refresh}
+                        mode={modalMode}
+                    />
+                )
+            }
         </>
     )
 }
 
-export default TripTable
+export default DriverTable

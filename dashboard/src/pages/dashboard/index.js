@@ -16,7 +16,7 @@ import GradientLineChart from "examples/Charts/LineCharts/GradientLineChart";
 import typography from "assets/theme/base/typography";
 
 // Dashboard layout components
-import Slider from "layouts/dashboard/components/Slider";
+import Slider from "pages/dashboard/components/Slider";
 
 import { useEffect, useState } from "react";
 import { revenueByYear } from "services/stats";

@@ -3,9 +3,9 @@ import { BASE_URL } from 'constant/network'
 
 const PAGE_SIZE = 10
 
-async function getAllTrip(pageNumber) {
+async function getAllTrip(pageNumber, place) {
     try {
-        const { data } = await axios.get(`${BASE_URL}/api/v1/trips/getAll?keyword&pageNo=${pageNumber}&pageSize=${PAGE_SIZE}`)
+        const { data } = await axios.get(`${BASE_URL}/api/v1/trips/getAll?place=${place}&pageNo=${pageNumber}&pageSize=${PAGE_SIZE}`)
         if (!data) throw new Error()
 
         return data

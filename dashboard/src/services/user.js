@@ -3,9 +3,9 @@ import { BASE_URL } from 'constant/network'
 
 const PAGE_SIZE = 10
 
-async function getUsers(pageNumber) {
+async function getUsers(pageNumber, email='') {
     try {
-        const { data } = await axios.get(`${BASE_URL}/api/v1/users?keyword&pageNumber=${pageNumber}&pageSize=${PAGE_SIZE}`)
+        const { data } = await axios.get(`${BASE_URL}/api/v1/users?keyword=${email}&pageNumber=${pageNumber}&pageSize=${PAGE_SIZE}`)
 
         if (!data) throw new Error()
 
@@ -51,9 +51,9 @@ async function getEmployees(pageNumber) {
     }
 }
 
-async function getDrivers(pageNumber) {
+async function getDrivers(pageNumber, email='') {
     try {
-        const { data } = await axios.get(`${BASE_URL}/api/v1/employees/getdriver?pageNumber=${pageNumber}&pageSize=${PAGE_SIZE}`)
+        const { data } = await axios.get(`${BASE_URL}/api/v1/employees/getdriver?keyword=${email}&pageNumber=${pageNumber}&pageSize=${PAGE_SIZE}`)
 
         if (!data) throw new Error()
 

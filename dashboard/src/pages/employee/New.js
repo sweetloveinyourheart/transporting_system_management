@@ -1,4 +1,4 @@
-import { Alert, Checkbox, FormControl, FormControlLabel, MenuItem, Modal, Select } from "@mui/material"
+import { Alert, Autocomplete, Checkbox, FormControl, FormControlLabel, MenuItem, Modal, Select, TextField } from "@mui/material"
 import { DatePicker } from "@mui/x-date-pickers";
 import ArgonBox from "components/ArgonBox"
 import ArgonButton from "components/ArgonButton";
@@ -8,6 +8,7 @@ import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import { newEmployee } from "services/auth";
 import { getRoles } from "services/auth";
+import { getUsers } from "services/user";
 
 const style = {
     position: 'absolute',
@@ -26,6 +27,7 @@ const initialFormData = {
     dob: "2001-01-01 00:00:00"
 };
 
+
 const NewEmployeeModal = ({ open, handleClose, refresh }) => {
     const [formData, setFormData] = useState(initialFormData);
     const [accountId, setAccountId] = useState("")
@@ -33,12 +35,26 @@ const NewEmployeeModal = ({ open, handleClose, refresh }) => {
     const [formSuccess, setFormSuccess] = useState(false)
     const [roles, setRoles] = useState([])
 
+    const [email, setEmail] = useState("")
+    const [users, setUsers] = useState([])
+    const [selectedUser, setSelectedUser] = useState('')
+
     useEffect(() => {
         (async () => {
             const roles = await getRoles()
             setRoles(roles)
         })()
     }, [])
+
+    useEffect(() => {
+        (async () => {
+            const userList = await getUsers(0, email)
+            setUsers(userList.content.map((el) => ({
+                label: `${el.user.email} - ${el.user.fullName}`,
+                accountId: el.accountId
+            })))
+        })()
+    }, [email])
 
     const onHandleClose = () => {
         setFormError("")
@@ -61,10 +77,6 @@ const NewEmployeeModal = ({ open, handleClose, refresh }) => {
             yoe: Number(event.target.value)
         }))
     }
-
-    const handleAccountIdChange = (event) => {
-        setAccountId(event.target.value)
-    };
 
     const handleRoleChange = (event) => {
         setFormData(prev => ({
@@ -103,15 +115,24 @@ const NewEmployeeModal = ({ open, handleClose, refresh }) => {
                     New Employees
                 </ArgonTypography>
                 <form onSubmit={handleSubmit}>
-                    <ArgonInput
-                        name="accountId"
-                        placeholder="Account ID"
-                        value={accountId}
-                        onChange={handleAccountIdChange}
-                        sx={{ my: 1 }}
-                        required
+                    <Autocomplete
+                        disableClearable
+                        value={selectedUser}
+                        onChange={(event, newValue) => {
+                            setAccountId(newValue.accountId)
+                            setSelectedUser(newValue);
+                        }}
+                        inputValue={email}
+                        onInputChange={(event, newInputValue) => {
+                          setEmail(newInputValue);
+                        }}
+                        id="combo-box-demo"
+                        options={users}
+                        sx={{ my:1 }}
                         fullWidth
+                        renderInput={(params) => <TextField placeholder="Search user by email" {...params}/>}
                     />
+
                     <ArgonInput
                         name="yoe"
                         placeholder="Year of experience"

@@ -48,14 +48,6 @@ const CarFormModal = ({ car, open, handleClose, refresh, mode }) => {
         handleClose()
     }
 
-    // const handleInputChange = (event) => {
-    //     const { name, value } = event.target;
-    //     setFormData((prevFormData) => ({
-    //         ...prevFormData,
-    //         [name]: value,
-    //     }));
-    // };
-
     const handleCheckboxChange = (event) => {
         setFormData((prevFormData) => ({
             ...prevFormData,
@@ -73,14 +65,16 @@ const CarFormModal = ({ car, open, handleClose, refresh, mode }) => {
 
     const handleDelete = async () => {
         try {
-            await deleteCar(car.tripId)
+            await deleteCar(car.carId)
 
             setFormError("")
             setFormSuccess(true)
             setFormData(initialFormData)
+
+            await refresh()
         } catch (error) {
             setFormSuccess(false)
-            setFormError("Update information failed. Please check and try again !")
+            setFormError("Remove car failed. Please check and try again !")
         }
     }
 

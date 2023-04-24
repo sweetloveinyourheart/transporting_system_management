@@ -2,15 +2,15 @@ import Table from "examples/Tables/Table";
 import ArgonBox from "components/ArgonBox";
 import { Pagination } from "@mui/material";
 import { useEffect, useState } from "react";
-import { getUsers } from "services/user";
-import { Author } from "layouts/tables/data/usersTableData";
+import { Author } from "pages/tables/data/usersTableData";
 import ArgonBadge from "components/ArgonBadge";
 import ArgonTypography from "components/ArgonTypography";
-import { Function } from "layouts/tables/data/usersTableData";
-import { userImages } from "layouts/tables/data/usersTableData";
+import { Function } from "pages/tables/data/usersTableData";
+import { userImages } from "pages/tables/data/usersTableData";
 import EditUserModal from "./Edit"
 
 import dayjs from "dayjs";
+import { getEmployees } from "services/user";
 
 const tableData = {
     columns: [
@@ -23,7 +23,7 @@ const tableData = {
     ],
 };
 
-const UserTable = () => {
+const EmployeeTable = () => {
     const [currentPage, setCurrentPage] = useState(1)
     const [totalPages, setTotalPages] = useState(1)
     const { columns } = tableData;
@@ -33,8 +33,9 @@ const UserTable = () => {
     const [selectedAccount, setSelectedAccount] = useState(null)
     const [modalMode, setModalMode] = useState("VIEW")
 
+
     const refresh = async () => {
-        const data = await getUsers(currentPage - 1)
+        const data = await getEmployees(currentPage - 1)
         if (!data) return;
 
         setAccounts(data.content)
@@ -51,20 +52,15 @@ const UserTable = () => {
         setCurrentPage(value);
     };
 
-    const onViewAccount = (acc) => {
-        setModalMode("VIEW")
-        setSelectedAccount(acc)
-        setOpenEdit(true)
-    }
-
     const onEditAccount = (acc) => {
-        setModalMode("EDIT")
         setSelectedAccount(acc)
+        setModalMode("EDIT")
         setOpenEdit(true)
     }
 
     const onCloseEdit = () => {
         setOpenEdit(false)
+        setModalMode("VIEW")
         setSelectedAccount(null)
     }
 
@@ -108,29 +104,16 @@ const UserTable = () => {
                                 </ArgonTypography>
                             ),
                             action: (
-                                <ArgonBox sx={{display: 'flex', justifyContent: 'center'}}>
-                                    <ArgonTypography
-                                        component="a"
-                                        href="#"
-                                        variant="caption"
-                                        color="secondary"
-                                        fontWeight="medium"
-                                        onClick={() => onViewAccount(account)}
-                                    >
-                                        View
-                                    </ArgonTypography>
-                                    <ArgonTypography
-                                        component="a"
-                                        href="#"
-                                        variant="caption"
-                                        color="secondary"
-                                        fontWeight="medium"
-                                        onClick={() => onEditAccount(account)}
-                                        sx={{ ml: 1 }}
-                                    >
-                                        Edit
-                                    </ArgonTypography>
-                                </ArgonBox>
+                                <ArgonTypography
+                                    component="a"
+                                    href="#"
+                                    variant="caption"
+                                    color="secondary"
+                                    fontWeight="medium"
+                                    onClick={() => onEditAccount(account)}
+                                >
+                                    Edit
+                                </ArgonTypography>
                             ),
                         })
                     })}
@@ -147,8 +130,8 @@ const UserTable = () => {
                         user={selectedAccount.user}
                         open={openEdit}
                         handleClose={onCloseEdit}
+                        role={selectedAccount.role.roleId}
                         refresh={refresh}
-                        mode={modalMode}
                     />
                 )
             }
@@ -156,4 +139,4 @@ const UserTable = () => {
     )
 }
 
-export default UserTable
+export default EmployeeTable
