@@ -71,7 +71,7 @@ export default function Header() {
 												<Link to={"/my-booking"}><i>My Booking</i></Link>
 											</li>
 											<li>
-												<Link to={"/profile"}><FontAwesomeIcon icon={faCircleUser} /></Link>
+												<Link to={"/profile"}><FontAwesomeIcon icon={faCircleUser} style={{ marginRight: 4 }}/> Profile </Link>
 											</li>
 										</>
 									)

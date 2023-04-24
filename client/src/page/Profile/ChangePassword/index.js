@@ -1,9 +1,10 @@
 import React from "react";
 import { Form, Input, Button, message, Typography } from "antd";
 import { LockFilled, } from '@ant-design/icons';
+import "./style.css"
 import { changePasswordAPI } from '../../../services/account';
 const ChangePassword = () => {
-    const [form] = Form.useForm();
+	const [form] = Form.useForm();
 
     //change password success
     const handleSubmit = async (value) => {
@@ -56,54 +57,58 @@ const ChangePassword = () => {
                     <Input.Password prefix={<LockFilled className="site-form-item-icon" />} />
                 </Form.Item>
 
-                <Form.Item
-                    name="passwordNew"
-                    label="New Password"
-                    rules={[
-                        { required: true, message: "Please enter new password" },
-                        {
-                            min: 6,
-                            message: 'Password must be at least 6 characters',
-                        },
-                        {
-                            max: 50,
-                            message: 'Password cannot be longer than 50 characters',
-                        },
-                        { validator: validatePassword }
-                    ]}
+				<Form.Item
+					name="passwordNew"
+					label="New Password"
+					rules={[
+						{ required: true, message: "Please enter new password" },
+						{
+							min: 6,
+							message: 'Password must be at least 6 characters',
+						},
+						{
+							max: 50,
+							message: 'Password cannot be longer than 50 characters',
+						},
+						{ validator: validatePassword }
+					]}
 
-                >
-                    <Input.Password
-                        prefix={<LockFilled className="site-form-item-icon" />} />
-                </Form.Item>
-                <Form.Item
-                    name="confirmPassword"
-                    label="Confirm Password"
-                    rules={[
-                        { required: true, message: "Please enter confirm password" },
-                        {
-                            min: 6,
-                            message: 'Password must be at least 6 characters',
-                        },
-                        {
-                            max: 50,
-                            message: 'Password cannot be longer than 50 characters',
-                        },
-                        { validator: validateConfirmPassword }]}
-                >
-                    <Input.Password prefix={<LockFilled className="site-form-item-icon" />} />
-                </Form.Item>
-                <div className="flex justify-between px-10 ">
-                    <Button className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded" htmlType='submit' >
-                        Change Password
-                    </Button>
-                    <Button className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded" onClick={handleCancle}>
-                        Cancel
-                    </Button>
-                </div>
-            </Form>
-        </div>
-    );
+				>
+					<Input.Password
+						prefix={<LockFilled className="site-form-item-icon" />} />
+				</Form.Item>
+				<Form.Item
+					name="confirmPassword"
+					label="Confirm Password"
+					rules={[
+						{ required: true, message: "Please enter confirm password" },
+						{
+							min: 6,
+							message: 'Password must be at least 6 characters',
+						},
+						{
+							max: 50,
+							message: 'Password cannot be longer than 50 characters',
+						},
+						{ validator: validateConfirmPassword }]}
+				>
+					<Input.Password prefix={<LockFilled className="site-form-item-icon" />} />
+				</Form.Item>
+				<div className="flex justify-around wrap-btn">
+					<Button className='edit-submit'
+						// className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded"
+						htmlType='submit' >
+						Change Password
+					</Button>
+					<Button className='edit-submit'
+						// className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded" 
+						onClick={handleCancle}>
+						Cancel
+					</Button>
+				</div>
+			</Form>
+		</div>
+	);
 };
 
 export default ChangePassword;

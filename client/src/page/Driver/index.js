@@ -8,12 +8,12 @@ import RequestForm from '../LeaveTool/RequestForm';
 import DriverInfo from '../DriverInfo';
 
 function DriverPage() {
-    const location = useLocation();
-    const navigate = useNavigate();
-    //Menu items
-    function getItemMenu(label, key, icon, children, type) {
-        return { label, key, icon, children, type }
-    }
+	const location = useLocation();
+	const navigate = useNavigate();
+	//Menu items
+	function getItemMenu(label, key, icon, children, type) {
+		return { label, key, icon, children, type }
+	}
 
     const items2 = [
         getItemMenu('My Information', 'my-information', <UserOutlined />),

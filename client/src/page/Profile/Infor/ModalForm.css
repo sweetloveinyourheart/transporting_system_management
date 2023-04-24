@@ -1,0 +1,18 @@
+.ant-modal {
+	width: 600px !important;
+}
+
+.ant-modal-content {
+	font-size: 16px !important;
+	width: 100% !important;
+}
+
+.ant-modal .ant-modal-title {
+	text-align: center;
+	font-size: 16px !important;
+}
+
+.ant-form-item .ant-form-item-label>label,
+.ant-input-affix-wrapper>input.ant-input {
+	font-size: 16px !important;
+}

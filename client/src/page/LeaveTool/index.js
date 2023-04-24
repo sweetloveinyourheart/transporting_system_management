@@ -3,53 +3,54 @@ import { memo, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllLeave, updateCurrentPage } from "../../feature/leave/leaveSlice";
+import "./style.css"
 
 function LeavePage() {
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const leaves = useSelector(state => state.leave.leaves);
-    const totalLeave = useSelector(state => state.leave.totalLeave);
-    const currentPage = useSelector(state => state.leave.currentPage);
-    const [loadingPage, setLoadingPage] = useState(true);
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
+	const leaves = useSelector(state => state.leave.leaves);
+	const totalLeave = useSelector(state => state.leave.totalLeave);
+	const currentPage = useSelector(state => state.leave.currentPage);
+	const [loadingPage, setLoadingPage] = useState(true);
 
-    //get all leave by user id
-    useEffect(() => {
-        setLoadingPage(true);
-        dispatch(fetchAllLeave({
-            currentPage,
-            onComplete: () => {
-                setLoadingPage(false);
-            }
-        }));
-    }, [dispatch, currentPage])
+	//get all leave by user id
+	useEffect(() => {
+		setLoadingPage(true);
+		dispatch(fetchAllLeave({
+			currentPage,
+			onComplete: () => {
+				setLoadingPage(false);
+			}
+		}));
+	}, [dispatch, currentPage])
 
-    const columns = [
-        {
-            title: "Index",
-            key: "index",
-            dataIndex: "index"
-        },
-        {
-            title: "Start date",
-            key: "startDate",
-            dataIndex: "startDate"
-        },
-        {
-            title: "End date",
-            key: "endDate",
-            dataIndex: "endDate"
-        },
-        {
-            title: "Reason",
-            key: "reason",
-            dataIndex: "reason"
-        },
-        {
-            title: "Approved",
-            key: "approved",
-            dataIndex: "approved"
-        }
-    ];
+	const columns = [
+		{
+			title: "Index",
+			key: "index",
+			dataIndex: "index"
+		},
+		{
+			title: "Start date",
+			key: "startDate",
+			dataIndex: "startDate"
+		},
+		{
+			title: "End date",
+			key: "endDate",
+			dataIndex: "endDate"
+		},
+		{
+			title: "Reason",
+			key: "reason",
+			dataIndex: "reason"
+		},
+		{
+			title: "Approved",
+			key: "approved",
+			dataIndex: "approved"
+		}
+	];
 
     return (
         <div className="ml-12 flex items-center justify-center w-full">
