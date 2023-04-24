@@ -17,7 +17,7 @@ public interface TripService {
 
     Page<SearchTripResponse> getAllTripsByProvinceStartAndProvinceEndDateTime(SearchTripRequest searchTripRequest, int pageNo, int pageSize);
 
-    Page<TripResponse> getAllTrips(int pageNo, int pageSize);
+    Page<TripResponse> getAllTrips(String place, int pageNo, int pageSize);
 
     Page<UserByTripIdResponse> getAllUserByTrip(String tripId, int pageNo, int pageSize);
 

@@ -245,11 +245,11 @@ public class TripServiceImpl implements TripService {
     }
 
     @Override
-    public Page<TripResponse> getAllTrips(int pageNo, int pageSize) {
-
+    public Page<TripResponse> getAllTrips(String place, int pageNo, int pageSize) {
         Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by("createAt").ascending());
 
-        Page<Trip> trips = tripRepository.findAll(pageable);
+        // Page<Trip> trips = tripRepository.findAll(pageable);
+        Page<Trip> trips = tripRepository.findByProvinceStartContainingOrProvinceEndContaining(place, place, pageable);
 
         return trips.map(trip -> {
             Optional<Ticket> ticket = ticketRepository.findByAddressStartAndAddressEnd(trip.getProvinceStart(), trip.getProvinceEnd());
