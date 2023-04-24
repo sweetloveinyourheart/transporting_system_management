@@ -48,8 +48,13 @@ export default function AuthProvider({ children }) {
 			setLoading(false)
 			return setUser(null)
 		}
-		//If driver login navigate to driver page
+		if (user.role.roleId === "USER" && window.location.pathname.includes("/driver")) {
+			navigate("/")
+			setLoading(false)
+			return setUser(user)
+		}
 		if (user.role.roleId === "DRIVER") {
+
 			navigate("/driver/*")
 			setLoading(false)
 			return setUser(user)
