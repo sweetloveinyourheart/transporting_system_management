@@ -36,8 +36,6 @@ function Illustration() {
   useEffect(() => {
     if(user) {
       navigate('/')
-    } else {
-      navigate('/authentication/sign-in')
     }
   }, [user])
 

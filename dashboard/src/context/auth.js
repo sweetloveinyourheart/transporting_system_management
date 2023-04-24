@@ -36,28 +36,27 @@ export default function AuthProvider({ children }) {
 
     const signOut = async () => {
         Cookies.remove("accessToken")
-        setAccessToken(null)
         setUser(null)
+        setAccessToken(null)
         navigate("/authentication/sign-in")
     }
 
     const getUserByAccessToken = async () => {
         const user = await getUser()
+
         if (!user || !ValidRoles.includes(user.role.roleId)) {
-            navigate("/authentication/sign-in")
-            setLoading(false)
-            if(error !== null) setError("Login failed. Please check your account !")
+            if (error !== null) setError("Login failed. Please check your account !")
             return setUser(null)
         }
+
         navigate("/")
-        setLoading(false)
         return setUser(user)
     }
 
     useEffect(() => {
         (async () => {
             const token = Cookies.get('accessToken')
-            if(token) {
+            if (token) {
                 axios.defaults.headers.common.Authorization = `Bearer ${token}`
                 setAccessToken(accessToken)
             }
@@ -66,8 +65,13 @@ export default function AuthProvider({ children }) {
 
     useEffect(() => {
         (async () => {
-            await getUserByAccessToken()
-            setLoading(false)
+            if (accessToken) {
+                await getUserByAccessToken()
+                setLoading(false)
+            } else {
+                setLoading(false)
+                navigate("/authentication/sign-in")
+            }
         })()
     }, [accessToken])
 
