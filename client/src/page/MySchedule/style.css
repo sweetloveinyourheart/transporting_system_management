@@ -1,4 +1,5 @@
-.my-schedule-page {
-    display: flex;
-    margin-top: 50px;
+.my-schedule-page .ant-table-wrapper .ant-table-container table>thead>tr>th,
+.ant-table-wrapper .ant-table-tbody>tr>td {
+	font-size: 16px;
+	color: black;
 }
