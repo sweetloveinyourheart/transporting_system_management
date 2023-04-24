@@ -193,8 +193,8 @@ function Register(props) {
 						validator: validateAddress
 					},
 					{
-						max: 50,
-						message: 'Adress cannot be longer than 50 characters'
+						max: 150,
+						message: 'Adress cannot be longer than 150 characters'
 					},
 					]}
 					name={'address'}

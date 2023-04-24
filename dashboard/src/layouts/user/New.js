@@ -93,7 +93,7 @@ const NewUserModal = ({ open, handleClose, refresh }) => {
         >
             <ArgonBox sx={style}>
                 <ArgonTypography id="modal-modal-title" variant="h6" component="h2">
-                    New Employees
+                    New users
                 </ArgonTypography>
                 <form onSubmit={handleSubmit}>
                     <ArgonInput
