@@ -12,7 +12,7 @@ const ChangePassword = () => {
             message.error("your old password is not correct");
             return;
         }
-        message.success("register success!");
+        message.success("Change passworđ success!");
         form.resetFields();
     };
     //btn cancle
