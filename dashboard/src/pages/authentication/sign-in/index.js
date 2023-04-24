@@ -13,7 +13,7 @@ import ArgonInput from "components/ArgonInput";
 import ArgonButton from "components/ArgonButton";
 
 // Authentication layout components
-import IllustrationLayout from "layouts/authentication/components/IllustrationLayout";
+import IllustrationLayout from "pages/authentication/components/IllustrationLayout";
 import { useAuth } from "context/auth";
 
 // Image

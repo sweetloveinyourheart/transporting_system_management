@@ -134,25 +134,6 @@ const EditUserModal = ({ accountId, user, open, handleClose, role, refresh, mode
                     Edit information
                 </ArgonTypography>
                 <form onSubmit={handleSubmit}>
-
-                    {mode === "VIEW"
-                        && (
-                            <Tooltip title="Copy">
-                                <ArgonBox sx={{ cursor: 'pointer' }} onClick={handleCopyToClipboard}>
-                                    <ArgonInput
-                                        name="employeeId"
-                                        placeholder="Employee Id"
-                                        defaultValue={user.employeeDTO.employeeId}
-                                        sx={{ my: 1 }}
-                                        required
-                                        fullWidth
-                                        disabled={mode === "VIEW"}
-                                    />
-                                </ArgonBox>
-                            </Tooltip>
-                        )
-                    }
-
                     <ArgonInput
                         name="fullName"
                         placeholder="Full Name"

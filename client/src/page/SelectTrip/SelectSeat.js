@@ -114,12 +114,12 @@ export default function SelectSeat({ trip, car }) {
     useEffect(() => {
         if (order && order.orderId.length > 0) {
             localStorage.setItem(
-                order.orderId,
+                'order_' + order.orderId,
                 JSON.stringify({ ...order, expireAt: new Date(new Date().getTime() + 0.5 * 60000) })
             );
 
             const clearLocalStorageItem = () => {
-                const item = JSON.parse(localStorage.getItem(order.orderId))
+                const item = JSON.parse(localStorage.getItem('order_' + order.orderId))
 
                 const data = JSON.stringify({
                     orderId: item.orderId,
@@ -128,7 +128,7 @@ export default function SelectSeat({ trip, car }) {
 
                 stompClient.send('/app/chairCancel', {}, data)
 
-                localStorage.removeItem(order.orderId);
+                localStorage.removeItem('order_' + order.orderId);
                 setOrder(null)
                 setSelectedSeats([])
             };
@@ -161,8 +161,11 @@ export default function SelectSeat({ trip, car }) {
     const cancelTempOrder = (client) => {
         const trips = { ...localStorage }
         const tripsWillBeCancel = Object.entries(trips).map(([key, value]) => {
-            return JSON.parse(value);
-        });
+            if (key.includes("order_"))
+                return JSON.parse(value);
+        }).filter(el => el !== undefined);
+
+        console.log(tripsWillBeCancel);
 
         tripsWillBeCancel.forEach((item) => {
             const payloadData = JSON.stringify({
@@ -171,7 +174,7 @@ export default function SelectSeat({ trip, car }) {
             })
 
             client.send('/app/chairCancel', {}, payloadData)
-            localStorage.removeItem(item.orderId)
+            localStorage.removeItem("order_" + item.orderId)
         })
     }
 

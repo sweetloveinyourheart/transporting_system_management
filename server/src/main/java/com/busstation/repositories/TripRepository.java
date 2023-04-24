@@ -41,4 +41,6 @@ public interface TripRepository extends JpaRepository<Trip,String> {
     List<Trip> findByCars(Car car);
 
     List<Trip> findAllByCars(Car car);
+
+    Page<Trip> findByProvinceStartContainingOrProvinceEndContaining(String provinceStart, String provinceEnd, Pageable pageable);
 }

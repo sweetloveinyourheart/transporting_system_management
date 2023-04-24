@@ -1,4 +1,4 @@
-import { Alert, Modal } from "@mui/material"
+import { Alert, Autocomplete, Modal, TextField } from "@mui/material"
 import ArgonBox from "components/ArgonBox"
 import ArgonButton from "components/ArgonButton";
 import ArgonInput from "components/ArgonInput";
@@ -6,6 +6,9 @@ import ArgonTypography from "components/ArgonTypography"
 import { useEffect, useState } from "react";
 import { addDriverForCar } from "services/car";
 import { addTripForCar } from "services/car";
+import { getAllTrip } from "services/trip";
+import { getDrivers } from "services/user";
+import { getFormattedDate } from "utils/getCurrentDate";
 
 const style = {
     position: 'absolute',
@@ -26,6 +29,36 @@ const ScheduleFormModal = ({ car, open, handleClose, refresh, type }) => {
     const [formData, setFormData] = useState(initialFormData);
     const [formError, setFormError] = useState("")
     const [formSuccess, setFormSuccess] = useState(false)
+
+    const [place, setPlace] = useState("")
+    const [trips, setTrips] = useState([])
+    const [selectedTrip, setSelectedTrip] = useState('')
+
+    const [driverEmail, setDriverEmail] = useState("")
+    const [drivers, setDrivers] = useState([])
+    const [selectedDriver, setSelectedDriver] = useState('')
+
+    useEffect(() => {
+        if(type === "TRIP") {
+            (async () => {
+                const tripList = await getAllTrip(0, place)
+                setTrips(tripList.content.map((el) => ({
+                    label: `${el.provinceStart} - ${el.provinceEnd} - ${getFormattedDate(el.timeStart)}`,
+                    tripId: el.tripId
+                })))
+            })()
+        }
+
+        if(type === "DRIVER") {
+            (async () => {
+                const driverList = await getDrivers(0, driverEmail)
+                setDrivers(driverList.content.map((el) => ({
+                    label: `${el.user.email} - ${el.user.fullName}`,
+                    employeeId: el.user.employeeDTO.employeeId
+                })))
+            })()
+        }
+    }, [place])
 
     useEffect(() => {
         if (car && type === "TRIP") {
@@ -97,37 +130,52 @@ const ScheduleFormModal = ({ car, open, handleClose, refresh, type }) => {
                     <ArgonInput
                         name="carId"
                         placeholder="Car ID*"
-                        value={formData.carId}
-                        onChange={handleInputChange}
+                        defaultValue={car?.carNumber}
                         sx={{ my: 1 }}
-                        required
+                        disabled
                         fullWidth
                     />
 
                     {type === "TRIP"
                         && (
-                            <ArgonInput
-                                name="tripId"
-                                placeholder="Trip ID*"
-                                value={formData.tripId}
-                                onChange={handleInputChange}
-                                sx={{ my: 1 }}
-                                required
+                            <Autocomplete
+                                disableClearable
+                                value={selectedTrip}
+                                onChange={(event, newValue) => {
+                                    setFormData(prevS => ({...prevS, tripId: newValue.tripId}))
+                                    setSelectedTrip(newValue);
+                                }}
+                                inputValue={place}
+                                onInputChange={(event, newInputValue) => {
+                                    setPlace(newInputValue);
+                                }}
+                                id="combo-box-demo"
+                                options={trips}
+                                sx={{ mb:1 }}
                                 fullWidth
+                                renderInput={(params) => <TextField placeholder="Search trip by place" {...params} />}
                             />
                         )
                     }
 
                     {type === "DRIVER"
                         && (
-                            <ArgonInput
-                                name="employeeId"
-                                placeholder="Employee ID*"
-                                value={formData.employeeId}
-                                onChange={handleInputChange}
-                                sx={{ my: 1 }}
-                                required
+                            <Autocomplete
+                                disableClearable
+                                value={selectedDriver}
+                                onChange={(event, newValue) => {
+                                    setFormData(prevS => ({...prevS, employeeId: newValue.employeeId}))
+                                    setSelectedDriver(newValue);
+                                }}
+                                inputValue={driverEmail}
+                                onInputChange={(event, newInputValue) => {
+                                    setDriverEmail(newInputValue);
+                                }}
+                                id="combo-box-demo"
+                                options={drivers}
+                                sx={{ mb:1 }}
                                 fullWidth
+                                renderInput={(params) => <TextField placeholder="Search driver by email" {...params} />}
                             />
                         )
                     }

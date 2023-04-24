@@ -16,7 +16,6 @@ import { useState } from "react";
 import EmployeeTable from "./EmployeeTable";
 import DriverTable from "./DriverTable";
 import NewEmployeeModal from "./New";
-import ArgonProgress from "components/ArgonProgress";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;

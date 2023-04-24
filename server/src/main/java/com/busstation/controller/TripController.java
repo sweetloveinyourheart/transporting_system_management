@@ -48,10 +48,12 @@ public class TripController {
     }
 
     @GetMapping("/getAll")
-    public ResponseEntity<?> getAllTrips(@RequestParam(value = "pageNo", defaultValue = "0") int pageNo,
+    public ResponseEntity<?> getAllTrips(
+        @RequestParam(value = "place", defaultValue = "") String place,
+        @RequestParam(value = "pageNo", defaultValue = "0") int pageNo,
                                          @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
 
-        Page<TripResponse> tripResponsePage = tripService.getAllTrips(pageNo, pageSize);
+        Page<TripResponse> tripResponsePage = tripService.getAllTrips(place, pageNo, pageSize);
         return new ResponseEntity<>(tripResponsePage, HttpStatus.OK);
     }
 

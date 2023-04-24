@@ -1,14 +1,14 @@
-// Argon Dashboard 2 MUI layouts
-import Dashboard from "layouts/dashboard";
-import SignIn from "layouts/authentication/sign-in";
+// Argon Dashboard 2 MUI pages
+import Dashboard from "pages/dashboard";
+import SignIn from "pages/authentication/sign-in";
 
 // Argon Dashboard 2 MUI components
 import ArgonBox from "components/ArgonBox";
-import Users from "layouts/user";
-import Trips from "layouts/trip";
-import Employees from "layouts/employee";
-import Cars from "layouts/car";
-import Orders from "layouts/order";
+import Users from "pages/user";
+import Trips from "pages/trip";
+import Employees from "pages/employee";
+import Cars from "pages/car";
+import Orders from "pages/order";
 
 const routes = [
   {
