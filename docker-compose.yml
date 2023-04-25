@@ -1,6 +1,7 @@
 version: '3.8'
 services:
   app:
+    container_name: app
     build: 
       context: client
       dockerfile: Dockerfile
@@ -12,6 +13,7 @@ services:
       - shared-network
 
   admin:
+    container_name: admin
     build: 
       context: dashboard
       dockerfile: Dockerfile
@@ -23,6 +25,7 @@ services:
       - shared-network
 
   api:
+    container_name: api
     build: 
       context: server
       dockerfile: Dockerfile
@@ -33,12 +36,13 @@ services:
 
   db:
     image: postgres:latest
+    container_name: db
     environment:
       POSTGRES_DB: bus_station
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 16072001
     ports:
-      - "5431:5432"
+      - "5432:5432"
     volumes:
       - db-data:/var/lib/postgresql/data
     networks:
