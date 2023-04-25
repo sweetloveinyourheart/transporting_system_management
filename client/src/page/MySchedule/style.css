@@ -49,6 +49,7 @@ ul {
 }
 
 .weekdays {
+    text-align: center;
     margin: 0;
     padding: 10px 0;
     background-color: #ddd;
@@ -62,6 +63,7 @@ ul {
 }
 
 .days {
+    text-align: center;
     padding: 10px 0;
     background: #eee;
     margin: 0;

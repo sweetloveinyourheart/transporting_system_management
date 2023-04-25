@@ -2,18 +2,21 @@ import Sider from 'antd/es/layout/Sider';
 import { Menu } from 'antd';
 import { CoffeeOutlined, UserOutlined, ScheduleOutlined } from '@ant-design/icons';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import MySchedulePage from '../MySchedule';
 import LeaveTool from '../LeaveTool';
 import RequestForm from '../LeaveTool/RequestForm';
 import DriverInfo from '../DriverInfo';
+import { useState } from 'react';
 
 function DriverPage() {
-	const location = useLocation();
-	const navigate = useNavigate();
-	//Menu items
-	function getItemMenu(label, key, icon, children, type) {
-		return { label, key, icon, children, type }
-	}
+    const [collapsed, setCollapsed] = useState(true);
+    const location = useLocation();
+    const navigate = useNavigate();
+    //Menu items
+    function getItemMenu(label, key, icon, children, type) {
+        return { label, key, icon, children, type }
+    }
 
     const items2 = [
         getItemMenu('My Information', 'my-information', <UserOutlined />),
@@ -23,7 +26,16 @@ function DriverPage() {
 
     return (
         <div className='my-schedule-page'>
-            <Sider>
+            <Sider collapsed={collapsed}>
+                {collapsed === true ?
+                    <div onClick={() => setCollapsed(false)} className='text-center cursor-pointer'>
+                        <FontAwesomeIcon icon={['fas', 'bars']} rotation={90} />
+                    </div>
+                    :
+                    <div onClick={() => setCollapsed(true)} className='text-center cursor-pointer'>
+                        <FontAwesomeIcon icon={['fas', 'bars']} />
+                    </div>
+                }
                 <Menu
                     mode="inline"
                     defaultSelectedKeys={[location.pathname.split("/")[2]]}
