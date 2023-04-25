@@ -2,6 +2,7 @@ version: '3.8'
 services:
   app:
     container_name: app
+    hostname: app
     build: 
       context: client
       dockerfile: Dockerfile
@@ -14,6 +15,7 @@ services:
 
   admin:
     container_name: admin
+    hostname: admin
     build: 
       context: dashboard
       dockerfile: Dockerfile
@@ -26,6 +28,7 @@ services:
 
   api:
     container_name: api
+    hostname: api
     build: 
       context: server
       dockerfile: Dockerfile
@@ -33,10 +36,13 @@ services:
       - "9999:9999"
     depends_on:
       - db
+    networks:
+      - shared-network
 
   db:
     image: postgres:latest
     container_name: db
+    hostname: db
     environment:
       POSTGRES_DB: bus_station
       POSTGRES_USER: postgres
@@ -51,6 +57,7 @@ services:
   nginx: 
     image: nginx:latest
     container_name: nginx
+    hostname: nginx
     ports:
       - 80:80
     
