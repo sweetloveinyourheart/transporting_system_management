@@ -10,7 +10,7 @@ function DriverInfo(){
     }
 
     return (
-        <div className="mx-12 w-full">
+        <div className="px-4 w-full">
             <h1 className="font-bold text-xl pb-2">Driver Information</h1>
             {/* simple info */}
             <div className="flex p-3 border my-3">

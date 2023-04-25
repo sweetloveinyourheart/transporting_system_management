@@ -37,9 +37,9 @@ const ChangePassword = () => {
         return Promise.reject('The two passwords that you entered does not match.');
     }
     return (
-        <div className="flex flex-col justify-center items-start h-auto ">
-            <Typography.Title className="">Change Password</Typography.Title>
-            <Form className="shadow-md w-2/4 p-16 rounded-lg mb-100" form={form} layout="vertical" onFinish={handleSubmit}>
+        <div className="flex flex-col justify-center items-start h-auto change-password">
+            <Typography.Title className="my-5 text-center">Change Password</Typography.Title>
+            <Form className="shadow-md p-8 rounded-lg mb-100 password-form" form={form} layout="vertical" onFinish={handleSubmit}>
                 <Form.Item
                     name="passwordOld"
                     label="Old Password"
@@ -94,7 +94,7 @@ const ChangePassword = () => {
 				>
 					<Input.Password prefix={<LockFilled className="site-form-item-icon" />} />
 				</Form.Item>
-				<div className="flex justify-around wrap-btn">
+				<div className="wrap-btn actions">
 					<Button className='edit-submit'
 						// className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded"
 						htmlType='submit' >

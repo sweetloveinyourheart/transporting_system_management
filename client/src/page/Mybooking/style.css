@@ -26,6 +26,7 @@
 	gap: 50px;
 	width: 60%;
 	margin-bottom: 100px;
+	margin-top: 50px;
 }
 
 .booking-items .item {
@@ -50,6 +51,7 @@
 	border-radius: 5px;
 	background-color: #2187b6;
 	color: white;
+	text-align: center;
 }
 
 @media screen and (max-width:740px) {
@@ -59,5 +61,19 @@
 
 	.title-all-booking {
 		gap: 20px;
+	}
+
+	.booking-items .item .time-state-car {
+		display: block;
+		text-align: center;
+	}
+
+	.booking-items .item .time-state-car div {
+		margin: 4px 0;
+	}
+
+	.booking-items .open-detail { 
+		text-align: center;
+		color: #fff;
 	}
 }

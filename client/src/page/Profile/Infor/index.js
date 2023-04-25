@@ -30,10 +30,10 @@ function Infor() {
 	}
 	return (
 
-		<div className='personal-infor'
+		<div className='flex flex-col justify-center items-start h-auto personal-infor'
 		// className="flex flex-col justify-start items-start h-auto "
 		>
-			<Typography.Title className="title">Person Information</Typography.Title>
+			<Typography.Title className="title my-5 text-center">Person Information</Typography.Title>
 			<div
 				className="shadow-md rounded-lg detail-infor"
 			>

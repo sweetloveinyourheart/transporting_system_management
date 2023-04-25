@@ -54,9 +54,9 @@ function Mybooking() {
 								</div>
 								<div class="flex justify-center items-center" >
 									<div class="arrow">
-										{detail.state === true ?
+										{detail.status === true ?
 											<div style={{ background: "green" }} className='state'>
-												Ongoing
+												On Going
 											</div>
 
 											:
@@ -71,18 +71,20 @@ function Mybooking() {
 
 								</div>
 							</div>
-							{openDetail === index ?
-								<button onClick={() => onClickOrder(detail, index)}
-									style={{ backgroundColor: "#2187b6", padding: "5px 10px", borderRadius: "10px" }}>Close</button>
-								:
-								<button onClick={() => onClickOrder(detail, index)}
-									style={{ backgroundColor: "#2187b6", padding: "5px 10px", borderRadius: "10px" }}>Detail</button>
-							}
-							{
-								openDetail === index
-									? <BookingDetails bookingDetail={getDetail} />
-									: null
-							}
+							<div className='open-detail'>
+								{openDetail === index ?
+									<button onClick={() => onClickOrder(detail, index)}
+										style={{ backgroundColor: "#2187b6", padding: "5px 10px", borderRadius: "10px" }}>Close</button>
+									:
+									<button onClick={() => onClickOrder(detail, index)}
+										style={{ backgroundColor: "#2187b6", padding: "5px 10px", borderRadius: "10px" }}>Detail</button>
+								}
+								{
+									openDetail === index
+										? <BookingDetails bookingDetail={getDetail} />
+										: null
+								}
+							</div>
 						</div>
 					))
 				}

@@ -1,10 +1,10 @@
 .my-schedule-page {
-	display: flex;
 	margin: 20px;
 	background-color: #F5F5F5;
 	padding: 20px;
 	gap: 20px;
 	/* justify-content: space-between; */
+	display: block !important;
 }
 
 .btn-leave {

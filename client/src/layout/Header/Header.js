@@ -9,11 +9,30 @@ import { faCircleUser } from '@fortawesome/free-regular-svg-icons'
 export default function Header() {
 	const { user, signOut } = useAuth()
 
+	const driverItems = [
+		{
+			key: '1',
+			label: (
+				<Link to={"/driver/*"}><b><i>Driver: {user?.user.fullName}</i></b></Link>
+			),
+		},
+		{
+			key: '2',
+			label: (
+				user
+					? <div onClick={() => signOut()}><b><i>Logout</i></b></div>
+					: <Link to={"/login"} className='drop-item' rel="noopener noreferrer"><b><i>Login</i></b></Link>
+
+			),
+		},
+
+	];
+
 	const items = [
 		{
 			key: '1',
 			label: (
-				<Link className='drop-item' target="_blank" rel="noopener noreferrer" to={"/"}>
+				<Link className='drop-item' rel="noopener noreferrer" to={"/"}>
 					<b><i>Home</i></b>
 				</Link>
 			),
@@ -22,7 +41,7 @@ export default function Header() {
 			key: '2',
 			label: (
 				user ? (
-					<Link className='drop-item' target="_blank" rel="noopener noreferrer" to={"/my-booking"}>
+					<Link className='drop-item' rel="noopener noreferrer" to={"/my-booking"}>
 						<b><i>My Booking</i></b>
 					</Link>
 				) : null
@@ -32,13 +51,18 @@ export default function Header() {
 			key: '3',
 			label: (
 				user
-					? (
-						<Link to={"/profile"} className='drop-item' target="_blank" rel="noopener noreferrer"><b><i>Account</i></b></Link>
-					)
-					: null,
+				? (
+					<Link to={"/profile"} className='drop-item' rel="noopener noreferrer"><b><i>Account</i></b></Link>
+				)
+				: null
+			),
+		},
+		{
+			key: '4',
+			label: (
 				user
-					? <div onClick={() => signOut()}>Logout</div>
-					: <Link to={"/login"} className='drop-item' target="_blank" rel="noopener noreferrer"><b><i>Login</i></b></Link>
+					? <div onClick={() => signOut()}><b><i>Logout</i></b></div>
+					: <Link to={"/login"} className='drop-item' rel="noopener noreferrer"><b><i>Login</i></b></Link>
 
 			),
 		},
@@ -86,7 +110,7 @@ export default function Header() {
 					</ul>
 					<Dropdown className="nav"
 						menu={{
-							items,
+							items: user?.role.roleId === "DRIVER" ? driverItems : items,
 						}}
 					>
 						<Link onClick={(e) => e.preventDefault()}>

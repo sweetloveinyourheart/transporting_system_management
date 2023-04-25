@@ -26,33 +26,24 @@ function DriverPage() {
 
     return (
         <div className='my-schedule-page'>
-            <Sider collapsed={collapsed}>
-                {collapsed === true ?
-                    <div onClick={() => setCollapsed(false)} className='text-center cursor-pointer'>
-                        <FontAwesomeIcon icon={['fas', 'bars']} rotation={90} />
-                    </div>
-                    :
-                    <div onClick={() => setCollapsed(true)} className='text-center cursor-pointer'>
-                        <FontAwesomeIcon icon={['fas', 'bars']} />
-                    </div>
-                }
-                <Menu
-                    mode="inline"
-                    defaultSelectedKeys={[location.pathname.split("/")[2]]}
-                    defaultOpenKeys={[location.pathname.split("/")[2]]}
-                    style={{ height: '100%', borderRight: 0 }}
-                    items={items2}
-                    onSelect={(item) => {
-                        navigate(item.key);
-                    }}
-                />
-            </Sider>
+            <div className='container mx-auto'>
+            <Menu
+                mode={'horizontal'}
+                defaultSelectedKeys={[location.pathname.split("/")[2]]}
+                defaultOpenKeys={[location.pathname.split("/")[2]]}
+                style={{ height: '100%', borderRight: 0, marginBottom: 24 }}
+                items={items2}
+                onSelect={(item) => {
+                    navigate(item.key);
+                }}
+            />
             <Routes>
                 <Route path='my-information' element={<DriverInfo />} />
                 <Route path='my-schedule' element={<MySchedulePage />} />
                 <Route path='my-leave' element={<LeaveTool />} />
                 <Route path='my-leave/request' element={<RequestForm />} />
             </Routes>
+            </div>
         </div>
     );
 }

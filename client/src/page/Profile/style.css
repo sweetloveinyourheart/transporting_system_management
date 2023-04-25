@@ -2,8 +2,7 @@
 	padding: 24px 0;
 	border-radius: 10px;
 	margin: 20px 20px;
-
-
+	min-height: calc(100vh - 205px);
 }
 
 .profile-container .profile-tab {

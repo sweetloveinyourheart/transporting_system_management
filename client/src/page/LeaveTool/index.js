@@ -53,8 +53,8 @@ function LeavePage() {
 	];
 
     return (
-        <div className="ml-12 flex items-center justify-center w-full">
-            <div className="flex">
+        <div className="flex items-center justify-center w-full">
+            <div className="block">
                 <Table
                     columns={columns}
                     loading={loadingPage}
@@ -78,7 +78,7 @@ function LeavePage() {
                         };
                     })}
                 />
-                <div className="mb-2 min-w-fit mx-5">
+                <div className="my-2 min-w-fit flex justify-center">
                     <button className="bg-main-blue text-white p-2 rounded hover:bg-dark-blue transition"
                         onClick={() => {
                             navigate("request");

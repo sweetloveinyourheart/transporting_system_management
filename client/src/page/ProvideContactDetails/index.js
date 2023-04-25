@@ -8,8 +8,8 @@ import { BackToFront } from "../../components/Back/Back";
 export default function ProvideContactDetails() {
 	const [inputEmail, setInputEmail] = useState("");
 	const [inputPhoneNumber, setInputPhoneNumber] = useState("");
-	const [contactDetailsList, setContactDetailsList] = useState("");
-	let inCreId = 0;
+	const [contactDetailsList, setContactDetailsList] = useState({});
+
 	return (
 		<div className="provide-contact-details">
 			<Typography.Title className="contact-title">Provide Contact Details</Typography.Title>
@@ -33,8 +33,11 @@ export default function ProvideContactDetails() {
 			<div className="btn-back-continue">
 				<BackToFront />
 				<div className='btn-continue' onClick={() => {
-					setContactDetailsList([...contactDetailsList, { id: inCreId + 1, email: inputEmail, phoneNumber: inputPhoneNumber }])
+					setContactDetailsList( {  email: inputEmail, phoneNumber: inputPhoneNumber })
+					setInputEmail('');
+					setInputPhoneNumber('');
 				}}>
+
 					<button>CONTINUE</button>
 					<i className="arrow-icon"><FontAwesomeIcon icon={faArrowRight} /></i>
 				</div>
