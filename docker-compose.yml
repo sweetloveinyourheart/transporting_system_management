@@ -66,3 +66,7 @@ services:
 
 volumes:
   db-data:
+
+networks:
+  shared-network:
+    driver: bridge
