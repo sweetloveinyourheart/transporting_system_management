@@ -30,6 +30,9 @@ export default function ProvidePassengerDetails() {
 				gender: inputGenger
 			}])
 			console.log(passengerDetailsList);
+			setInputPassengerName('');
+			setInputAge('');
+			setInputGender('');
 		} else {
 			message.error("Please fill all")
 		}
