@@ -52,13 +52,15 @@ const ScheduleFormModal = ({ car, open, handleClose, refresh, type }) => {
         if(type === "DRIVER") {
             (async () => {
                 const driverList = await getDrivers(0, driverEmail)
+                console.log(driverList);
+
                 setDrivers(driverList.content.map((el) => ({
                     label: `${el.user.email} - ${el.user.fullName}`,
                     employeeId: el.user.employeeDTO.employeeId
                 })))
             })()
         }
-    }, [place])
+    }, [type, place])
 
     useEffect(() => {
         if (car && type === "TRIP") {
