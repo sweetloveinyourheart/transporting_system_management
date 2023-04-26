@@ -8,6 +8,7 @@ import { submitOrder } from '../../services/order'
 import { message } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import { WS_URL } from '../../constant/network';
+import Loading from '../../components/Loading/loading';
 
 export default function SelectSeat({ trip, car }) {
     const [order, setOrder] = useState(null)
@@ -165,8 +166,6 @@ export default function SelectSeat({ trip, car }) {
                 return JSON.parse(value);
         }).filter(el => el !== undefined);
 
-        console.log(tripsWillBeCancel);
-
         tripsWillBeCancel.forEach((item) => {
             const payloadData = JSON.stringify({
                 orderId: item.orderId,
@@ -185,7 +184,7 @@ export default function SelectSeat({ trip, car }) {
             return;
         }
 
-        if (chair) {
+        if (chair && stompClient) {
             const orderData = {
                 orderId: order ? order.orderId : "",
                 tripId: trip.tripId,
@@ -220,7 +219,7 @@ export default function SelectSeat({ trip, car }) {
             return;
         }
 
-        localStorage.removeItem(order.orderId);
+        localStorage.removeItem("order_" + order.orderId);
         message.success("Create order successfully !")
         navigate("/my-booking")
     }
@@ -276,93 +275,98 @@ export default function SelectSeat({ trip, car }) {
                     <span> Selecting </span>
                 </div>
             </div>
-            <div class="seat-map">
-                <div className='seat-map__desk-title'>
-                    <p>Upper Desk</p>
-                    <p>Lower Desk</p>
-                </div>
-                <div class="seat-map__position">
-                    <div>
-                        {seats.slice(0, 7).map((chair) => (
-                            <Seat
-                                chair={chair}
-                                key={chair.chairId}
-                                // isSelected={order?.chairId === chair.chairId}
-                                isSelected={selectedSeats.includes(chair.chairId)}
-                                // isSelecting={disabledSeats.includes(chair.chairId)}
-                                isSelecting={disabledSeats.some(el => el.chairId === chair.chairId)}
-                                onSelectSeat={onChooseSeat}
-                            />
-                        ))}
+            {stompClient
+                ? (
+                    <div class="seat-map">
+                        <div className='seat-map__desk-title'>
+                            <p>Upper Desk</p>
+                            <p>Lower Desk</p>
+                        </div>
+                        <div className="seat-map__position">
+                            <div>
+                                {seats.slice(0, 7).map((chair) => (
+                                    <Seat
+                                        chair={chair}
+                                        key={chair.chairId}
+                                        // isSelected={order?.chairId === chair.chairId}
+                                        isSelected={selectedSeats.includes(chair.chairId)}
+                                        // isSelecting={disabledSeats.includes(chair.chairId)}
+                                        isSelecting={disabledSeats.some(el => el.chairId === chair.chairId)}
+                                        onSelectSeat={onChooseSeat}
+                                    />
+                                ))}
+                            </div>
+                            <div>
+                                <Seat
+                                    chair={seats[7]}
+                                    // isSelected={(order && (order?.chairId === seats[7]?.chairId))}
+                                    isSelected={selectedSeats.includes(seats[7]?.chairId)}
+                                    // isSelecting={disabledSeats.includes(seats[7]?.chairId)}
+                                    isSelecting={disabledSeats.some(el => el.chairId === seats[7]?.chairId)}
+                                    onSelectSeat={onChooseSeat}
+                                />
+                            </div>
+                            <div>
+                                {seats.slice(8, 15).map((chair) => (
+                                    <Seat
+                                        chair={chair}
+                                        key={chair.chairId}
+                                        // isSelected={order?.chairId === chair.chairId}
+                                        isSelecting={disabledSeats.some(el => el.chairId === chair.chairId)}
+                                        isSelected={selectedSeats.includes(chair.chairId)}
+                                        // isSelecting={disabledSeats.includes(chair.chairId)}
+                                        onSelectSeat={onChooseSeat}
+                                    />
+                                ))}
+                            </div>
+                            <div style={{
+                                fontSize: "100px",
+                                display: 'flex',
+                                justifyContent: 'center',
+                                fontWeight: 100,
+                                color: '#5669FF'
+                            }}>|</div>
+                            <div>
+                                {seats.slice(15, 22).map((chair) => (
+                                    <Seat
+                                        chair={chair}
+                                        key={chair.chairId}
+                                        // isSelected={order?.chairId === chair.chairId}
+                                        isSelecting={disabledSeats.some(el => el.chairId === chair.chairId)}
+                                        isSelected={selectedSeats.includes(chair.chairId)}
+                                        // isSelecting={disabledSeats.includes(chair.chairId)}
+                                        onSelectSeat={onChooseSeat}
+                                    />
+                                ))}
+                            </div>
+                            <div>
+                                <Seat
+                                    chair={seats[22]}
+                                    // isSelected={order && (order?.chairId === seats[22]?.chairId)}
+                                    isSelecting={disabledSeats.some(el => el.chairId === seats[22]?.chairId)}
+                                    isSelected={selectedSeats.includes(seats[22]?.chairId)}
+                                    // isSelecting={disabledSeats.includes(seats[22]?.chairId)}
+                                    onSelectSeat={onChooseSeat}
+                                />
+                            </div>
+                            <div>
+                                {seats.slice(23, 30).map((chair) => (
+                                    <Seat
+                                        chair={chair}
+                                        key={chair.chairId}
+                                        // isSelected={order?.chairId === chair.chairId}
+                                        isSelecting={disabledSeats.some(el => el.chairId === chair.chairId)}
+                                        isSelected={selectedSeats.includes(chair.chairId)}
+                                        // isSelecting={disabledSeats.includes(chair.chairId)}
+                                        onSelectSeat={onChooseSeat}
+                                    />
+                                ))}
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <Seat
-                            chair={seats[7]}
-                            // isSelected={(order && (order?.chairId === seats[7]?.chairId))}
-                            isSelected={selectedSeats.includes(seats[7]?.chairId)}
-                            // isSelecting={disabledSeats.includes(seats[7]?.chairId)}
-                            isSelecting={disabledSeats.some(el => el.chairId === seats[7]?.chairId)}
-                            onSelectSeat={onChooseSeat}
-                        />
-                    </div>
-                    <div>
-                        {seats.slice(8, 15).map((chair) => (
-                            <Seat
-                                chair={chair}
-                                key={chair.chairId}
-                                // isSelected={order?.chairId === chair.chairId}
-                                isSelecting={disabledSeats.some(el => el.chairId === chair.chairId)}
-                                isSelected={selectedSeats.includes(chair.chairId)}
-                                // isSelecting={disabledSeats.includes(chair.chairId)}
-                                onSelectSeat={onChooseSeat}
-                            />
-                        ))}
-                    </div>
-                    <div style={{
-                        fontSize: "100px",
-                        display: 'flex',
-                        justifyContent: 'center',
-                        fontWeight: 100,
-                        color: '#5669FF'
-                    }}>|</div>
-                    <div>
-                        {seats.slice(15, 22).map((chair) => (
-                            <Seat
-                                chair={chair}
-                                key={chair.chairId}
-                                // isSelected={order?.chairId === chair.chairId}
-                                isSelecting={disabledSeats.some(el => el.chairId === chair.chairId)}
-                                isSelected={selectedSeats.includes(chair.chairId)}
-                                // isSelecting={disabledSeats.includes(chair.chairId)}
-                                onSelectSeat={onChooseSeat}
-                            />
-                        ))}
-                    </div>
-                    <div>
-                        <Seat
-                            chair={seats[22]}
-                            // isSelected={order && (order?.chairId === seats[22]?.chairId)}
-                            isSelecting={disabledSeats.some(el => el.chairId === seats[22]?.chairId)}
-                            isSelected={selectedSeats.includes(seats[22]?.chairId)}
-                            // isSelecting={disabledSeats.includes(seats[22]?.chairId)}
-                            onSelectSeat={onChooseSeat}
-                        />
-                    </div>
-                    <div>
-                        {seats.slice(23, 30).map((chair) => (
-                            <Seat
-                                chair={chair}
-                                key={chair.chairId}
-                                // isSelected={order?.chairId === chair.chairId}
-                                isSelecting={disabledSeats.some(el => el.chairId === chair.chairId)}
-                                isSelected={selectedSeats.includes(chair.chairId)}
-                                // isSelecting={disabledSeats.includes(chair.chairId)}
-                                onSelectSeat={onChooseSeat}
-                            />
-                        ))}
-                    </div>
-                </div>
-            </div>
+                )
+                : <div style={{ height: 300, display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Loading /></div>
+            }
             <div style={{ display: 'flex', alignItems: 'center' }}>
                 <div>
                     <p >Seats: {seats.length}</p>
