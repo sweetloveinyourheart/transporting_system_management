@@ -4,6 +4,7 @@ import ArgonButton from "components/ArgonButton";
 import ArgonInput from "components/ArgonInput";
 import ArgonTypography from "components/ArgonTypography"
 import { useEffect, useState } from "react";
+import { editCar } from "services/car";
 import { createCar, deleteCar } from "services/car";
 
 const style = {
@@ -34,7 +35,7 @@ const CarFormModal = ({ car, open, handleClose, refresh, mode }) => {
             const { carNumber, numberOfChair, status, tripId } = car
             setFormData({
                 carNumber,
-                numberOfChair,
+                numberOfChair: 30,
                 status
             })
         }
@@ -84,6 +85,11 @@ const CarFormModal = ({ car, open, handleClose, refresh, mode }) => {
         try {
             if (!car) {
                 await createCar(formData)
+            }
+
+
+            if (car) {
+                await editCar(car.carId, formData)
             }
 
             setFormError("")

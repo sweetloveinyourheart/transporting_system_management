@@ -51,7 +51,7 @@ function Login() {
 					},
 					{
 						min: 6,
-						message: 'Password must be at least 3 characters'
+						message: 'Password must be at least 6 characters'
 					},
 					{
 						max: 50,
