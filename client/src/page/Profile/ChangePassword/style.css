@@ -1,0 +1,45 @@
+.change-password .password-form {
+	width: 50%;
+	background-color: white;
+}
+
+.change-password .actions {
+	display: flex;
+}
+
+.change-password .actions button:last-child {
+	margin-left: 8px;
+}
+
+@media screen and (min-width:1025px) {
+	.change-password .password-form {
+		width: 50%;
+	}
+}
+
+@media screen and (max-width:1024px) and (min-width:900px) {
+	.change-password .password-form {
+		width: 60%;
+	}
+}
+
+@media screen and (max-width:899px) {
+	.change-password .password-form {
+		width: 100%;
+	}
+}
+
+@media screen and (max-width:740px) {
+	.change-password {
+		align-items: center;
+	}
+
+	.change-password .actions {
+		display: block;
+	}
+
+	.change-password .actions button:last-child {
+		margin-left: 0;
+		margin-top: 8px;
+	}
+}

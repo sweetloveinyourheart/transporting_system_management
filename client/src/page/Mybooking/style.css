@@ -1,0 +1,79 @@
+.my-booking {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: auto !important;
+}
+
+.title-all-booking {
+	margin: 50px 0px;
+	display: flex;
+	justify-content: center;
+	align-items: top;
+	gap: 50px;
+
+}
+
+.ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
+	padding: 5px;
+	height: auto !important;
+
+}
+
+.booking-items {
+	display: flex;
+	flex-direction: column;
+	gap: 50px;
+	width: 60%;
+	margin-bottom: 100px;
+	margin-top: 50px;
+}
+
+.booking-items .item {
+	padding: 20px;
+	border-radius: 5px;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.booking-items .item .place,
+.booking-items .item .time-state-car {
+	display: flex;
+	justify-content: space-between;
+}
+
+.booking-items .item .place {
+	font-size: 20px;
+	font-weight: 600;
+}
+
+.booking-items .item .time-state-car .state {
+	padding: 5px 20px;
+	border-radius: 5px;
+	background-color: #2187b6;
+	color: white;
+	text-align: center;
+}
+
+@media screen and (max-width:740px) {
+	.booking-items {
+		width: 90%;
+	}
+
+	.title-all-booking {
+		gap: 20px;
+	}
+
+	.booking-items .item .time-state-car {
+		display: block;
+		text-align: center;
+	}
+
+	.booking-items .item .time-state-car div {
+		margin: 4px 0;
+	}
+
+	.booking-items .open-detail { 
+		text-align: center;
+		color: #fff;
+	}
+}

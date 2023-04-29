@@ -1,0 +1,113 @@
+.select-car-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.select-car-page__title {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 62px;
+    display: flex;
+    align-items: center;
+}
+
+.select-car-page__list>.car {
+    margin: 10px;
+    padding: 10px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+}
+
+.car__type-price {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* CAR TIME AND BUTTON */
+.car__time-and-button {
+    display: flex;
+    justify-content: space-between;
+}
+
+.car__time {
+    display: flex;
+    justify-content: space-between;
+}
+
+.car__time>div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.car__time-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    margin-right: 5px;
+}
+
+.car__time>div>p {
+    display: flex;
+}
+
+
+.btn-choose {
+    margin-left: 80px;
+    background: #5669FF;
+    padding: 6px 12px;
+
+    color: #FFFFFF;
+    border-radius: 8px;
+    box-shadow: 0px 10px 35px rgba(111, 126, 201, 0.25);
+    font-size: 15px;
+}
+
+/* CAR SERVICE */
+.car__service {
+    display: flex;
+    justify-content: space-between;
+}
+
+.car__service>div {
+    display: flex;
+    align-items: center;
+}
+
+.car__service>div>p {
+    margin: 0 5px;
+}
+
+/* CAR LIST */
+
+.car-list {
+    margin-top: 20px;
+    border-top: 1px solid #dcdcdc !important;
+    padding:  20px 0;
+}
+
+.car-list__item {
+    margin-bottom: 6px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.car-list__item h5 {
+    font-weight: 700;
+}
+
+.car-list__item button {
+    background-color: #f93707;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 8px;
+}
+
+.car-list__item p {
+    font-size: 14px;
+    color: #777777;
+}

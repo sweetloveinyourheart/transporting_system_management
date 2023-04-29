@@ -1,0 +1,92 @@
+.provide-contact-details {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.provide-contact-details .contact-title {
+	text-align: center;
+	font-size: 38px;
+	margin: 50px 0px;
+}
+
+.provide-contact-details .inp-details {
+	padding: 50px;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+	border-radius: 5px;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	width: 40%;
+	margin: 0px !important;
+}
+
+.provide-contact-details .inp-details .inp-email input,
+.provide-contact-details .inp-details .inp-phone-number input {
+	border: none;
+	outline: none;
+}
+
+.note {
+	text-align: left;
+	word-wrap: break-word;
+}
+
+.btn-back-continue {
+	display: flex;
+	justify-content: center;
+	gap: 30px;
+	align-items: center;
+	margin: 50px 0px 100px 0px;
+}
+
+.btn-continue {
+	display: flex;
+	background-color: #165F81;
+	padding: 10px 30px;
+	border-radius: 10px;
+	gap: 10px;
+	transition: 0.2s;
+
+}
+
+.btn-continue:hover {
+	box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+
+.btn-continue button {
+	cursor: pointer;
+	border: none;
+	background-color: inherit;
+	color: white;
+}
+
+.arrow-icon {
+	background-color: #3D56F0;
+	padding: 3px 7px;
+	border-radius: 50%;
+	color: white;
+	cursor: pointer;
+}
+
+/* Mobile: width < 740px */
+@media screen and (max-width: 46.1875em) {
+
+	.provide-contact-details .inp-details {
+		padding: 30px;
+		width: 70%;
+	}
+}
+
+@media screen and (max-width: 900px) {
+	.provide-contact-details .inp-details {
+		width: 50%;
+	}
+}
+
+@media screen and (max-width: 560px) {
+	.provide-contact-details .inp-details {
+		width: 80%;
+	}
+}

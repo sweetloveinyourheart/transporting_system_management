@@ -1,0 +1,59 @@
+.home {
+	position: relative;
+	background-size: cover;
+	min-height: calc(100vh - 205px);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	/* background: url("images/leaderboard.png"); */
+}
+
+.main {
+
+	width: 330px;
+	margin: 0px auto;
+	background-color: white;
+	padding: 25px;
+	border-radius: 10px;
+
+}
+
+.ant-select-selector {
+	width: 250px !important;
+	padding: 3px 30px !important;
+	height: 40px !important;
+}
+
+.ant-select-selector .ant-select-selection-placeholder {
+	margin-left: 10px;
+}
+
+.ant-select-selector .ant-select-selection-search .ant-select-selection-search-input {
+	padding: 3px 30px !important;
+	margin-top: 6px !important;
+}
+
+.main .calendar {
+	width: 330px;
+}
+
+.btn-search {
+	display: flex;
+	background-color: #165F81;
+	padding: 7px 30px;
+	border-radius: 10px;
+	gap: 10px;
+	transition: 0.2s;
+
+}
+
+.btn-search:hover {
+	box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.btn-search button {
+	cursor: pointer;
+	border: none;
+	background-color: inherit;
+	color: white;
+}

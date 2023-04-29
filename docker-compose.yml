@@ -1,0 +1,83 @@
+version: '3.8'
+services:
+  app:
+    container_name: app
+    hostname: app
+    build: 
+      context: client
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+    networks:
+      - shared-network
+
+  admin:
+    container_name: admin
+    hostname: admin
+    build: 
+      context: dashboard
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    depends_on:
+      - api
+    networks:
+      - shared-network
+
+  api:
+    container_name: api
+    hostname: api
+    build: 
+      context: server
+      dockerfile: Dockerfile
+    ports:
+      - "9999:9999"
+    depends_on:
+      - db
+    networks:
+      - shared-network
+
+  db:
+    image: postgres:latest
+    container_name: db
+    hostname: db
+    environment:
+      POSTGRES_DB: bus_station
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 16072001
+    ports:
+      - "5431:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - shared-network
+
+  nginx: 
+    image: nginx:latest
+    container_name: nginx
+    hostname: nginx
+    ports:
+      - 80:80
+    
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    
+    command: /bin/sh -c "nginx -g 'daemon off;'"
+
+    depends_on:
+      app:
+        condition: service_started
+      api:
+        condition: service_started
+
+    networks:
+      - shared-network
+
+volumes:
+  db-data:
+
+networks:
+  shared-network:
+    driver: bridge

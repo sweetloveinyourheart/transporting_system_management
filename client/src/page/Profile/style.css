@@ -1,0 +1,60 @@
+.profile-container {
+	padding: 24px 0;
+	border-radius: 10px;
+	margin: 20px 20px;
+	min-height: calc(100vh - 205px);
+}
+
+.profile-container .profile-tab {
+	margin: 0px 0px 0px 20px;
+	flex: 0 0 20% !important;
+	/* width: auto !important; */
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+	background-color: transparent;
+	border-radius: 8px;
+}
+
+.ant-avatar.ant-avatar-icon {
+	width: 25px;
+	height: 25px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.menu {
+	border-radius: 8px;
+	height: 100%;
+}
+
+.profile-content {
+	padding: 0 24px;
+	min-height: 200px;
+}
+
+@media screen and (max-width:740px) {
+	.profile-container {
+		flex-direction: column !important;
+	}
+
+	.profile-container .profile-tab {
+		width: 218px !important;
+		max-width: 220px !important;
+	}
+
+	.ant-layout.ant-layout-has-sider>.ant-layout-content {
+		width: auto;
+	}
+
+	.profile-container .ant-menu-light.ant-menu-root.ant-menu-inline {
+		display: flex;
+		flex-direction: row;
+		width: 100% !important;
+		background-color: #F5F5F5;
+
+	}
+
+	.ant-layout-sider .ant-layout-sider-dark .profile-tab {
+		width: 300px !important;
+	}
+}

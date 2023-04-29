@@ -1,0 +1,217 @@
+.provide-passenger-details {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.passenger-title {
+	text-align: center;
+	font-size: 38px;
+	font-weight: 400;
+	margin: 50px 0px;
+}
+
+.inp-details {
+	display: flex;
+	flex-direction: column;
+	padding: 50px;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+	border-radius: 5px;
+	margin: 30px 0px;
+	width: 45%;
+
+}
+
+.inp-details .inp-name-age {
+	display: flex;
+	gap: 20px;
+}
+
+.inp-details .inp-name-age .inp-name {
+	flex: 0 0 auto;
+	width: 70%;
+}
+
+.inp-details .inp-name-age .inp-name input {
+	border: none;
+	outline: none;
+
+}
+
+.inp-details .inp-name-age .inp-age {
+	flex: 0 0 auto;
+	width: 25%;
+}
+
+.inp-details .inp-name-age .inp-age input {
+	border: none;
+	outline: none;
+	/* width: 90px; */
+
+
+}
+
+.inp-details .inp-gender {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 15px;
+	margin: 10px 0px;
+
+}
+
+.inp-details .inp-gender .title-gender {
+	font-weight: 600;
+}
+
+.inp-details .inp-gender form {
+	display: flex;
+	gap: 15px;
+}
+
+.submit-details {
+	display: flex;
+	justify-content: flex-end;
+	cursor: pointer;
+	margin: 10px 0px;
+
+
+}
+
+.right-col {
+	display: flex;
+	background-color: #165F81;
+	padding: 10px 30px;
+	border-radius: 10px;
+	gap: 10px;
+	transition: 0.2s;
+
+}
+
+.right-col:hover {
+	box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+
+.right-col button {
+	cursor: pointer;
+	border: none;
+	background-color: inherit;
+	color: white;
+}
+
+.arrow-icon {
+	background-color: #3D56F0;
+	padding: 3px 7px;
+	border-radius: 50%;
+	color: white;
+	cursor: pointer;
+}
+
+.passenger-details {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	margin: 30px;
+	flex: 0 0 auto;
+	width: 45%;
+}
+
+.passenger-details .details-title {
+	font-size: 30px;
+	margin-bottom: 50px;
+}
+
+.passenger-details .wrap-details {
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+	border-radius: 5px;
+	width: 100%;
+	/* margin: 50px 0px; */
+
+
+}
+
+.passenger-details .wrap-details .details {
+	padding: 20px;
+}
+
+
+
+.passenger-details .wrap-details .details td {
+	padding: 5px 25px;
+}
+
+.btn-continue {
+	display: flex;
+	background-color: #165F81;
+	padding: 10px 30px;
+	border-radius: 10px;
+	gap: 10px;
+	/* margin: 50px 0px 100px 0px; */
+	transition: 0.2s;
+
+}
+
+.btn-continue:hover {
+	box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+
+.btn-continue button {
+	cursor: pointer;
+	border: none;
+	background-color: inherit;
+	color: white;
+}
+
+/* Mobile: width < 740px */
+@media screen and (max-width: 875px) {
+
+
+	.inp-details .inp-name-age {
+		flex-direction: column;
+	}
+
+	.passenger-details .wrap-details .details td {
+		padding: 5px 20px;
+	}
+
+	.inp-details .inp-name-age .inp-name {
+		flex: 0 0 auto;
+		width: 100%;
+	}
+
+	.inp-details .inp-name-age .inp-age {
+		flex: 0 0 auto;
+		width: 100%;
+	}
+
+	.passenger-details .wrap-details .details {
+		padding: 20px;
+	}
+
+	.inp-details .inp-gender {
+		flex-direction: column;
+		align-items: start;
+	}
+
+	.inp-details .inp-gender form {
+		flex-direction: column;
+		align-items: start;
+	}
+
+}
+
+/* Tablet: width >= 740px and width < 1024px */
+@media screen and (max-width: 675px) {
+	.inp-details {
+		width: 80%;
+	}
+
+	.passenger-details {
+		width: 80%;
+	}
+}
+
+/* Mobile & tablet: width >= 1024px */
+@media screen and (max-width: 64em) {}

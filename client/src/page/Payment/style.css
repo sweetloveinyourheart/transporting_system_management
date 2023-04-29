@@ -1,0 +1,153 @@
+.payment-tickets {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.payment-tickets .payment-title {
+	font-size: 38px;
+	margin: 50px 0px;
+}
+
+.payment-tickets .payment-wrapper {
+	padding: 20px;
+	width: 50%;
+
+
+}
+
+.payment-tickets .payment-wrapper .select-option {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 20px;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+	border-radius: 5px;
+	padding: 20px;
+}
+
+.payment-tickets .payment-wrapper .select-option .option-title {
+	background-color: #165F81;
+	padding: 20px 10px;
+	border-radius: 15px;
+	font-size: 20px;
+	width: 97%;
+	color: white;
+}
+
+.payment-tickets .payment-wrapper .select-option .online {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 80%;
+	padding: 10px;
+	border-radius: 10px;
+	box-shadow: rgba(203, 131, 87, 0.25) 0px 2px 5px -1px, rgba(221, 157, 61, 0.3) 0px 1px 3px -1px;
+	cursor: pointer;
+}
+
+.payment-tickets .payment-wrapper .select-option .online .wrap-logo-title {
+	display: flex;
+	align-items: center;
+}
+
+.payment-tickets .payment-wrapper .select-option .online .wrap-logo-title .logo-onl img {
+	object-fit: contain;
+	width: 90px;
+	height: 40px;
+}
+
+.payment-tickets .payment-wrapper .select-option .online .arrow-drop {
+	cursor: pointer;
+}
+
+.payment-tickets .payment-wrapper .select-option .online .wrap-logo-title .title-description .title,
+.payment-tickets .payment-wrapper .select-option .physically .title-description .title {
+	font-size: 18px;
+}
+
+.payment-tickets .payment-wrapper .select-option .online .wrap-logo-title .title-description .description,
+.payment-tickets .payment-wrapper .select-option .physically .title-description .description {
+	color: rgb(119, 115, 115);
+}
+
+.payment-tickets .payment-wrapper .select-option .online-payment-details {
+	display: grid;
+	grid-template-columns: auto auto auto;
+	gap: 10px;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+	border-radius: 10px;
+	padding: 10px;
+	width: 80%;
+}
+
+.payment-tickets .payment-wrapper .select-option .online-payment-details .detail img {
+	width: 140px;
+	height: 100px;
+	object-fit: contain;
+	cursor: pointer;
+}
+
+.payment-tickets .payment-wrapper .select-option .physically {
+	display: flex;
+	width: 80%;
+	gap: 20px;
+	padding: 10px;
+	border-radius: 10px;
+	box-shadow: rgba(203, 131, 87, 0.25) 0px 2px 5px -1px, rgba(221, 157, 61, 0.3) 0px 1px 3px -1px;
+	cursor: pointer;
+}
+
+.payment-tickets .payment-wrapper .select-option .physically .logo-phy img {
+	width: 70px;
+	height: 40px;
+	object-fit: cover;
+
+}
+
+.payment-wrapper .price {
+	display: flex;
+	justify-content: space-between;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+	border-radius: 5px;
+	padding: 20px 40px;
+	margin: 70px 0px;
+}
+
+.payment-wrapper .btn-back-sub {
+	display: flex;
+	justify-content: center;
+	gap: 30px;
+	/* align-items: center; */
+}
+
+.payment-wrapper .payment-sub {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 100px;
+}
+
+.payment-wrapper .payment-sub button {
+	background-color: #165F81;
+	padding: 10px 30px;
+	border-radius: 10px;
+	color: white;
+}
+
+.payment-wrapper .payment-sub button:hover {
+	box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+@media screen and (max-width: 900px) and (min-width: 741px) {
+	.payment-tickets .payment-wrapper {
+		width: 70%;
+	}
+}
+
+/* Mobile: width < 740px */
+@media screen and (max-width: 46.1875em) {
+	.payment-tickets .payment-wrapper {
+		width: 90%;
+		padding: 10px;
+	}
+}

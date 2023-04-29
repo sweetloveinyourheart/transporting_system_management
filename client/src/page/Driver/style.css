@@ -1,0 +1,42 @@
+.my-schedule-page {
+	margin: 20px;
+	background-color: #F5F5F5;
+	padding: 20px;
+	gap: 20px;
+	/* justify-content: space-between; */
+	display: block !important;
+}
+
+.btn-leave {
+	display: flex;
+	background-color: #165F81;
+	padding: 10px 20px;
+	border-radius: 10px;
+	gap: 10px;
+	transition: 0.2s;
+	color: white;
+}
+
+.btn-leave:hover {
+	box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+@media screen and (max-width:900px) {
+	.my-schedule-page {
+		display: block;
+		margin-bottom: 20px;
+	}
+
+	.my-schedule-page .ant-menu-light {
+		display: flex;
+		width: 350px;
+		background-color: #F5F5F5;
+		margin-bottom: 20px;
+		box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+
+	}
+
+	.my-schedule-page .ant-layout-sider .ant-layout-sider-dark {
+		flex: 0 0 500px !important;
+	}
+}

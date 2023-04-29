@@ -1,0 +1,59 @@
+.appBg {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: auto !important;
+}
+
+.registerForm {
+	box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+	width: 40%;
+	padding: 50px;
+	border-radius: 10px;
+	margin-bottom: 100px;
+
+}
+
+.form-item-register {
+	text-align: center;
+	display: flex;
+	font-size: 20px;
+	justify-content: center;
+	cursor: pointer;
+}
+
+.form-item-register .wrap-btn {
+	background-color: #165F81;
+	padding: 10px 30px;
+	color: white;
+	border-radius: 5px;
+	transition: 0.2s;
+}
+
+.form-item-register .wrap-btn:hover {
+	box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.btn-register {
+	margin-right: 20px;
+	font-weight: 600;
+}
+
+.to-login {
+	display: flex;
+	justify-content: center;
+	gap: 5px;
+}
+
+@media screen and (max-width: 46.1875em) {
+	.registerForm {
+		width: 80%;
+	}
+}
+
+/* Tablet: width >= 740px and width < 1024px */
+@media screen and (min-width: 46.25em) and (max-width: 59.9375em) {
+	.registerForm {
+		width: 55%;
+	}
+}
