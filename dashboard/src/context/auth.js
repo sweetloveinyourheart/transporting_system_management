@@ -12,7 +12,7 @@ export function useAuth() {
     return useContext(AuthContext)
 }
 
-const ValidRoles = ["ADMIN", "EMPLOYEE"]
+const ValidRoles = ["ROLE_ADMIN", "ROLE_EMPLOYEE"]
 
 export default function AuthProvider({ children }) {
     const [user, setUser] = useState(null)
@@ -23,15 +23,15 @@ export default function AuthProvider({ children }) {
     const navigate = useNavigate();
 
     const signIn = async (username, password) => {
-        const { accessToken } = await login(username, password)
+        const { accessToken: token } = await login(username, password)
 
-        setError("")
+        setError(null)
         setLoading(false)
-        if (!accessToken) return setUser(null)
+        if (!token) return setUser(null)
 
-        axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`
-        setAccessToken(accessToken)
-        Cookies.set('accessToken', accessToken)
+        axios.defaults.headers.common.Authorization = `Bearer ${token}`
+        setAccessToken(token)
+        Cookies.set('accessToken', token)
     }
 
     const signOut = async () => {
@@ -44,12 +44,12 @@ export default function AuthProvider({ children }) {
     const getUserByAccessToken = async () => {
         const user = await getUser()
 
-        if (!user || !ValidRoles.includes(user.role.roleId)) {
+        if (!user || !ValidRoles.includes(user.role.name)) {
             if (error !== null) setError("Login failed. Please check your account !")
             return setUser(null)
         }
 
-        navigate("/")
+        navigate("/dashboard")
         return setUser(user)
     }
 
@@ -58,7 +58,7 @@ export default function AuthProvider({ children }) {
             const token = Cookies.get('accessToken')
             if (token) {
                 axios.defaults.headers.common.Authorization = `Bearer ${token}`
-                setAccessToken(accessToken)
+                setAccessToken(token)
             }
         })()
     }, [])

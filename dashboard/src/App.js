@@ -95,7 +95,8 @@ export default function App() {
       if (route.collapse) {
         return getRoutes(route.collapse);
       }
-      if (route.route && route.roles?.includes(user?.role.roleId)) {
+      if (route.route && route.roles?.includes(user?.role.name)) {
+
         return <Route exact path={route.route} element={route.component} key={route.key} />;
       }
 
@@ -150,7 +151,7 @@ export default function App() {
       {layout === "vr" && <Configurator />}
       <Routes>
         {getRoutes(routes)}
-        <Route path="*" element={<Navigate to={"/dashboard"} />} />
+        <Route path="/" element={<Navigate to={"/dashboard"} />} />
       </Routes>
     </ThemeProvider>
   );

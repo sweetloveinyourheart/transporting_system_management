@@ -18,7 +18,7 @@ const routes = [
     route: "/dashboard",
     icon: <ArgonBox component="i" color="primary" fontSize="14px" className="ni ni-tv-2" />,
     component: <Dashboard />,
-    roles: ['ADMIN', 'EMPLOYEE']
+    roles: ['ROLE_ADMIN', 'ROLE_EMPLOYEE']
   },
   { type: "title", title: "Users", key: "account-pages" },
   {
@@ -30,7 +30,7 @@ const routes = [
       <ArgonBox component="i" color="warning" fontSize="14px" className="ni ni-single-02" />
     ),
     component: <Users />,
-    roles: ['ADMIN', 'EMPLOYEE']
+    roles: ['ROLE_ADMIN', 'ROLE_EMPLOYEE']
   },
   {
     type: "route",
@@ -41,7 +41,7 @@ const routes = [
       <ArgonBox component="i" color="warning" fontSize="14px" className="ni ni-circle-08" />
     ),
     component: <Employees />,
-    roles: ['ADMIN']
+    roles: ['ROLE_ADMIN']
   },
   { type: "title", title: "Trips", key: "trip-pages" },
 
@@ -54,7 +54,7 @@ const routes = [
       <ArgonBox component="i" color="primary" fontSize="14px" className="ni ni-map-big" />
     ),
     component: <Trips />,
-    roles: ['ADMIN']
+    roles: ['ROLE_ADMIN']
   },
   {
     type: "route",
@@ -65,7 +65,7 @@ const routes = [
       <ArgonBox component="i" color="success" fontSize="14px" className="ni ni-ambulance" />
     ),
     component: <Cars />,
-    roles: ['ADMIN']
+    roles: ['ROLE_ADMIN']
   },
   {
     type: "route",
@@ -76,7 +76,7 @@ const routes = [
       <ArgonBox component="i" color="warning" fontSize="14px" className="ni ni-paper-diploma" />
     ),
     component: <Orders />,
-    roles: ['ADMIN', 'EMPLOYEE']
+    roles: ['ROLE_ADMIN', 'ROLE_EMPLOYEE']
   },
   {
     type: "sub-route",

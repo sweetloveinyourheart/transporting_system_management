@@ -60,7 +60,7 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
   const renderRoutes = routes.map(({ type, name, icon, title, key, href, route, roles }) => {
     let returnValue;
 
-    if (type === "route" && roles?.includes(user?.role.roleId)) {
+    if (type === "route" && roles?.includes(user?.role.name)) {
       if (href) {
         returnValue = (
           <Link href={href} key={key} target="_blank" rel="noreferrer">
